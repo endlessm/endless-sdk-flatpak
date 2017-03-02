@@ -1,0 +1,12 @@
+.flatpak-builder/
+com.endlessm.Platform.appdata.xml
+com.endlessm.Sdk.appdata.xml
+com.endlessm.Sdk.json
+issue
+issue.net
+metadata.platform
+metadata.sdk
+os-release
+os-release-configure
+repo/
+sdk/
