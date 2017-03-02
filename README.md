@@ -24,4 +24,3 @@ Run:
 ```
 
 To build the Endless run time.
->>>>>>> 8f9efca... Initial import of the Endless flatpak run times
