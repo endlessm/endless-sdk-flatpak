@@ -40,7 +40,6 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder \
 		--force-clean --ccache --require-changes \
-		--keep-build-dirs \
 		--repo=${REPO} \
 		--arch=${ARCH} \
 		--subject="Build of com.endlessm.Sdk, `date`" \

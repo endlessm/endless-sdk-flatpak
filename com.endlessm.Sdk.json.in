@@ -44,6 +44,11 @@
             "name": "python-polib",
             "no-autogen": true,
             "ensure-writable": ["/lib/python*/site-packages/easy-install.pth"],
+            "build-options": {
+                "env": {
+                    "PYTHON": "/usr/bin/python3"
+                }
+            },
             "sources": [
                 {
                     "type": "archive",
@@ -52,7 +57,7 @@
                 },
                 {
                     "type": "file",
-                    "path": "polib-setuptools-makefile",
+                    "path": "setuptools-makefile",
                     "dest-filename": "Makefile"
                 }
             ]
@@ -83,7 +88,7 @@
                 },
                 {
                     "type": "file",
-                    "path": "python3-setuptools-makefile",
+                    "path": "setuptools-makefile",
                     "dest-filename": "Makefile"
                 }
             ]
@@ -213,7 +218,7 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/endlessm/eos-knowledge-lib.gi"
+                    "url": "https://github.com/endlessm/eos-knowledge-lib.git"
                 }
             ]
         },
