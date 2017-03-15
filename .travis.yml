@@ -1,0 +1,29 @@
+sudo: false
+
+branches:
+  - master
+
+os:
+  - linux
+
+compiler:
+  - gcc
+
+services:
+  - docker
+
+before_script:
+  - docker pull ebassi/endless-ci:base
+  - echo FROM ebassi/endless-ci:base > Dockerfile
+  - echo ADD . /root/endless-sdk-flatpak >> Dockerfile
+  - echo WORKDIR /root/endless-sdk-flatpak >> Dockerfile
+
+script:
+  - echo RUN ./endless-sdk-build.sh >> Dockerfile ;
+    docker build -t ebassi/endless-ci:latest .
+
+after_success:
+  - if [[ -n "$DOCKER_USERNAME" && "$TRAVIS_BRANCH" == "master" ]]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" ;
+      docker push push ebassi/endless-sdk:latest ;
+    fi
