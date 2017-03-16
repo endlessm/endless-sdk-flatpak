@@ -1,0 +1,17 @@
+all:
+	@true
+
+install:
+	mkdir -p /usr/share/javascript/mathjax
+	mv MathJax.js /usr/share/javascript/mathjax
+	mv config /usr/share/javascript/mathjax
+	mv extensions /usr/share/javascript/mathjax
+	mv images /usr/share/javascript/mathjax
+	mv jax /usr/share/javascript/mathjax
+	mv localization /usr/share/javascript/mathjax
+	mv test /usr/share/javascript/mathjax
+	mv unpacked /usr/share/javascript/mathjax
+	mkdir -p /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX
+	mv fonts/HTML-CSS/TeX/otf /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX
+	mv fonts/HTML-CSS/TeX/svg /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX
+	mv fonts/HTML-CSS/TeX/woff /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX

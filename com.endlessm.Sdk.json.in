@@ -213,6 +213,22 @@
             ]
         },
         {
+            "name": "mathjax-js",
+            "no-autogen": true,
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/mathjax/MathJax/archive/2.4.0.tar.gz",
+                    "sha256": "cd7175e1e352793942a976bf40692b954b5169bd28533921a8a8dd4ec865d855"
+                },
+                {
+                    "type": "file",
+                    "path": "mathjax-makefile",
+                    "dest-filename": "Makefile"
+                }
+            ]
+        },
+        {
             "name": "eos-knowledge-lib",
             "cleanup-platform": ["*.scss"],
             "sources": [
