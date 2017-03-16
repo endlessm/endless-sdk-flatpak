@@ -8,7 +8,9 @@ flatpak install gnome \
         org.freedesktop.Sdk.Debug//${FDO_SDK_VERSION} \
         org.freedesktop.Sdk.Locale//${FDO_SDK_VERSION} \
         org.freedesktop.Platform//${FDO_SDK_VERSION} \
-        org.freedesktop.Platform.Locale//${FDO_SDK_VERSION} \
+        org.freedesktop.Platform.Locale//${FDO_SDK_VERSION}
+
+flatpak install gnome \
         org.gnome.Sdk//${GNOME_SDK_VERSION} \
         org.gnome.Sdk.Debug//${GNOME_SDK_VERSION} \
         org.gnome.Sdk.Locale//${GNOME_SDK_VERSION} \

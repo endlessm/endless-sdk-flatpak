@@ -1,0 +1,34 @@
+Description: Don't write cache if there are no valid components
+Author: Matthias Klumpp <matthias@tenstral.net>
+
+--- appstream-0.10.4.orig/src/as-cache-file.c
++++ appstream-0.10.4/src/as-cache-file.c
+@@ -185,6 +185,7 @@ as_cache_file_save (const gchar *fname,
+ 	g_autoptr(GFileOutputStream) file_out = NULL;
+ 	g_autoptr(GOutputStream) zout = NULL;
+ 	g_autoptr(GZlibCompressor) compressor = NULL;
++	gboolean serializable_components_found = FALSE;
+ 	GError *tmp_error = NULL;
+ 	guint cindex;
+ 
+@@ -218,6 +219,8 @@ as_cache_file_save (const gchar *fname,
+ 			continue;
+ 		}
+ 
++		serializable_components_found = TRUE;
++
+ 		/* start serializing our component */
+ 		g_variant_builder_init (&cb, G_VARIANT_TYPE_VARDICT);
+ 
+@@ -486,6 +489,11 @@ as_cache_file_save (const gchar *fname,
+ 		g_variant_builder_add_value (builder, g_variant_builder_end (&cb));
+ 	}
+ 
++	/* check if we actually have some valid components serialized to a GVariant */
++	if (!serializable_components_found) {
++		g_debug ("Skipped writing cache file: No valid components found for serialization.");
++		return;
++	}
+ 
+ 	/* write basic information and add components */
+ 	g_variant_builder_add (main_builder, "{sv}",

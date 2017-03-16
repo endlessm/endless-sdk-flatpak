@@ -1,0 +1,31 @@
+diff -Nuarp appstream-APPSTREAM_0_10_4.old/docs/CMakeLists.txt appstream-APPSTREAM_0_10_4.new/docs/CMakeLists.txt
+--- appstream-APPSTREAM_0_10_4.old/docs/CMakeLists.txt	2016-11-27 17:59:18.000000000 +0000
++++ appstream-APPSTREAM_0_10_4.new/docs/CMakeLists.txt	2017-03-16 14:51:00.997136311 +0000
+@@ -1,18 +1,18 @@
+ # CMakeLists for documentation
+ 
+-find_program (XMLTO xmlto)
+-mark_as_advanced (XMLTO)
+-if (XMLTO STREQUAL "XMLTO-NOTFOUND")
+-	message (FATAL_ERROR "Xmlto was not found! Please install it to continue!")
+-endif (XMLTO STREQUAL "XMLTO-NOTFOUND")
++if (DOCUMENTATION)
++        find_program (XMLTO xmlto)
++        mark_as_advanced (XMLTO)
++        if (XMLTO STREQUAL "XMLTO-NOTFOUND")
++	        message (FATAL_ERROR "Xmlto was not found! Please install it to continue!")
++        endif (XMLTO STREQUAL "XMLTO-NOTFOUND")
+ 
+-include (${CMAKE_SOURCE_DIR}/data/cmake/documentation.cmake)
++        include (${CMAKE_SOURCE_DIR}/data/cmake/documentation.cmake)
+ 
+-add_xml_manpages(doc-man-asi "sources/man/appstreamcli.1" "" "")
++        add_xml_manpages(doc-man-asi "sources/man/appstreamcli.1" "" "")
+ 
+-set(DOC_HTML_EXPORT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/html")
++        set(DOC_HTML_EXPORT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/html")
+ 
+-if (DOCUMENTATION)
+ 	#########################
+ 	# General project documentation
+ 	find_program (PUBLICAN publican)

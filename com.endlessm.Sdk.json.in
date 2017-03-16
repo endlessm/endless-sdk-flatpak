@@ -41,6 +41,28 @@
 
     "modules": [
         {
+            "name": "meson",
+            "no-autogen": true,
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/mesonbuild/meson/releases/download/0.38.1/meson-0.38.1.tar.gz",
+                    "sha256": "dcb05349b32427924fa2a258a5e23e40e09c1bf9dd09919198c3a2ae1c38ba53"
+                },
+                {
+                    "type": "patch",
+                    "path": "meson-glib-check.patch",
+                    "strip-components": 0
+
+                },
+                {
+                    "type": "file",
+                    "path": "setuptools-makefile",
+                    "dest-filename": "Makefile"
+                }
+            ]
+        },
+        {
             "name": "python-polib",
             "no-autogen": true,
             "ensure-writable": ["/lib/python*/site-packages/easy-install.pth"],
@@ -229,8 +251,175 @@
             ]
         },
         {
+            "name": "opus",
+            "cleanup": [ "/bin" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/xiph/opus.git"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer",
+            "config-opts": ["--enable-debug", "--disable-examples" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gstreamer",
+                    "branch": "1.10"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer-plugins-base",
+            "config-opts": ["--enable-experimental", "--enable-orc", "--enable-opus" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gst-plugins-base",
+                    "branch": "1.10"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer-plugins-good",
+            "build-options" : {
+                "arch" : {
+                    "i386" : {
+                        "config-opts" : [
+                            "--build=i586-unknown-linux-gnu"
+                        ]
+                    },
+                    "arm" : {
+                        "config-opts" : [
+                            "--build=arm-unknown-linux-gnueabi"
+                        ]
+                    }
+                }
+            },
+            "config-opts": ["--enable-experimental", "--enable-orc" ,
+                            "--disable-monoscope",
+                            "--disable-aalib",
+                            "--enable-cairo",
+                            "--disable-libcaca",
+                            "--disable-jack",
+                            "--with-default-visualizer=autoaudiosink" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gst-plugins-good",
+                    "branch": "1.10"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer-plugins-bad",
+            "build-options" : {
+                "arch" : {
+                    "i386" : {
+                        "config-opts" : [
+                            "--build=i586-unknown-linux-gnu"
+                        ]
+                    },
+                    "arm" : {
+                        "config-opts" : [
+                            "--build=arm-unknown-linux-gnueabi"
+                        ]
+                    }
+                }
+            },
+            "config-opts": ["--enable-experimental", "--enable-orc" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gst-plugins-bad",
+                    "branch": "1.10"
+                }
+            ]
+        },
+        {
+            "name": "appstream",
+            "builddir": true,
+            "buildsystem": "cmake",
+            "build-options": {
+                "config-opts": [
+                    "-DQT=OFF",
+                    "-DAPT_SUPPORT=ON",
+                    "-DVAPI=OFF",
+                    "-DSTEMMING=OFF"
+                ]
+            },
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/ximion/appstream/archive/APPSTREAM_0_10_4.tar.gz",
+                    "sha256": "0f506ef1146d2bc96c9215368de7e3248a110f4a8b90c6cc80cfe058e9abe33e"
+                },
+                {
+                    "type": "patch",
+                    "path": "endless-appstream-cache.patch"
+                },
+                {
+                    "type": "patch",
+                    "path": "endless-appstream-no-docs.patch"
+                }
+            ]
+        },
+        {
+            "name": "emeus",
+            "buildtype": "meson",
+            "builddir": true,
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/ebassi/emeus.git"
+                }
+            ]
+        },
+                {
+            "name": "popplerdata",
+            "no-autogen": true,
+            "make-install-args": ["prefix=/usr"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://poppler.freedesktop.org/poppler-data-0.4.7.tar.gz",
+                    "sha256": "e752b0d88a7aba54574152143e7bf76436a7ef51977c55d6bd9a48dccde3a7de"
+                }
+            ]
+        },
+        {
+            "name": "poppler",
+            "config-opts": [ "--disable-libopenjpeg" ],
+            "cleanup": [ "/bin" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://poppler.freedesktop.org/poppler-0.36.0.tar.xz",
+                    "sha256": "93cc067b23c4ef7421380d3e8bd7c940b2027668446750787d7c1cb42720248e"
+                }
+            ]
+        },
+        {
+            "name": "evince",
+            "config-opts": [ "--disable-nautilus", "--enable-introspection" ],
+            "cleanup": [ "/bin" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/evince"
+                }
+            ]
+        },
+        {
             "name": "eos-knowledge-lib",
             "cleanup-platform": ["*.scss"],
+            "config-opts": [
+                "--disable-metrics",
+                "--disable-js-doc",
+                "--with-mathjax-dir=/usr/share/javascript/mathjax"
+            ],
             "sources": [
                 {
                     "type": "git",
