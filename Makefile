@@ -7,11 +7,11 @@ REPO ?= repo
 # The branch of the Endless SDK to build
 SDK_BRANCH ?= master
 
-# The version of the GNOME runtime we build on
-SDK_RUNTIME_VERSION = 3.22
-
 # The version of the Freedesktop runtime we build on
-FDO_RUNTIME_VERSION = 1.4
+FDO_RUNTIME_VERSION ?= 1.4
+
+# The version of the GNOME runtime we build on
+GNOME_RUNTIME_VERSION ?= 3.22
 
 SUBST_FILES = \
 	com.endlessm.Sdk.json \
@@ -30,7 +30,7 @@ define subst-metadata
 	  echo "  GEN   $${file}";						\
 	  sed -e 's/@@SDK_ARCH@@/${ARCH}/g'                                     \
 	      -e 's/@@SDK_BRANCH@@/${SDK_BRANCH}/g'                             \
-	      -e 's/@@SDK_RUNTIME_VERSION@@/${SDK_RUNTIME_VERSION}/g'           \
+	      -e 's/@@GNOME_RUNTIME_VERSION@@/${GNOME_RUNTIME_VERSION}/g'       \
 	      -e 's/@@FDO_RUNTIME_VERSION@@/${FDO_RUNTIME_VERSION}/g'           \
 	      $$file_source > $$file.tmp && mv $$file.tmp $$file || exit 1;     \
 	done

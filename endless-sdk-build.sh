@@ -1,15 +1,22 @@
 #!/bin/bash
 
-flatpak install gnome \
-        org.freedesktop.Sdk//1.4 \
-        org.freedesktop.Sdk.Debug//1.4 \
-        org.freedesktop.Sdk.Locale//1.4 \
-        org.freedesktop.Platform//1.4 \
-        org.freedesktop.Platform.Locale//1.4 \
-        org.gnome.Sdk//3.22 \
-        org.gnome.Sdk.Debug//3.22 \
-        org.gnome.Sdk.Locale//3.22 \
-        org.gnome.Platform//3.22 \
-        org.gnome.Platform.Locale//3.22 \
+FDO_SDK_VERSION=1.4
+GNOME_SDK_VERSION=3.22
 
-make REPO=com_endless_sdk BRANCH=${TRAVIS_BRANCH}
+flatpak install gnome \
+        org.freedesktop.Sdk//${FDO_SDK_VERSION} \
+        org.freedesktop.Sdk.Debug//${FDO_SDK_VERSION} \
+        org.freedesktop.Sdk.Locale//${FDO_SDK_VERSION} \
+        org.freedesktop.Platform//${FDO_SDK_VERSION} \
+        org.freedesktop.Platform.Locale//${FDO_SDK_VERSION} \
+        org.gnome.Sdk//${GNOME_SDK_VERSION} \
+        org.gnome.Sdk.Debug//${GNOME_SDK_VERSION} \
+        org.gnome.Sdk.Locale//${GNOME_SDK_VERSION} \
+        org.gnome.Platform//${GNOME_SDK_VERSION} \
+        org.gnome.Platform.Locale//${GNOME_SDK_VERSION} \
+
+make \
+        FDO_RUNTIME_VERSION=${FDO_SDK_VERSION} \
+        GNOME_RUNTIME_VERSION=${GNOME_SDK_VERSION} \
+        BRANCH=${TRAVIS_BRANCH} \
+        REPO=com_endless_sdk
