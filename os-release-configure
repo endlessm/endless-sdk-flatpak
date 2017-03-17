@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cat <<EOF > Makefile
+all:
+
+install:
+	mkdir -p ${DESTDIR}/usr/lib
+	install os-release ${DESTDIR}/usr/lib
+	mkdir -p ${DESTDIR}/usr/share/appdata
+	mkdir -p ${DESTDIR}/etc
+	install issue ${DESTDIR}/etc
+	install issue.net ${DESTDIR}/etc
+	install com.endlessm.Platform.appdata.xml ${DESTDIR}/usr/share/appdata
+	install com.endlessm.Sdk.appdata.xml ${DESTDIR}/usr/share/appdata
+	appstream-compose --basename=com.endlessm.Platform --prefix=/usr --origin=flatpak com.endlessm.Platform
+	appstream-compose --basename=com.endlessm.Sdk --prefix=/usr --origin=flatpak com.endlessm.Sdk
+EOF
