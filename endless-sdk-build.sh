@@ -3,6 +3,10 @@
 FDO_SDK_VERSION=1.4
 GNOME_SDK_VERSION=3.22
 
+if [[ -z "${TRAVIS_BRANCH}" ]]; then
+  TRAVIS_BRANCH=master
+fi
+
 flatpak install gnome \
         org.freedesktop.Sdk//${FDO_SDK_VERSION} \
         org.freedesktop.Sdk.Debug//${FDO_SDK_VERSION} \
