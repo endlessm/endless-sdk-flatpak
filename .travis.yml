@@ -13,9 +13,10 @@ services:
   - docker
 
 before_script:
-  - docker pull ebassi/endless-ci:base
+  - docker pull ebassi/flathub:base
   - echo FROM ebassi/endless-ci:base > Dockerfile
   - echo ENV FLATPAK_OSTREE_REPO_MODE=user-only >> Dockerfile
+  - echo RUN flatpak install gnome org.freedesktop.Platform//1.6 org.gnome.Platform//3.24 org.gnome.Sdk//3.24 >> Dockerfile
   - echo ADD . /root/endless-sdk-flatpak >> Dockerfile
   - docker build -t endless-ci .
 
