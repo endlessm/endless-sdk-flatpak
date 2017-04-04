@@ -15,12 +15,12 @@ services:
 before_script:
   - docker pull ebassi/endless-ci:base
   - echo FROM ebassi/endless-ci:base > Dockerfile
+  - echo ENV FLATPAK_OSTREE_REPO_MODE=user-only >> Dockerfile
   - echo ADD . /root/endless-sdk-flatpak >> Dockerfile
-  - echo WORKDIR /root/endless-sdk-flatpak >> Dockerfile
+  - docker build -t endless-ci .
 
 script:
-  - echo RUN ./endless-sdk-build.sh >> Dockerfile ;
-    docker build -t ebassi/endless-ci:latest .
+  - docker run --device=/dev/fuse:/dev/fuse --privileged -t ebassi/endless-ci:sdk-build /root/endless-sdk-flatpak/endless-sdk-build.sh
 
 after_success:
   - if [[ -n "$DOCKER_USERNAME" && "$TRAVIS_BRANCH" == "master" ]]; then
