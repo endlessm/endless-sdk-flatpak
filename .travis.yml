@@ -14,7 +14,7 @@ services:
 
 before_script:
   - docker pull ebassi/flathub:gnome-3.24
-  - echo FROM ebassi/endless-ci:base > Dockerfile
+  - echo FROM ebassi/flathub:gnome-3.24 > Dockerfile
   - echo ENV FLATPAK_OSTREE_REPO_MODE=user-only >> Dockerfile
   - echo RUN flatpak install gnome org.freedesktop.Platform//1.6 >> Dockerfile
   - echo ADD . /root/endless-sdk-flatpak >> Dockerfile
