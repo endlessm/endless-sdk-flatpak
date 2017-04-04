@@ -8,10 +8,10 @@ REPO ?= repo
 SDK_BRANCH ?= master
 
 # The version of the Freedesktop runtime we build on
-FDO_RUNTIME_VERSION ?= 1.4
+FDO_RUNTIME_VERSION ?= 1.6
 
 # The version of the GNOME runtime we build on
-GNOME_RUNTIME_VERSION ?= 3.22
+GNOME_RUNTIME_VERSION ?= 3.24
 
 SUBST_FILES = \
 	com.endlessm.Sdk.json \
@@ -39,7 +39,7 @@ endef
 all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder \
-		--force-clean --ccache --require-changes \
+		--force-clean --disable-cache --require-changes \
 		--repo=${REPO} \
 		--arch=${ARCH} \
 		--subject="Build of com.endlessm.Sdk, `date`" \
