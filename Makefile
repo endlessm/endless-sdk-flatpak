@@ -13,6 +13,18 @@ FDO_RUNTIME_VERSION ?= 1.6
 # The version of the GNOME runtime we build on
 GNOME_RUNTIME_VERSION ?= 3.24
 
+FDO_DEPS = \
+	org.freedesktop.Sdk//${FDO_RUNTIME_VERSION} \
+	org.freedesktop.Platform//${FDO_RUNTIME_VERSION} \
+	$()
+
+GNOME_DEPS = \
+	org.gnome.Platform//${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk//${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk.Debug//${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk.Locale//${GNOME_RUNTIME_VERSION} \
+	$()
+
 SUBST_FILES = \
 	com.endlessm.Sdk.json \
 	com.endlessm.Sdk.appdata.xml \
@@ -48,6 +60,13 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 ${REPO}:
 	ostree  init --mode=archive-z2 --repo=${REPO}
 
+add-repo:
+	flatpak remote-add --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
+
+install-dependencies: add-repo
+	flatpak install gnome $(FDO_DEPS) || flatpak update $(FDO_DEPS)
+	flatpak install gnome $(GNOME_DEPS) || flatpak update $(GNOME_DEPS)
+
 check: com.endlessm.Sdk.json.in
 	$(call subst-metadata)
 	@echo "  CHK   $<"; json-glib-validate com.endlessm.Sdk.json
@@ -59,3 +78,5 @@ clean:
 
 maintainer-clean: clean
 	@rm -rf .flatpak-builder
+
+.PHONY: add-repo install-dependencies
