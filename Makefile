@@ -51,11 +51,13 @@ endef
 all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder \
-		--force-clean --disable-cache --require-changes \
+		--force-clean \
 		--repo=${REPO} \
 		--arch=${ARCH} \
 		--subject="Build of com.endlessm.Sdk, `date`" \
-		${EXPORT_ARGS} sdk com.endlessm.Sdk.json
+		${EXPORT_ARGS} \
+		builddir \
+		com.endlessm.Sdk.json
 
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
@@ -72,7 +74,7 @@ check: com.endlessm.Sdk.json.in
 	@echo "  CHK   $<"; json-glib-validate com.endlessm.Sdk.json
 
 clean:
-	@rm -rf sdk
+	@rm -rf builddir 
 	@rm -rf ${REPO}
 	@rm -f ${SUBST_FILES}
 
