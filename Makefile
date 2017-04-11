@@ -14,15 +14,15 @@ FDO_RUNTIME_VERSION ?= 1.6
 GNOME_RUNTIME_VERSION ?= 3.24
 
 FDO_DEPS = \
-	org.freedesktop.Sdk//${FDO_RUNTIME_VERSION} \
-	org.freedesktop.Platform//${FDO_RUNTIME_VERSION} \
+	org.freedesktop.Sdk/${ARCH}/${FDO_RUNTIME_VERSION} \
+	org.freedesktop.Platform/${ARCH}/${FDO_RUNTIME_VERSION} \
 	$()
 
 GNOME_DEPS = \
-	org.gnome.Platform//${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk//${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk.Debug//${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk.Locale//${GNOME_RUNTIME_VERSION} \
+	org.gnome.Platform/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk.Debug/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	$()
 
 SUBST_FILES = \
@@ -58,7 +58,7 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 		${EXPORT_ARGS} sdk com.endlessm.Sdk.json
 
 ${REPO}:
-	ostree  init --mode=archive-z2 --repo=${REPO}
+	ostree init --mode=archive-z2 --repo=${REPO}
 
 add-repo:
 	flatpak remote-add --user --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
