@@ -61,11 +61,11 @@ ${REPO}:
 	ostree  init --mode=archive-z2 --repo=${REPO}
 
 add-repo:
-	flatpak remote-add --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
+	flatpak remote-add --user --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
 
 install-dependencies: add-repo
-	flatpak install gnome $(FDO_DEPS) || flatpak update $(FDO_DEPS)
-	flatpak install gnome $(GNOME_DEPS) || flatpak update $(GNOME_DEPS)
+	flatpak install --user gnome $(FDO_DEPS) || flatpak update $(FDO_DEPS)
+	flatpak install --user gnome $(GNOME_DEPS) || flatpak update $(GNOME_DEPS)
 
 check: com.endlessm.Sdk.json.in
 	$(call subst-metadata)
