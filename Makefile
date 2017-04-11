@@ -64,8 +64,8 @@ add-repo:
 	flatpak remote-add --user --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
 
 install-dependencies: add-repo
-	flatpak install --user gnome $(FDO_DEPS) || flatpak update $(FDO_DEPS)
-	flatpak install --user gnome $(GNOME_DEPS) || flatpak update $(GNOME_DEPS)
+	flatpak install --user gnome $(FDO_DEPS) || flatpak update --user $(FDO_DEPS)
+	flatpak install --user gnome $(GNOME_DEPS) || flatpak update --user $(GNOME_DEPS)
 
 check: com.endlessm.Sdk.json.in
 	$(call subst-metadata)
