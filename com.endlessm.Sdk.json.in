@@ -404,11 +404,11 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/ebassi/emeus.git"
+                    "url": "https://github.com/endlessm/emeus.git"
                 }
             ]
         },
-                {
+        {
             "name": "popplerdata",
             "no-autogen": true,
             "make-install-args": ["prefix=/usr"],
