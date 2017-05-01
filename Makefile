@@ -69,6 +69,7 @@ add-repo:
 install-dependencies: add-repo
 	flatpak install --user gnome $(FDO_DEPS) || flatpak update --user $(FDO_DEPS)
 	flatpak install --user gnome $(GNOME_DEPS) || flatpak update --user $(GNOME_DEPS)
+	flatpak list --show-details
 
 check: com.endlessm.Sdk.json.in
 	$(call subst-metadata)
