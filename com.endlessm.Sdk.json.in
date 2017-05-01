@@ -354,6 +354,7 @@
             "buildsystem": "cmake",
             "build-options": {
                 "config-opts": [
+                    "-DCMAKE_INSTALL_LIBDIR=/usr/lib",
                     "-DQT=OFF",
                     "-DAPT_SUPPORT=ON",
                     "-DVAPI=OFF",
