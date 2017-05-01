@@ -71,6 +71,10 @@ install-dependencies: add-repo
 	flatpak install --user gnome $(GNOME_DEPS) || flatpak update --user $(GNOME_DEPS)
 	flatpak list --show-details
 
+clean-dependencies: add-repo
+	flatpak uninstall --user $(FDO_DEPS)
+	flatpak uninstall --user $(GNOME_DEPS)
+
 check: com.endlessm.Sdk.json.in
 	$(call subst-metadata)
 	@echo "  CHK   $<"; json-glib-validate com.endlessm.Sdk.json
