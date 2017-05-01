@@ -20,9 +20,10 @@ FDO_DEPS = \
 
 GNOME_DEPS = \
 	org.gnome.Platform/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Platform.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	org.gnome.Sdk/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk.Debug/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	org.gnome.Sdk.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk.Debug/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	$()
 
 SUBST_FILES = \
