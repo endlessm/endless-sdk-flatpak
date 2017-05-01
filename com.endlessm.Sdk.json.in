@@ -380,6 +380,12 @@
             "name": "emeus",
             "buildsystem": "meson",
             "builddir": true,
+            "build-options": {
+                "config-opts": [
+                    "--libdir=/usr/lib",
+                    "-Denable-gtk-doc=false"
+                ]
+            },
             "sources": [
                 {
                     "type": "git",
