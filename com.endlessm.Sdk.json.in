@@ -7,7 +7,7 @@
     "sdk": "org.gnome.Sdk",
     "runtime-version": "@@GNOME_RUNTIME_VERSION@@",
     "sdk-extensions": ["org.gnome.Sdk.Debug", "org.gnome.Sdk.Locale"],
-    "runtime-extensions": ["org.gnome.Platform.Locale"],
+    "platform-extensions": ["org.gnome.Platform.Locale"],
     "metadata": "metadata.sdk",
     "metadata-platform": "metadata.platform",
     "cleanup": [ "/cache",
@@ -399,7 +399,7 @@
         },
         {
             "name": "emeus",
-            "buildtype": "meson",
+            "buildsystem": "meson",
             "builddir": true,
             "sources": [
                 {
