@@ -50,6 +50,7 @@ endef
 
 all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
+	flatpak-builder --version
 	flatpak-builder \
 		--force-clean \
 		--repo=${REPO} \
