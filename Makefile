@@ -61,6 +61,11 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 		builddir \
 		com.endlessm.Sdk.json
 
+sign:
+	if [[ -d gpg ]]; then \
+	  flatpak build-sign ${REPO} --runtime --gpg-homedir=gpg com.endlssm.Sdk
+	fi
+
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
 
