@@ -75,7 +75,7 @@ add-repo:
 install-dependencies: add-repo
 	flatpak install --user gnome $(FDO_DEPS) || flatpak update --user $(FDO_DEPS)
 	flatpak install --user gnome $(GNOME_DEPS) || flatpak update --user $(GNOME_DEPS)
-	flatpak list --user --show-details
+	flatpak list --user --runtime --show-details
 
 clean-dependencies: add-repo
 	flatpak uninstall --user $(FDO_DEPS)
