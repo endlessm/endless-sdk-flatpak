@@ -53,18 +53,13 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder --version
 	flatpak-builder \
-		--force-clean \
+		--force-clean --ccache --require-changes \
 		--repo=${REPO} \
 		--arch=${ARCH} \
 		--subject="Build of com.endlessm.Sdk, `date`" \
 		${EXPORT_ARGS} \
 		builddir \
 		com.endlessm.Sdk.json
-
-sign:
-	if [[ -d gpg ]]; then \
-	  flatpak build-sign ${REPO} --runtime --gpg-homedir=gpg com.endlssm.Sdk
-	fi
 
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
@@ -93,4 +88,4 @@ clean:
 maintainer-clean: clean
 	@rm -rf .flatpak-builder
 
-.PHONY: add-repo install-dependencies
+.PHONY: add-repo install-dependencies clean-dependencies maintainer-clean
