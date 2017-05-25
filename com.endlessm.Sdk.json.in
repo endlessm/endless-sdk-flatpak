@@ -219,6 +219,21 @@
             ]
         },
         {
+            "name": "basin",
+            "cleanup-platform": [
+                "/bin/basin",
+                "/bin/basin-helper",
+                "/bin/basin-processor",
+                "/share/basin"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/endlessm/basin.git"
+                }
+            ]
+        },
+        {
             "name": "mathjax-js",
             "no-autogen": true,
             "sources": [
