@@ -1,4 +1,4 @@
 NAME=Endless
 VERSION=@@SDK_BRANCH@@ (Flatpak runtime)
 VERSION_ID=@@SDK_BRANCH@@
-ID=com.endlessm.Platform
+ID=com.endlessm.apps.Platform

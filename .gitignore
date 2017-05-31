@@ -1,7 +1,7 @@
 .flatpak-builder/
-com.endlessm.Platform.appdata.xml
-com.endlessm.Sdk.appdata.xml
-com.endlessm.Sdk.json
+com.endlessm.apps.Platform.appdata.xml
+com.endlessm.apps.Sdk.appdata.xml
+com.endlessm.apps.Sdk.json
 issue
 issue.net
 metadata.platform

@@ -27,9 +27,9 @@ GNOME_DEPS = \
 	$()
 
 SUBST_FILES = \
-	com.endlessm.Sdk.json \
-	com.endlessm.Sdk.appdata.xml \
-	com.endlessm.Platform.appdata.xml \
+	com.endlessm.apps.Sdk.json \
+	com.endlessm.apps.Sdk.appdata.xml \
+	com.endlessm.apps.Platform.appdata.xml \
 	metadata.sdk \
 	metadata.platform \
 	os-release \
@@ -53,18 +53,13 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder --version
 	flatpak-builder \
-		--force-clean \
+		--force-clean --ccache --require-changes \
 		--repo=${REPO} \
 		--arch=${ARCH} \
-		--subject="Build of com.endlessm.Sdk, `date`" \
+		--subject="Build of com.endlessm.apps.Sdk, `date`" \
 		${EXPORT_ARGS} \
 		builddir \
-		com.endlessm.Sdk.json
-
-sign:
-	if [[ -d gpg ]]; then \
-	  flatpak build-sign ${REPO} --runtime --gpg-homedir=gpg com.endlssm.Sdk
-	fi
+		com.endlessm.apps.Sdk.json
 
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
@@ -75,15 +70,15 @@ add-repo:
 install-dependencies: add-repo
 	flatpak install --user gnome $(FDO_DEPS) || flatpak update --user $(FDO_DEPS)
 	flatpak install --user gnome $(GNOME_DEPS) || flatpak update --user $(GNOME_DEPS)
-	flatpak list --user --show-details
+	flatpak list --user --runtime --show-details
 
 clean-dependencies: add-repo
 	flatpak uninstall --user $(FDO_DEPS)
 	flatpak uninstall --user $(GNOME_DEPS)
 
-check: com.endlessm.Sdk.json.in
+check: com.endlessm.apps.Sdk.json.in
 	$(call subst-metadata)
-	@echo "  CHK   $<"; json-glib-validate com.endlessm.Sdk.json
+	@echo "  CHK   $<"; json-glib-validate com.endlessm.apps.Sdk.json
 
 clean:
 	@rm -rf builddir 
@@ -93,4 +88,4 @@ clean:
 maintainer-clean: clean
 	@rm -rf .flatpak-builder
 
-.PHONY: add-repo install-dependencies
+.PHONY: add-repo install-dependencies clean-dependencies maintainer-clean
