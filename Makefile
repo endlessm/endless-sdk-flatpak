@@ -27,9 +27,9 @@ GNOME_DEPS = \
 	$()
 
 SUBST_FILES = \
-	com.endlessm.Sdk.json \
-	com.endlessm.Sdk.appdata.xml \
-	com.endlessm.Platform.appdata.xml \
+	com.endlessm.apps.Sdk.json \
+	com.endlessm.apps.Sdk.appdata.xml \
+	com.endlessm.apps.Platform.appdata.xml \
 	metadata.sdk \
 	metadata.platform \
 	os-release \
@@ -56,10 +56,10 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 		--force-clean --ccache --require-changes \
 		--repo=${REPO} \
 		--arch=${ARCH} \
-		--subject="Build of com.endlessm.Sdk, `date`" \
+		--subject="Build of com.endlessm.apps.Sdk, `date`" \
 		${EXPORT_ARGS} \
 		builddir \
-		com.endlessm.Sdk.json
+		com.endlessm.apps.Sdk.json
 
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
@@ -76,9 +76,9 @@ clean-dependencies: add-repo
 	flatpak uninstall --user $(FDO_DEPS)
 	flatpak uninstall --user $(GNOME_DEPS)
 
-check: com.endlessm.Sdk.json.in
+check: com.endlessm.apps.Sdk.json.in
 	$(call subst-metadata)
-	@echo "  CHK   $<"; json-glib-validate com.endlessm.Sdk.json
+	@echo "  CHK   $<"; json-glib-validate com.endlessm.apps.Sdk.json
 
 clean:
 	@rm -rf builddir 

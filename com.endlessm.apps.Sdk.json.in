@@ -1,7 +1,7 @@
 {
     "build-runtime": true,
-    "id": "com.endlessm.Sdk",
-    "id-platform": "com.endlessm.Platform",
+    "id": "com.endlessm.apps.Sdk",
+    "id-platform": "com.endlessm.apps.Platform",
     "branch": "@@SDK_BRANCH@@",
     "runtime": "org.gnome.Platform",
     "sdk": "org.gnome.Sdk",
@@ -526,11 +526,11 @@
                 },
                 {
                     "type": "file",
-                    "path": "com.endlessm.Sdk.appdata.xml"
+                    "path": "com.endlessm.apps.Sdk.appdata.xml"
                 },
                 {
                     "type": "file",
-                    "path": "com.endlessm.Platform.appdata.xml"
+                    "path": "com.endlessm.apps.Platform.appdata.xml"
                 },
                 {
                     "type": "file",

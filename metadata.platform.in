@@ -1,7 +1,7 @@
 [Runtime]
-name=com.endlessm.Platform
-runtime=com.endlessm.Platform/@@SDK_ARCH@@/@@SDK_BRANCH@@
-sdk=com.endlessm.Sdk/@@SDK_ARCH@@/@@SDK_BRANCH@@
+name=com.endlessm.apps.Platform
+runtime=com.endlessm.apps.Platform/@@SDK_ARCH@@/@@SDK_BRANCH@@
+sdk=com.endlessm.apps.Sdk/@@SDK_ARCH@@/@@SDK_BRANCH@@
 
 [Extension org.freedesktop.Platform.GL]
 version=@@FDO_RUNTIME_VERSION@@
