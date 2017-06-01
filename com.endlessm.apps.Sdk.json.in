@@ -88,6 +88,7 @@
             "name": "python-dbusmock",
             "no-autogen": true,
             "cleanup": ["*"],
+            "ensure-writable": ["/lib/python*/site-packages/easy-install.pth"],
             "build-options": {
                 "env": {
                     "PYTHON": "/usr/bin/python3"
