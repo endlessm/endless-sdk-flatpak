@@ -13,6 +13,8 @@ FDO_RUNTIME_VERSION ?= 1.6
 # The version of the GNOME runtime we build on
 GNOME_RUNTIME_VERSION ?= 3.24
 
+BUILD_TAG ?= $(shell date +%Y-%m-%d)
+
 FDO_DEPS = \
 	org.freedesktop.Sdk/${ARCH}/${FDO_RUNTIME_VERSION} \
 	org.freedesktop.Platform/${ARCH}/${FDO_RUNTIME_VERSION} \
@@ -88,4 +90,11 @@ clean:
 maintainer-clean: clean
 	@rm -rf .flatpak-builder
 
-.PHONY: add-repo install-dependencies clean-dependencies maintainer-clean
+bundle-artefacts:
+	@tar cf builder-cache.tar .flatpak-builder
+	@tar cf builddir.tar builddir
+	@tar -Af "eos-sdk-$(BUILD_TAG).tar" builder-cache.tar
+	@tar -Af "eos-sdk-$(BUILD_TAG).tar" builddir.tar
+	@rm -f builder-cache.tar builddir.tar
+
+.PHONY: add-repo install-dependencies clean-dependencies maintainer-clean bundle-artefacts
