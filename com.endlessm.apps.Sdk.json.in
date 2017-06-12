@@ -499,7 +499,14 @@
         },
         {
             "name": "eos-knowledge-lib",
-            "cleanup-platform": ["*.scss"],
+            "cleanup-platform": [
+                "*.scss",
+                "/bin/autobahn",
+                "/bin/eminem",
+                "/bin/introspect",
+                "/bin/kermit",
+                "/bin/picard"
+            ],
             "config-opts": [
                 "--disable-js-doc",
                 "--with-mathjax-dir=/usr/share/javascript/mathjax"
