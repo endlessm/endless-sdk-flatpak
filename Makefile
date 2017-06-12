@@ -92,9 +92,10 @@ maintainer-clean: clean
 
 bundle-artefacts:
 	@tar cf builder-cache.tar .flatpak-builder
-	@tar cf builddir.tar builddir
+	@tar cf ${REPO}.tar ${REPO}
 	@tar -Af "eos-sdk-$(BUILD_TAG).tar" builder-cache.tar
-	@tar -Af "eos-sdk-$(BUILD_TAG).tar" builddir.tar
-	@rm -f builder-cache.tar builddir.tar
+	@tar -Af "eos-sdk-$(BUILD_TAG).tar" ${REPO}.tar
+	@rm -f builder-cache.tar
+	@rm -f ${REPO}.tar
 
 .PHONY: add-repo install-dependencies clean-dependencies maintainer-clean bundle-artefacts
