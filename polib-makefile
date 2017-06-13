@@ -1,0 +1,8 @@
+all:
+	@true
+
+install:
+	PYVER=`$$PYTHON -c 'import sys; print("python{0}.{1}".format(sys.version.split(".")[0], sys.version.split(".")[1]))'`; \
+	mkdir -p /usr/lib/$$PYVER/site-packages && \
+	cp polib.py /usr/lib/$$PYVER/site-packages/polib.py
+

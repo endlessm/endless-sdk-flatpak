@@ -57,7 +57,7 @@
                 },
                 {
                     "type": "file",
-                    "path": "setuptools-makefile",
+                    "path": "polib-makefile",
                     "dest-filename": "Makefile"
                 }
             ]
