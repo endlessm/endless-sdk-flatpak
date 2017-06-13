@@ -44,6 +44,7 @@
             "name": "python-polib",
             "no-autogen": true,
             "ensure-writable": ["/lib/python*/site-packages/easy-install.pth"],
+            "cleanup-platform": ["*"],
             "build-options": {
                 "env": {
                     "PYTHON": "/usr/bin/python3"
