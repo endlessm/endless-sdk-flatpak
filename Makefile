@@ -50,14 +50,6 @@ define subst-metadata
 	done
 endef
 
-com.endlessm.apps.Sdk.json: com.endlessm.apps.Sdk.json.in generate-manifest.py Makefile
-	@echo "  GEN   $@"; \
-	./generate-manifest.py \
-		--arch=$(ARCH) \
-		--sdk-branch=$(SDK_BRANCH) \
-		--base-runtime-version=$(GNOME_RUNTIME_VERSION) \
-		$< > $@
-
 all: ${REPO} com.endlessm.apps.Sdk.json $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder --version
@@ -72,6 +64,14 @@ all: ${REPO} com.endlessm.apps.Sdk.json $(patsubst %,%.in,$(SUBST_FILES))
 
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
+
+com.endlessm.apps.Sdk.json: com.endlessm.apps.Sdk.json.in generate-manifest.py Makefile
+	@echo "  GEN   $@"; \
+	./generate-manifest.py \
+		--arch=$(ARCH) \
+		--sdk-branch=$(SDK_BRANCH) \
+		--base-runtime-version=$(GNOME_RUNTIME_VERSION) \
+		$< > $@
 
 add-repo:
 	flatpak remote-add --user --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
