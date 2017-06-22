@@ -29,7 +29,6 @@ GNOME_DEPS = \
 	$()
 
 SUBST_FILES = \
-	com.endlessm.apps.Sdk.json \
 	com.endlessm.apps.Sdk.appdata.xml \
 	com.endlessm.apps.Platform.appdata.xml \
 	metadata.sdk \
@@ -51,7 +50,7 @@ define subst-metadata
 	done
 endef
 
-all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
+all: ${REPO} com.endlessm.apps.Sdk.json $(patsubst %,%.in,$(SUBST_FILES))
 	$(call subst-metadata)
 	flatpak-builder --version
 	flatpak-builder \
@@ -66,6 +65,14 @@ all: ${REPO} $(patsubst %,%.in,$(SUBST_FILES))
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
 
+com.endlessm.apps.Sdk.json: com.endlessm.apps.Sdk.json.in generate-manifest.py Makefile
+	@echo "  GEN   $@"; \
+	./generate-manifest.py \
+		--arch=$(ARCH) \
+		--sdk-branch=$(SDK_BRANCH) \
+		--base-runtime-version=$(GNOME_RUNTIME_VERSION) \
+		$< > $@
+
 add-repo:
 	flatpak remote-add --user --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
 
@@ -78,8 +85,7 @@ clean-dependencies: add-repo
 	flatpak uninstall --user $(FDO_DEPS)
 	flatpak uninstall --user $(GNOME_DEPS)
 
-check: com.endlessm.apps.Sdk.json.in
-	$(call subst-metadata)
+check: com.endlessm.apps.Sdk.json
 	@echo "  CHK   $<"; json-glib-validate com.endlessm.apps.Sdk.json
 
 clean:
