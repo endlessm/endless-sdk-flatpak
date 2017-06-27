@@ -186,7 +186,7 @@
                 ],
                 "arch": {
                     "arm": {
-                        "cxxflags": "-Wno-error=cast-align"
+                        "cxxflags": "-O2 -g -Wno-error=cast-align"
                     }
                 }
             },
