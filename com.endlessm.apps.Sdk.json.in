@@ -178,10 +178,17 @@
             "name": "xapian-1.3",
             "subdir": "xapian-core",
             "builddir": false,
-            "config-opts": [
-                "--enable-maintainer-mode",
-                "--disable-documentation"
-            ],
+            "build-options": {
+                "config-opts": [
+                    "--enable-maintainer-mode",
+                    "--disable-documentation"
+                ],
+                "arch": {
+                    "arm": {
+                        "cxxflags": "-Wno-error=cast-align"
+                    }
+                }
+            },
             "sources": [
                 {
                     "type": "git",
