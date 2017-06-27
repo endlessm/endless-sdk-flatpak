@@ -92,6 +92,7 @@ clean:
 	@rm -rf builddir 
 	@rm -rf ${REPO}
 	@rm -f ${SUBST_FILES}
+	@rm -f com.endlessm.apps.Sdk.json
 
 maintainer-clean: clean
 	@rm -rf .flatpak-builder
