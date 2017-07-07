@@ -193,7 +193,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/endlessm/xapian-core"
+                    "url": "https://github.com/endlessm/xapian-core",
+                    "branch": "sdk-1"
                 }
             ]
         },
