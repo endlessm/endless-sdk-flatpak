@@ -90,12 +90,12 @@ check: com.endlessm.apps.Sdk.json
 
 clean:
 	@rm -rf builddir 
-	@rm -rf ${REPO}
 	@rm -f ${SUBST_FILES}
 	@rm -f com.endlessm.apps.Sdk.json
 
 maintainer-clean: clean
 	@rm -rf .flatpak-builder
+	@rm -rf ${REPO}
 
 bundle-artefacts:
 	@tar cf builder-cache.tar .flatpak-builder
