@@ -97,12 +97,14 @@ maintainer-clean: clean
 	@rm -rf .flatpak-builder
 	@rm -rf ${REPO}
 
+import-artefacts:
+	@if [ -f ${REPO}.tar ]; then \
+	    tar xf ${REPO}.tar && \
+	    ostree fsck --repo=${REPO} ; \
+	    rm -f ${REPO}.tar
+	fi
+
 bundle-artefacts:
-	@tar cf builder-cache.tar .flatpak-builder
 	@tar cf ${REPO}.tar ${REPO}
-	@tar -Af "eos-sdk-$(BUILD_TAG).tar" builder-cache.tar
-	@tar -Af "eos-sdk-$(BUILD_TAG).tar" ${REPO}.tar
-	@rm -f builder-cache.tar
-	@rm -f ${REPO}.tar
 
 .PHONY: add-repo install-dependencies clean-dependencies maintainer-clean bundle-artefacts
