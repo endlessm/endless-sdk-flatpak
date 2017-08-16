@@ -538,26 +538,26 @@
                     "type": "file",
                     "url": "https://fonts.google.com/download?family=Fira+Sans",
                     "dest-filename": "fira_sans.zip",
-                    "sha256": "764c40c880e20b559442f95adbfd227f6f312a98b9690ba0e9e0590f3a21644c"
+                    "sha256": "72dffb20a8cdaebafa707a69049f27086b4d74007fcbbc675dccd9fa7df950af"
                 },
                 {
                     "type": "file",
                     "url": "https://fonts.google.com/download?family=Lato",
                     "dest-filename": "lato.zip",
-                    "sha256": "1986eb89e1da6b205ba5b3e52f9fd4cea7f1e809238a55ba019b349ad66cc045"
+                    "sha256": "2797e3ee749f572a506a1b9c2536ac45bb266dba093cffff30542eeb24c29f9c"
                 },
 
                 {
                     "type": "file",
                     "url": "https://fonts.google.com/download?family=Libre+Baskerville",
                     "dest-filename": "libre_baskerville.zip",
-                    "sha256": "5b568327a734ae902b9ec12b7493ca2904a99982d90dda52eea3a46eec8d0f9b"
+                    "sha256": "f55e2d802e947c8d565f617871ce83bfee7f95c723cb095f483452f40536b5b6"
                 },
                 {
                     "type": "file",
                     "url": "https://fonts.google.com/download?family=Merriweather",
                     "dest-filename": "merriweather.zip",
-                    "sha256": "55936c4a9d206603ca0c22fdf4804cbca145533256e808ee456e4ad5e5e672c1"
+                    "sha256": "9c070c980b1da8337b1fbc333845684fda74fc1a708158e16842ad48d8dec67d"
                 },
                 {
                     "type": "file",
@@ -575,7 +575,7 @@
                     "type": "file",
                     "url": "https://fonts.google.com/download?family=Raleway",
                     "dest-filename": "raleway.zip",
-                    "sha256": "13187555e8f32c45b92a642912c9d9f43e8ed86612c087c35b146557d763e6a2"
+                    "sha256": "04d293c9cfa08e501267297f1d649b055d8a8ca5745f2154f2643e67da880852"
                 },
                 {
                     "type": "file",
