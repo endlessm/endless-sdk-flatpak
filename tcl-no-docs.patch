@@ -1,0 +1,108 @@
+diff -Nuarp tcl8.6.6.old/pkgs/itcl4.0.5/Makefile.in tcl8.6.6.new/pkgs/itcl4.0.5/Makefile.in
+--- tcl8.6.6.old/pkgs/itcl4.0.5/Makefile.in	2016-07-12 17:59:19.000000000 +0100
++++ tcl8.6.6.new/pkgs/itcl4.0.5/Makefile.in	2017-09-04 16:49:53.976631679 +0100
+@@ -197,7 +197,7 @@ libraries:
+ 
+ doc:
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: binaries install-lib-binaries install-bin-binaries
+ 
+diff -Nuarp tcl8.6.6.old/pkgs/sqlite3.13.0/Makefile.in tcl8.6.6.new/pkgs/sqlite3.13.0/Makefile.in
+--- tcl8.6.6.old/pkgs/sqlite3.13.0/Makefile.in	2016-01-07 15:38:22.000000000 +0000
++++ tcl8.6.6.new/pkgs/sqlite3.13.0/Makefile.in	2017-09-04 16:50:17.863699170 +0100
+@@ -206,7 +206,7 @@ doc:
+ 	@echo "        xml2nroff sample.xml > sample.n"
+ 	@echo "        xml2html sample.xml > sample.html"
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: binaries install-lib-binaries install-bin-binaries
+ 
+diff -Nuarp tcl8.6.6.old/pkgs/tdbc1.0.4/Makefile.in tcl8.6.6.new/pkgs/tdbc1.0.4/Makefile.in
+--- tcl8.6.6.old/pkgs/tdbc1.0.4/Makefile.in	2015-10-19 15:52:13.000000000 +0100
++++ tcl8.6.6.new/pkgs/tdbc1.0.4/Makefile.in	2017-09-04 16:51:54.612972531 +0100
+@@ -204,7 +204,7 @@ libraries:
+ 
+ doc:
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: binaries install-lib-binaries install-bin-binaries
+ 
+diff -Nuarp tcl8.6.6.old/pkgs/tdbcmysql1.0.4/Makefile.in tcl8.6.6.new/pkgs/tdbcmysql1.0.4/Makefile.in
+--- tcl8.6.6.old/pkgs/tdbcmysql1.0.4/Makefile.in	2015-10-13 12:57:32.000000000 +0100
++++ tcl8.6.6.new/pkgs/tdbcmysql1.0.4/Makefile.in	2017-09-04 16:51:18.636870881 +0100
+@@ -197,7 +197,7 @@ libraries:
+ 
+ doc:
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: binaries install-lib-binaries install-bin-binaries
+ 
+diff -Nuarp tcl8.6.6.old/pkgs/tdbcodbc1.0.4/Makefile.in tcl8.6.6.new/pkgs/tdbcodbc1.0.4/Makefile.in
+--- tcl8.6.6.old/pkgs/tdbcodbc1.0.4/Makefile.in	2015-10-13 12:57:58.000000000 +0100
++++ tcl8.6.6.new/pkgs/tdbcodbc1.0.4/Makefile.in	2017-09-04 16:51:41.762936222 +0100
+@@ -200,7 +200,7 @@ libraries:
+ 
+ doc:
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: binaries install-lib-binaries install-bin-binaries
+ 
+diff -Nuarp tcl8.6.6.old/pkgs/tdbcpostgres1.0.4/Makefile.in tcl8.6.6.new/pkgs/tdbcpostgres1.0.4/Makefile.in
+--- tcl8.6.6.old/pkgs/tdbcpostgres1.0.4/Makefile.in	2015-10-13 12:58:11.000000000 +0100
++++ tcl8.6.6.new/pkgs/tdbcpostgres1.0.4/Makefile.in	2017-09-04 16:52:09.363014204 +0100
+@@ -200,7 +200,7 @@ libraries:
+ 
+ doc:
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: binaries install-lib-binaries install-bin-binaries
+ 
+diff -Nuarp tcl8.6.6.old/pkgs/tdbcsqlite3-1.0.4/Makefile.in tcl8.6.6.new/pkgs/tdbcsqlite3-1.0.4/Makefile.in
+--- tcl8.6.6.old/pkgs/tdbcsqlite3-1.0.4/Makefile.in	2015-10-19 16:03:19.000000000 +0100
++++ tcl8.6.6.new/pkgs/tdbcsqlite3-1.0.4/Makefile.in	2017-09-04 16:53:57.464319638 +0100
+@@ -155,7 +155,7 @@ doc:
+ 	@echo "        xml2nroff sample.xml > sample.n"
+ 	@echo "        xml2html sample.xml > sample.html"
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: install-lib-binaries
+ 
+diff -Nuarp tcl8.6.6.old/pkgs/thread2.8.0/Makefile.in tcl8.6.6.new/pkgs/thread2.8.0/Makefile.in
+--- tcl8.6.6.old/pkgs/thread2.8.0/Makefile.in	2015-10-13 12:58:40.000000000 +0100
++++ tcl8.6.6.new/pkgs/thread2.8.0/Makefile.in	2017-09-04 16:51:29.561901748 +0100
+@@ -203,7 +203,7 @@ libraries:
+ 
+ doc:
+ 
+-install: all install-binaries install-libraries install-doc
++install: all install-binaries install-libraries
+ 
+ install-binaries: binaries install-lib-binaries install-bin-binaries
+ 
+diff -Nuarp tcl8.6.6.old/unix/Makefile.in tcl8.6.6.new/unix/Makefile.in
+--- tcl8.6.6.old/unix/Makefile.in	2016-07-26 15:07:18.000000000 +0100
++++ tcl8.6.6.new/unix/Makefile.in	2017-09-04 16:18:19.460369839 +0100
+@@ -769,7 +769,7 @@ trace-test: ${TCLTEST_EXE}
+ #--------------------------------------------------------------------------
+ 
+ INSTALL_BASE_TARGETS = install-binaries install-libraries install-msgs $(INSTALL_TZDATA)
+-INSTALL_DOC_TARGETS = install-doc
++INSTALL_DOC_TARGETS =
+ INSTALL_PACKAGE_TARGETS = install-packages
+ INSTALL_DEV_TARGETS = install-headers
+ INSTALL_EXTRA_TARGETS = @EXTRA_INSTALL@
