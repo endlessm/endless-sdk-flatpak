@@ -6,7 +6,7 @@
     "runtime": "org.gnome.Platform",
     "sdk": "org.gnome.Sdk",
     "runtime-version": "@@GNOME_RUNTIME_VERSION@@",
-    "sdk-extensions": ["org.gnome.Sdk.Debug", "org.gnome.Sdk.Locale"],
+    "sdk-extensions": ["org.gnome.Sdk.Debug", "org.gnome.Sdk.Locale", "org.gnome.Sdk.Docs"],
     "platform-extensions": ["org.gnome.Platform.Locale"],
     "metadata": "metadata.sdk",
     "metadata-platform": "metadata.platform",

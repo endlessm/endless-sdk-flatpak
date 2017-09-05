@@ -23,6 +23,14 @@ version=@@FDO_RUNTIME_VERSION@@
 directory=lib/extensions/gstreamer-1.0
 subdirectories=true
 
+[Extension org.freedesktop.Sdk.Docs]
+version=@@FDO_RUNTIME_VERSION@@
+directory=share/runtime/docs
+subdirectories=true
+bundle=true
+autodelete=true
+no-autodownload=true
+
 [Environment]
 GI_TYPELIB_PATH=/app/lib/girepository-1.0
 GST_PLUGIN_SYSTEM_PATH=/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/gstreamer-1.0
