@@ -310,123 +310,6 @@
             ]
         },
         {
-            "name": "opus",
-            "cleanup": [ "/bin" ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/xiph/opus/releases/download/v1.1.2/opus-1.1.2.tar.gz",
-                    "sha256": "0e290078e31211baa7b5886bcc8ab6bc048b9fc83882532da4a1a45e58e907fd"
-                }
-            ]
-        },
-        {
-            "name": "gstreamer",
-            "build-options" : {
-                "arch" : {
-                    "i386" : {
-                        "config-opts" : [
-                            "--build=i586-unknown-linux-gnu"
-                        ]
-                    },
-                    "arm" : {
-                        "config-opts" : [
-                            "--build=arm-unknown-linux-gnueabi"
-                        ]
-                    }
-                }
-            },
-            "config-opts": ["--enable-experimental", "--enable-orc", "--enable-opus" ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gstreamer/1.11/gstreamer-1.11.2.tar.xz",
-                    "sha256": "baa27e761e9d2e1770a8e311b2a61397edd6a288b2ff188940ea001615883305"
-                }
-            ]
-        },
-        {
-            "name": "gstreamer-plugins-base",
-            "build-options" : {
-                "arch" : {
-                    "i386" : {
-                        "config-opts" : [
-                            "--build=i586-unknown-linux-gnu"
-                        ]
-                    },
-                    "arm" : {
-                        "config-opts" : [
-                            "--build=arm-unknown-linux-gnueabi"
-                        ]
-                    }
-                }
-            },
-            "config-opts": ["--enable-experimental", "--enable-orc", "--enable-opus" ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gst-plugins-base/1.11/gst-plugins-base-1.11.2.tar.xz",
-                    "sha256": "7f73876e795dccf8acf1a45148b7cdd32bc618de6cadb049a00ea38111ceebd9"
-                }
-            ]
-        },
-        {
-            "name": "gstreamer-plugins-good",
-            "build-options" : {
-                "arch" : {
-                    "i386" : {
-                        "config-opts" : [
-                            "--build=i586-unknown-linux-gnu"
-                        ]
-                    },
-                    "arm" : {
-                        "config-opts" : [
-                            "--build=arm-unknown-linux-gnueabi"
-                        ]
-                    }
-                }
-            },
-            "config-opts": ["--enable-experimental", "--enable-orc" ,
-                            "--disable-monoscope",
-                            "--disable-aalib",
-                            "--enable-cairo",
-                            "--disable-libcaca",
-                            "--disable-jack",
-                            "--with-default-visualizer=autoaudiosink" ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gst-plugins-good/1.11/gst-plugins-good-1.11.2.tar.xz",
-                    "sha256": "704dadaa6b024bb5cdbdae58d6dabcbc3134294b64555484927a137c5b66ae69"
-                }
-            ]
-        },
-        {
-            "name": "gstreamer-plugins-bad",
-            "build-options" : {
-                "arch" : {
-                    "i386" : {
-                        "config-opts" : [
-                            "--build=i586-unknown-linux-gnu"
-                        ]
-                    },
-                    "arm" : {
-                        "config-opts" : [
-                            "--build=arm-unknown-linux-gnueabi"
-                        ]
-                    }
-                }
-            },
-            "config-opts": ["--enable-experimental", "--enable-orc" ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-1.11.2.tar.xz",
-                    "sha256": "c23fc89a5fdd8e1c77a3b12e8667df33990526c88b328ee7957dbbf9b29cc16a"
-                }
-            ]
-        },
-        {
             "name": "appstream",
             "builddir": true,
             "buildsystem": "cmake",
@@ -479,20 +362,20 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-data-0.4.7.tar.gz",
-                    "sha256": "e752b0d88a7aba54574152143e7bf76436a7ef51977c55d6bd9a48dccde3a7de"
+                    "url": "https://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz",
+                    "sha256": "1096a18161f263cccdc6d8a2eb5548c41ff8fcf9a3609243f1b6296abdf72872"
                 }
             ]
         },
         {
             "name": "poppler",
-            "config-opts": [ "--disable-libopenjpeg" ],
+            "config-opts": [ "--enable-libopenjpeg=none"],
             "cleanup": [ "/bin" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-0.36.0.tar.xz",
-                    "sha256": "93cc067b23c4ef7421380d3e8bd7c940b2027668446750787d7c1cb42720248e"
+                    "url": "https://poppler.freedesktop.org/poppler-0.59.0.tar.xz",
+                    "sha256": "a3d626b24cd14efa9864e12584b22c9c32f51c46417d7c10ca17651f297c9641"
                 }
             ]
         },
@@ -503,8 +386,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.24/evince-3.24.0.tar.xz",
-                    "sha256": "043895af7bbd6f1b57f9ab8778e78cf9c0af5dfcc347eaa94a17bf864c04dc8f"
+                    "url": "https://download.gnome.org/sources/evince/3.26/evince-3.26.0.tar.xz",
+                    "sha256": "79567bdb743cf0c3ed7b638da32afc9b850298f9b4edd532455df4a7e2a4c9d8"
                 }
             ]
         },
