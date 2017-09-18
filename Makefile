@@ -26,6 +26,7 @@ GNOME_DEPS = \
 	org.gnome.Sdk/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	org.gnome.Sdk.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	org.gnome.Sdk.Debug/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk.Docs/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	$()
 
 SUBST_FILES = \
