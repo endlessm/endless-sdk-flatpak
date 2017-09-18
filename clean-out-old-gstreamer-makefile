@@ -3,3 +3,6 @@ all:
 	for plugin in $(wildcard /usr/lib/gstreamer-1.0/*.so); do \
 		install -D dummy $$plugin; \
 	done
+
+install:
+	true
