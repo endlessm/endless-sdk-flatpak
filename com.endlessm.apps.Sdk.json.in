@@ -47,7 +47,6 @@
         {
             "name": "clean-out-old-gstreamer",
             "no-autogen": true,
-            "no-make-install": true,
             "ensure-writable": ["/usr/lib/gstreamer-1.0/*"],
             "sources": [
                 {
