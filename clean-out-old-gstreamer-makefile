@@ -1,6 +1,28 @@
+PLUGINS_TO_REMOVE = $(addprefix /usr/lib/gstreamer-1.0/libgst,$(addsuffix .so,\
+	accurip adder adpcmdec adpcmenc aiff alaw alpha alphacolor alsa apetag app \
+	asfmux audioconvert audiofx audiofxbad audiomixer audioparsers audiorate \
+	audioresample audiotestsrc audiovisualizers auparse autoconvert autodetect \
+	avi bayer bz2 cairo camerabin2 coloreffects compositor coreelements \
+	coretracers curl cutter dashdemux dataurisrc debug debugutilsbad decklink \
+	deinterlace dtls dtmf dvb dvbsuboverlay dvdspu effectv encodebin equalizer \
+	fbdevsink festival fieldanalysis flac flv flxdec freeverb frei0r \
+	gaudieffects gdkpixbuf gdp geometrictransform gio goom goom2k1 gtksink hls \
+	icydemux id3demux id3tag imagefreeze inter interlace interleave isomp4 \
+	ivfparse ivtc jp2kdecimator jpeg jpegformat kmssink level matroska midi \
+	mpegpsdemux mpegpsmux mpegtsdemux mpegtsmux mulaw multifile multipart mxf \
+	navigationtest netsim ogg openal opengl oss4audio ossaudio pango pcapparse \
+	playback png pnm pulse rawparse removesilence replaygain rfbsrc rsvg rtp \
+	rtpmanager rtponvif rtsp sdpelem segmentclip shapewipe shm siren smooth \
+	smoothstreaming smpte sndfile souphttpsrc spectrum speed speex stereo \
+	subenc subparse tcp theora timecode typefindfunctions udp vcdsrc vdpau \
+	video4linux2 videobox videoconvert videocrop videofilter videofiltersbad \
+	videoframe_audiolevel videomixer videoparsersbad videorate videoscale \
+	videosignal videotestsrc vmnc volume vorbis vpx vulkan wavenc wavparse \
+	waylandsink webp ximagesink ximagesrc xvimagesink y4mdec y4menc yadif))
+
 all:
 	touch dummy
-	for plugin in $(wildcard /usr/lib/gstreamer-1.0/*.so); do \
+	for plugin in $(PLUGINS_TO_REMOVE); do \
 		install -D dummy $$plugin; \
 	done
 
