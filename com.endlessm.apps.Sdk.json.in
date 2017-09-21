@@ -178,31 +178,6 @@
             ]
         },
         {
-            "name": "gtk",
-            "build-options": {
-                "arch" : {
-                    "i386" : {
-                        "config-opts" : [
-                            "--build=i586-unknown-linux-gnu"
-                        ]
-                    },
-                    "arm" : {
-                        "config-opts" : [
-                            "--build=arm-unknown-linux-gnueabi",
-                            "--enable-egl-x11"
-                        ]
-                    }
-                }
-            },
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/endlessm/gtk.git",
-                    "branch": "master"
-                }
-            ]
-        },
-        {
             "name": "eos-metrics",
             "config-opts": [
                 "--disable-gtk-doc",
