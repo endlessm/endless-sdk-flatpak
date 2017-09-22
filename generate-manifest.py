@@ -67,6 +67,7 @@ def edit_manifest(data, arch, branch, runtime_version):
             gtk_module = m
             gtk_module['config-opts'].append('--enable-egl-x11')
             gtk_module['config-opts'].append('--build=arm-unknown-linux-gnueabi')
+            gtk_module['rm-configure'] = True
             gtk_module['sources'].append(gtk_patch)
             data['modules'].insert(0, gtk_module)
             break
