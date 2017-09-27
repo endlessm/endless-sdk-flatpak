@@ -180,7 +180,6 @@
         },
         {
             "name": "xapian-1.3",
-            "subdir": "xapian-core",
             "builddir": false,
             "build-options": {
                 "config-opts": [
