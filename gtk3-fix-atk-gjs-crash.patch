@@ -1,0 +1,75 @@
+From f5c24a2397f65e275db6ebb5c971191d8c6ebec6 Mon Sep 17 00:00:00 2001
+From: Juan Pablo Ugarte <ugarte@endlessm.com>
+Date: Thu, 19 Oct 2017 15:16:43 -0300
+Subject: [PATCH] GtkScrolledWindowAccessible, GtkIconViewAccessible: fix bug
+ #789215
+
+Use g_signal_connect_data() instead of g_signal_connect_object()
+to make sure the callback gets disconected when the data object
+is destroyed.
+---
+ gtk/a11y/gtkiconviewaccessible.c       | 24 ++++++++++++------------
+ gtk/a11y/gtkscrolledwindowaccessible.c | 12 ++++++------
+ 2 files changed, 18 insertions(+), 18 deletions(-)
+
+diff --git a/gtk/a11y/gtkiconviewaccessible.c b/gtk/a11y/gtkiconviewaccessible.c
+index eb85522d87..e8a3aa780f 100644
+--- a/gtk/a11y/gtkiconviewaccessible.c
++++ b/gtk/a11y/gtkiconviewaccessible.c
+@@ -1226,18 +1226,18 @@ gtk_icon_view_accessible_connect_model_signals (GtkIconView *icon_view)
+   GObject *obj;
+ 
+   obj = G_OBJECT (icon_view->priv->model);
+-  g_signal_connect_data (obj, "row-changed",
+-                         (GCallback) gtk_icon_view_accessible_model_row_changed,
+-                         icon_view, NULL, 0);
+-  g_signal_connect_data (obj, "row-inserted",
+-                         (GCallback) gtk_icon_view_accessible_model_row_inserted,
+-                         icon_view, NULL, G_CONNECT_AFTER);
+-  g_signal_connect_data (obj, "row-deleted",
+-                         (GCallback) gtk_icon_view_accessible_model_row_deleted,
+-                         icon_view, NULL, G_CONNECT_AFTER);
+-  g_signal_connect_data (obj, "rows-reordered",
+-                         (GCallback) gtk_icon_view_accessible_model_rows_reordered,
+-                         icon_view, NULL, G_CONNECT_AFTER);
++  g_signal_connect_object (obj, "row-changed",
++                           G_CALLBACK (gtk_icon_view_accessible_model_row_changed),
++                           icon_view, 0);
++  g_signal_connect_object (obj, "row-inserted",
++                           G_CALLBACK (gtk_icon_view_accessible_model_row_inserted),
++                           icon_view, G_CONNECT_AFTER);
++  g_signal_connect_object (obj, "row-deleted",
++                           G_CALLBACK (gtk_icon_view_accessible_model_row_deleted),
++                           icon_view, G_CONNECT_AFTER);
++  g_signal_connect_object (obj, "rows-reordered",
++                           G_CALLBACK (gtk_icon_view_accessible_model_rows_reordered),
++                           icon_view, G_CONNECT_AFTER);
+ }
+ 
+ static void
+diff --git a/gtk/a11y/gtkscrolledwindowaccessible.c b/gtk/a11y/gtkscrolledwindowaccessible.c
+index 488cf7a9ea..80fb5b75b4 100644
+--- a/gtk/a11y/gtkscrolledwindowaccessible.c
++++ b/gtk/a11y/gtkscrolledwindowaccessible.c
+@@ -92,12 +92,12 @@ gtk_scrolled_window_accessible_initialize (AtkObject *obj,
+ 
+   window = GTK_SCROLLED_WINDOW (data);
+ 
+-  g_signal_connect_data (gtk_scrolled_window_get_hscrollbar (window), "notify::visible",
+-                         G_CALLBACK (visibility_changed),
+-                         obj, NULL, FALSE);
+-  g_signal_connect_data (gtk_scrolled_window_get_vscrollbar (window), "notify::visible",
+-                         G_CALLBACK (visibility_changed),
+-                         obj, NULL, FALSE);
++  g_signal_connect_object (gtk_scrolled_window_get_hscrollbar (window), "notify::visible",
++                           G_CALLBACK (visibility_changed),
++                           obj, 0);
++  g_signal_connect_object (gtk_scrolled_window_get_vscrollbar (window), "notify::visible",
++                           G_CALLBACK (visibility_changed),
++                           obj, 0);
+ 
+   obj->role = ATK_ROLE_SCROLL_PANE;
+ }
+-- 
+2.15.0.rc1
+

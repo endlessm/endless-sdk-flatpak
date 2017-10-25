@@ -59,16 +59,20 @@ def edit_manifest(data, arch, branch, runtime_version):
     data['runtime-version'] = runtime_version
 
     # This is nasty
-    gtk_patch = { 'type': 'patch', 'path': 'gtk3-egl-x11.patch' }
+    gtk_patches = [ 'gtk3-fix-atk-gjs-crash.patch' ]
     u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
     sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
     for m in sdk_manifest['modules']:
         if m['name'] == 'gtk3':
             gtk_module = m
-            gtk_module['config-opts'].append('--enable-egl-x11')
-            gtk_module['config-opts'].append('--build=arm-unknown-linux-gnueabi')
+            if arch == 'arm':
+                gtk_module['config-opts'].append('--enable-egl-x11')
+                gtk_module['config-opts'].append('--build=arm-unknown-linux-gnueabi')
+                gtk_patches.append('gtk3-egl-x11.patch')
             gtk_module['rm-configure'] = True
-            gtk_module['sources'].append(gtk_patch)
+            gtk_module['ensure-writable'] = ['/lib/gtk-3.0/3.0.0/immodules.cache']
+            for patch in gtk_patches:
+                gtk_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gtk_module)
             break
 
