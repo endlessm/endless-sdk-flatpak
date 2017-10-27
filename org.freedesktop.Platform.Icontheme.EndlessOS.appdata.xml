@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="runtime">
+  <id>org.freedesktop.Platform.Icontheme.EndlessOS</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LGPL-2.1+</project_license>
+  <name>EndlessOS icon theme</name>
+  <summary>EndlessOS icon theme</summary>
+  <description>
+    <p>
+      The default icon theme used in Endless OS.
+      https://endlessos.com
+    </p>
+  </description>
+  <url type="homepage">https://github.com/endlessm/eos-theme</url>
+</component>

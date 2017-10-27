@@ -32,7 +32,8 @@ LOCALE_DEPS = \
 	org.gnome.Sdk.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	$()
 
-SUBST_FILES = \
+SDK_DEPS = \
+	com.endlessm.apps.Sdk.json \
 	com.endlessm.apps.Sdk.appdata.xml \
 	com.endlessm.apps.Platform.appdata.xml \
 	metadata.sdk \
@@ -53,29 +54,39 @@ GOOGLE_FONTS = \
 	Roboto \
 	$()
 
-define subst-metadata
-	@for file in ${SUBST_FILES}; do                                         \
-	  file_source=$${file}.in;                                              \
-	  echo "  GEN   $${file}";						\
-	  sed -e 's/@@SDK_ARCH@@/${ARCH}/g'                                     \
-	      -e 's/@@SDK_BRANCH@@/${SDK_BRANCH}/g'                             \
-	      -e 's/@@GNOME_RUNTIME_VERSION@@/${GNOME_RUNTIME_VERSION}/g'       \
-	      -e 's/@@FDO_RUNTIME_VERSION@@/${FDO_RUNTIME_VERSION}/g'           \
-	      $$file_source > $$file.tmp && mv $$file.tmp $$file || exit 1;     \
-	done
-endef
+ICONTHEME_DEPS = \
+	org.freedesktop.Platform.Icontheme.EndlessOS.json \
+	org.freedesktop.Platform.Icontheme.EndlessOS.appdata.xml \
+	$()
 
-all: ${REPO} com.endlessm.apps.Sdk.json $(patsubst %,%.in,$(SUBST_FILES))
-	$(call subst-metadata)
-	flatpak-builder --version
+# Generic substitution rule
+%: %.in
+	@echo "  GEN   $@" &&                                            \
+	sed -e 's/@@SDK_ARCH@@/${ARCH}/g'                                \
+	    -e 's/@@SDK_BRANCH@@/${SDK_BRANCH}/g'                        \
+	    -e 's/@@GNOME_RUNTIME_VERSION@@/${GNOME_RUNTIME_VERSION}/g'  \
+	    -e 's/@@FDO_RUNTIME_VERSION@@/${FDO_RUNTIME_VERSION}/g'      \
+	    $< > $@.tmp && mv $@.tmp $@
+
+define build-manifest
+	@flatpak-builder --version
 	flatpak-builder \
 		--force-clean --ccache --require-changes \
 		--repo=${REPO} \
 		--arch=${ARCH} \
-		--subject="Build of com.endlessm.apps.Sdk, `date`" \
+		--subject="Build of $1, `date`" \
 		${EXPORT_ARGS} \
 		builddir \
-		com.endlessm.apps.Sdk.json
+		$1
+endef
+
+all: sdk icontheme
+
+sdk: ${REPO} $(SDK_DEPS)
+	$(call build-manifest,com.endlessm.apps.Sdk.json)
+
+icontheme: ${REPO} $(ICONTHEME_DEPS)
+	$(call build-manifest,org.freedesktop.Platform.Icontheme.EndlessOS.json)
 
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
@@ -136,4 +147,4 @@ update-fonts:
 		wget https://fonts.google.com/download?family=$$font -O fonts/$$font.zip; \
 	done
 
-.PHONY: add-repo install-dependencies clean-dependencies maintainer-clean bundle-artefacts
+.PHONY: sdk icontheme add-repo install-dependencies clean-dependencies maintainer-clean bundle-artefacts
