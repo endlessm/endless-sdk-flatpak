@@ -1,0 +1,48 @@
+{
+    "id": "org.freedesktop.Platform.Icontheme.EndlessOS",
+    "branch": "1.0",
+    "runtime": "org.freedesktop.Sdk",
+    "build-extension": true,
+    "sdk": "org.freedesktop.Sdk",
+    "runtime-version": "@@FDO_RUNTIME_VERSION@@",
+    "sdk-extensions": [],
+    "separate-locales": false,
+    "cleanup": [ "/share/info", "/share/man" ],
+    "appstream-compose": false,
+    "build-options" : {
+        "prefix": "/usr/share/runtime"
+    },
+    "modules": [
+        {
+            "name": "eos-theme",
+            "config-opts": [
+                "--disable-fonts",
+                "--disable-settings"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/endlessm/eos-theme.git"
+                }
+            ],
+            "ensure-writable": [
+                "/share/runtime/share/dconf"
+            ]
+        },
+        {
+            "name": "appdata",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p ${FLATPAK_DEST}/share/appdata",
+                "cp org.freedesktop.Platform.Icontheme.EndlessOS.appdata.xml ${FLATPAK_DEST}/share/appdata",
+                "appstream-compose --basename=org.freedesktop.Platform.Icontheme.EndlessOS --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.Platform.Icontheme.EndlessOS"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "org.freedesktop.Platform.Icontheme.EndlessOS.appdata.xml"
+                }
+            ]
+        }
+    ]
+}
