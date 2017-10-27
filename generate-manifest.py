@@ -4,7 +4,9 @@ import argparse
 import gi
 import json
 import os
+import re
 import sys
+from urllib import request
 
 gi.require_version('Flatpak', '1.0')
 from gi.repository import Flatpak
@@ -17,6 +19,9 @@ DEBIAN_TO_FLATPAK_ARCH_OVERRIDES = {
 
 FLATPAK_TO_DEBIAN_ARCH_OVERRIDES = \
     dict([(v, k) for k, v in DEBIAN_TO_FLATPAK_ARCH_OVERRIDES.items()])
+
+FREEDESKTOP_MANIFEST_URL = \
+    'https://raw.githubusercontent.com/flatpak/freedesktop-sdk-images/1.6/org.freedesktop.Sdk.json.in'
 
 def canonicalize_arch(arch, debian=False):
     """Transform arch names to the canonical names used by flatpak
@@ -52,6 +57,24 @@ def edit_manifest(data, arch, branch, runtime_version):
 
     data['branch'] = branch
     data['runtime-version'] = runtime_version
+
+    # This is nasty
+    gtk_patches = [ 'gtk3-fix-atk-gjs-crash.patch' ]
+    u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
+    sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
+    for m in sdk_manifest['modules']:
+        if m['name'] == 'gtk3':
+            gtk_module = m
+            if arch == 'arm':
+                gtk_module['config-opts'].append('--enable-egl-x11')
+                gtk_module['config-opts'].append('--build=arm-unknown-linux-gnueabi')
+                gtk_patches.append('gtk3-egl-x11.patch')
+            gtk_module['rm-configure'] = True
+            gtk_module['ensure-writable'] = ['/lib/gtk-3.0/3.0.0/immodules.cache']
+            for patch in gtk_patches:
+                gtk_module['sources'].append({ 'type': 'patch', 'path': patch })
+            data['modules'].insert(0, gtk_module)
+            break
 
 aparser = argparse.ArgumentParser(description='Add necessary build-args to manifest')
 aparser.add_argument('--arch', metavar='ARCH',

@@ -78,8 +78,9 @@ add-repo:
 	flatpak remote-add --user --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
 
 install-dependencies: add-repo
-	flatpak install --user gnome $(FDO_DEPS) || flatpak update --user $(FDO_DEPS)
-	flatpak install --user gnome $(GNOME_DEPS) || flatpak update --user $(GNOME_DEPS)
+	for dep in $(FDO_DEPS) $(GNOME_DEPS); do \
+		flatpak install --user gnome $$dep || flatpak update --user $$dep ; \
+	done
 	flatpak list --user --runtime --show-details
 
 clean-dependencies: add-repo
