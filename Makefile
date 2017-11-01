@@ -21,12 +21,15 @@ FDO_DEPS = \
 	$()
 
 GNOME_DEPS = \
-	org.gnome.Platform/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	org.gnome.Platform.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	org.gnome.Sdk/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	org.gnome.Sdk.Debug/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	org.gnome.Sdk.Docs/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Platform/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	$()
+
+LOCALE_DEPS = \
+	org.gnome.Platform.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
+	org.gnome.Sdk.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
 	$()
 
 SUBST_FILES = \
@@ -82,6 +85,13 @@ install-dependencies: add-repo
 		flatpak install --user gnome $$dep || flatpak update --user $$dep ; \
 	done
 	flatpak list --user --runtime --show-details
+
+install-locale-dependencies: add-repo
+	for dep in $(LOCALE_DEPS); do \
+		flatpak uninstall --user $$dep ; \
+		flatpak install --user gnome $$dep ; \
+	done
+	flatpak list --user --runtime --all --show-details
 
 clean-dependencies: add-repo
 	flatpak uninstall --user $(FDO_DEPS)
