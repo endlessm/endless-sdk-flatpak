@@ -1,9 +1,0 @@
-all:
-	@true
-
-install:
-	@mkdir -p /usr/share/fonts && \
-	for font in *.zip; do \
-	  unzip $$font -d /usr/share/fonts/$${font%.*}; \
-	done
-
