@@ -42,6 +42,17 @@ SUBST_FILES = \
 	issue.net \
 	$()
 
+GOOGLE_FONTS = \
+	Fira+Sans \
+	Lato \
+	Libre+Baskerville \
+	Merriweather \
+	Noto+Sans \
+	Noto+Serif \
+	Raleway \
+	Roboto \
+	$()
+
 define subst-metadata
 	@for file in ${SUBST_FILES}; do                                         \
 	  file_source=$${file}.in;                                              \
@@ -118,5 +129,10 @@ import-artefacts:
 
 bundle-artefacts:
 	@tar cf ${REPO}.tar ${REPO}
+
+update-fonts:
+	@for font in $(GOOGLE_FONTS); do \
+		wget https://fonts.google.com/download?family=$$font -O fonts/$$font.zip; \
+	done
 
 .PHONY: add-repo install-dependencies clean-dependencies maintainer-clean bundle-artefacts
