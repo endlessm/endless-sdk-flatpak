@@ -2,6 +2,7 @@
 
 import argparse
 import gi
+import hashlib
 import json
 import os
 import re
@@ -76,6 +77,34 @@ def edit_manifest(data, arch, branch, runtime_version):
             data['modules'].insert(0, gtk_module)
             break
 
+def sha256(filename):
+    checksum = hashlib.sha256()
+    with open(filename, 'rb') as file:
+        for data in iter(lambda: file.read(65536), b''):
+            checksum.update(data)
+    return checksum.hexdigest()
+
+def add_fonts_module(data):
+    """Add fonts module to manifest json"""
+
+    sources = []
+
+    for font in os.listdir('fonts'):
+        if font.endswith('.zip'):
+            path = 'fonts/' + font
+            sources.append({ 'type': 'file',
+                              'path': path,
+                              'dest-filename': font.replace("+", "-"),
+                              'sha256': sha256(path)})
+
+    data['modules'].insert(0, { 'name': 'default-theme-fonts',
+                                'buildsystem': 'simple',
+                                'build-commands': [
+                                    "mkdir -p /usr/share/fonts",
+                                    "for font in *.zip; do unzip $font -d /usr/share/fonts/${font%.*}; done",
+                                ],
+                                'sources': sources })
+
 aparser = argparse.ArgumentParser(description='Add necessary build-args to manifest')
 aparser.add_argument('--arch', metavar='ARCH',
                      help='build architecture')
@@ -94,4 +123,5 @@ args = aparser.parse_args()
 
 data = json.load(args.infile)
 edit_manifest(data, args.arch, args.branch, args.runtime_version)
+add_fonts_module(data)
 print(json.dumps(data, indent=4))
