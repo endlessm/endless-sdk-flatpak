@@ -24,3 +24,9 @@ Run:
 ```
 
 To build the Endless run time.
+
+# Default theme fonts
+
+All zip files in fonts subdir will be automaticaly added to the manifest by generate-manifest.py
+Use makefile rule update-fonts to update fonts from google fonts servers.
+

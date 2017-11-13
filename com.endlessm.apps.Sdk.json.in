@@ -424,66 +424,6 @@
             ]
         },
         {
-            "name": "default-theme-fonts",
-            "no-autogen": true,
-            "sources": [
-                {
-                    "type": "file",
-                    "path": "fonts-makefile",
-                    "dest-filename": "Makefile"
-                },
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Fira+Sans",
-                    "dest-filename": "fira_sans.zip",
-                    "sha256": "72dffb20a8cdaebafa707a69049f27086b4d74007fcbbc675dccd9fa7df950af"
-                },
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Lato",
-                    "dest-filename": "lato.zip",
-                    "sha256": "2797e3ee749f572a506a1b9c2536ac45bb266dba093cffff30542eeb24c29f9c"
-                },
-
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Libre+Baskerville",
-                    "dest-filename": "libre_baskerville.zip",
-                    "sha256": "f55e2d802e947c8d565f617871ce83bfee7f95c723cb095f483452f40536b5b6"
-                },
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Merriweather",
-                    "dest-filename": "merriweather.zip",
-                    "sha256": "9c070c980b1da8337b1fbc333845684fda74fc1a708158e16842ad48d8dec67d"
-                },
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Noto+Sans",
-                    "dest-filename": "noto_sans.zip",
-                    "sha256": "abec8b6e2f8cd368331d994d139bf9ff08e263b7409dc13638203c49e875e17a"
-                },
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Noto+Serif",
-                    "dest-filename": "noto_serif.zip",
-                    "sha256": "f281f11ab5bf01f6e4262d2b5c2fe89a7b4e83210673b9859a65911ff4f9de7e"
-                },
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Raleway",
-                    "dest-filename": "raleway.zip",
-                    "sha256": "04d293c9cfa08e501267297f1d649b055d8a8ca5745f2154f2643e67da880852"
-                },
-                {
-                    "type": "file",
-                    "url": "https://fonts.google.com/download?family=Roboto",
-                    "dest-filename": "roboto.zip",
-                    "sha256": "3d0a957f7070355aa776cd0b09e26d002d4bb141962b53ef6daa893572d45d48"
-                }
-            ]
-        },
-        {
             "name": "os-release",
             "sources": [
                 {
