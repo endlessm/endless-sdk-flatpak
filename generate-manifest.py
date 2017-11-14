@@ -79,8 +79,8 @@ def edit_manifest(data, arch, branch, runtime_version):
 
 def sha256(filename):
     checksum = hashlib.sha256()
-    with open(filename, 'rb') as file:
-        for data in iter(lambda: file.read(65536), b''):
+    with open(filename, 'rb') as f:
+        for data in iter(lambda: f.read(65536), b''):
             checksum.update(data)
     return checksum.hexdigest()
 
