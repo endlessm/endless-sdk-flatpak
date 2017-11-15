@@ -93,7 +93,8 @@ add-repo:
 
 install-dependencies: add-repo
 	for dep in $(FDO_DEPS) $(GNOME_DEPS); do \
-		flatpak install --user gnome $$dep || flatpak update --user $$dep ; \
+		flatpak install --user gnome $$dep ; \
+		flatpak update --user $$dep ; \
 	done
 	flatpak list --user --runtime --show-details
 
