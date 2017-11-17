@@ -97,13 +97,17 @@ def add_fonts_module(data):
                               'dest-filename': font.replace("+", "-"),
                               'sha256': sha256(path)})
 
-    data['modules'].insert(0, { 'name': 'default-theme-fonts',
-                                'buildsystem': 'simple',
-                                'build-commands': [
-                                    "mkdir -p /usr/share/fonts",
-                                    "for font in *.zip; do unzip $font -d /usr/share/fonts/${font%.*}; done",
-                                ],
-                                'sources': sources })
+    # Append the fonts to the end of the manifest, but before the
+    # os-release scripts
+    data['modules'].insert(-1, {
+        'name': 'default-theme-fonts',
+        'buildsystem': 'simple',
+        'build-commands': [
+            "mkdir -p /usr/share/fonts",
+            "for font in *.zip; do unzip $font -d /usr/share/fonts/${font%.*}; done",
+        ],
+        'sources': sources,
+    })
 
 aparser = argparse.ArgumentParser(description='Add necessary build-args to manifest')
 aparser.add_argument('--arch', metavar='ARCH',
