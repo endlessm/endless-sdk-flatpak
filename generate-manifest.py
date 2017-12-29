@@ -60,7 +60,10 @@ def edit_manifest(data, arch, branch, runtime_version):
     data['runtime-version'] = runtime_version
 
     # This is nasty
-    gtk_patches = [ 'gtk3-fix-atk-gjs-crash.patch' ]
+    gtk_patches = [
+        'gtk3-fix-atk-gjs-crash.patch',
+        'gtk3-GtkCssImageSurface-cache.patch'
+    ]
     u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
     sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
     for m in sdk_manifest['modules']:
