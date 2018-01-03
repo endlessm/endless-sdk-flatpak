@@ -16,6 +16,7 @@
         {
             "name": "eos-theme",
             "config-opts": [
+                "--enable-app-icons",
                 "--disable-fonts",
                 "--disable-settings"
             ],
