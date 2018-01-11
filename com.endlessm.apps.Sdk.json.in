@@ -186,6 +186,7 @@
         {
             "name": "xapian-1.3",
             "builddir": false,
+            "no-parallel-make": true,
             "build-options": {
                 "config-opts": [
                     "--enable-maintainer-mode",
