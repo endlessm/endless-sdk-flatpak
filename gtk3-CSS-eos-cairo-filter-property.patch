@@ -1,0 +1,232 @@
+From 5f6b84d234898d3d9fdac6e42b633c43c1e7b969 Mon Sep 17 00:00:00 2001
+From: Juan Pablo Ugarte <ugarte@endlessm.com>
+Date: Thu, 11 Jan 2018 17:21:24 -0300
+Subject: [PATCH] CSS: add vendor specific -eos-cairo-filter property
+
+This property is used to provide a hint about the algorithm it should be use to scale CSS images.
+---
+ gtk/gtkcssenumvalue.c           | 55 +++++++++++++++++++++++++++++++++++++++++
+ gtk/gtkcssenumvalueprivate.h    |  4 +++
+ gtk/gtkcssimagesurface.c        |  9 +++++++
+ gtk/gtkcssimagesurfaceprivate.h |  4 +++
+ gtk/gtkcssstylepropertyimpl.c   | 20 +++++++++++++++
+ gtk/gtkcsstypesprivate.h        |  1 +
+ gtk/gtkrenderbackground.c       |  9 +++++++
+ 7 files changed, 102 insertions(+)
+
+diff --git a/gtk/gtkcssenumvalue.c b/gtk/gtkcssenumvalue.c
+index 784f97e3e6..9af3078f7d 100644
+--- a/gtk/gtkcssenumvalue.c
++++ b/gtk/gtkcssenumvalue.c
+@@ -1070,3 +1070,58 @@ _gtk_css_icon_style_value_get (const GtkCssValue *value)
+ 
+   return value->value;
+ }
++
++/* GtkCssEosCairoFilter */
++
++static const GtkCssValueClass GTK_CSS_VALUE_EOS_CAIRO_FILTER = {
++  gtk_css_value_enum_free,
++  gtk_css_value_enum_compute,
++  gtk_css_value_enum_equal,
++  gtk_css_value_enum_transition,
++  gtk_css_value_enum_print
++};
++
++static GtkCssValue cairo_filter_values[] = {
++  { &GTK_CSS_VALUE_EOS_CAIRO_FILTER, 1, CAIRO_FILTER_FAST, "-eos-fast" },
++  { &GTK_CSS_VALUE_EOS_CAIRO_FILTER, 1, CAIRO_FILTER_GOOD, "-eos-good" },
++  { &GTK_CSS_VALUE_EOS_CAIRO_FILTER, 1, CAIRO_FILTER_BEST, "-eos-best" },
++  { &GTK_CSS_VALUE_EOS_CAIRO_FILTER, 1, CAIRO_FILTER_NEAREST, "-eos-nearest" },
++  { &GTK_CSS_VALUE_EOS_CAIRO_FILTER, 1, CAIRO_FILTER_BILINEAR, "-eos-bilinear" }
++};
++
++GtkCssValue *
++_gtk_css_eos_cairo_filter_value_new (cairo_filter_t filter)
++{
++  guint i;
++
++  for (i = 0; i < G_N_ELEMENTS (cairo_filter_values); i++)
++    {
++      if (cairo_filter_values[i].value == filter)
++        return _gtk_css_value_ref (&cairo_filter_values[i]);
++    }
++
++  g_return_val_if_reached (NULL);
++}
++
++GtkCssValue *
++_gtk_css_eos_cairo_filter_value_try_parse (GtkCssParser *parser)
++{
++  guint i;
++
++  g_return_val_if_fail (parser != NULL, NULL);
++
++  for (i = 0; i < G_N_ELEMENTS (cairo_filter_values); i++)
++    {
++      if (_gtk_css_parser_try (parser, cairo_filter_values[i].name, TRUE))
++        return _gtk_css_value_ref (&cairo_filter_values[i]);
++    }
++
++  return NULL;
++}
++
++cairo_filter_t
++_gtk_css_eos_cairo_filter_get (const GtkCssValue *value)
++{
++  g_return_val_if_fail (value->class == &GTK_CSS_VALUE_EOS_CAIRO_FILTER, CAIRO_FILTER_GOOD);
++  return value->value;
++}
+diff --git a/gtk/gtkcssenumvalueprivate.h b/gtk/gtkcssenumvalueprivate.h
+index deb145cb2e..705a00c373 100644
+--- a/gtk/gtkcssenumvalueprivate.h
++++ b/gtk/gtkcssenumvalueprivate.h
+@@ -91,6 +91,10 @@ GtkCssValue *   _gtk_css_icon_style_value_new         (GtkCssIconStyle    icon_s
+ GtkCssValue *   _gtk_css_icon_style_value_try_parse   (GtkCssParser      *parser);
+ GtkCssIconStyle _gtk_css_icon_style_value_get         (const GtkCssValue *value);
+ 
++GtkCssValue *   _gtk_css_eos_cairo_filter_value_new       (cairo_filter_t     filter);
++GtkCssValue *   _gtk_css_eos_cairo_filter_value_try_parse (GtkCssParser      *parser);
++cairo_filter_t  _gtk_css_eos_cairo_filter_get             (const GtkCssValue *value);
++
+ G_END_DECLS
+ 
+ #endif /* __GTK_CSS_ENUM_VALUE_PRIVATE_H__ */
+diff --git a/gtk/gtkcssimagesurface.c b/gtk/gtkcssimagesurface.c
+index 8c439c9a52..c76522ba63 100644
+--- a/gtk/gtkcssimagesurface.c
++++ b/gtk/gtkcssimagesurface.c
+@@ -57,6 +57,7 @@ gtk_css_image_surface_draw (GtkCssImage *image,
+ 
+   /* Update cache image if size is different */
+   if (surface->cache == NULL   ||
++      surface->cache_filter != surface->filter ||
+       ABS (width - surface->width) > 0.001 ||
+       ABS (height - surface->height) > 0.001)
+     {
+@@ -78,6 +79,8 @@ gtk_css_image_surface_draw (GtkCssImage *image,
+       cairo_rectangle (cache, 0, 0, width, height);
+       cairo_scale (cache, width / image_width, height / image_height);
+       cairo_set_source_surface (cache, surface->surface, 0, 0);
++      cairo_pattern_set_filter (cairo_get_source (cache), surface->filter);
++      surface->cache_filter = surface->filter;
+       cairo_fill (cache);
+ 
+       cairo_destroy (cache);
+@@ -153,6 +156,7 @@ _gtk_css_image_surface_class_init (GtkCssImageSurfaceClass *klass)
+ static void
+ _gtk_css_image_surface_init (GtkCssImageSurface *image_surface)
+ {
++  image_surface->filter = CAIRO_FILTER_GOOD;
+ }
+ 
+ GtkCssImage *
+@@ -185,3 +189,8 @@ _gtk_css_image_surface_new_for_pixbuf (GdkPixbuf *pixbuf)
+   return image;
+ }
+ 
++void
++_gtk_css_image_surface_set_filter (GtkCssImageSurface *image, cairo_filter_t filter)
++{
++  image->filter = filter;
++}
+diff --git a/gtk/gtkcssimagesurfaceprivate.h b/gtk/gtkcssimagesurfaceprivate.h
+index 9619d8483d..ee758425af 100644
+--- a/gtk/gtkcssimagesurfaceprivate.h
++++ b/gtk/gtkcssimagesurfaceprivate.h
+@@ -42,6 +42,8 @@ struct _GtkCssImageSurface
+   cairo_surface_t *cache;               /* the scaled surface - to avoid scaling every time we need to draw */
+   double width;                         /* original cache width */
+   double height;                        /* original cache height */
++  cairo_filter_t filter;
++  cairo_filter_t cache_filter;
+ };
+ 
+ struct _GtkCssImageSurfaceClass
+@@ -53,6 +55,8 @@ GType          _gtk_css_image_surface_get_type             (void) G_GNUC_CONST;
+ 
+ GtkCssImage *  _gtk_css_image_surface_new                  (cairo_surface_t *surface);
+ GtkCssImage *  _gtk_css_image_surface_new_for_pixbuf       (GdkPixbuf       *pixbuf);
++void           _gtk_css_image_surface_set_filter           (GtkCssImageSurface *image,
++                                                            cairo_filter_t      filter);
+ 
+ G_END_DECLS
+ 
+diff --git a/gtk/gtkcssstylepropertyimpl.c b/gtk/gtkcssstylepropertyimpl.c
+index 9fd506a0ca..1491dde99b 100644
+--- a/gtk/gtkcssstylepropertyimpl.c
++++ b/gtk/gtkcssstylepropertyimpl.c
+@@ -719,6 +719,17 @@ css_image_value_parse_with_builtin (GtkCssStyleProperty *property,
+   return css_image_value_parse (property, parser);
+ }
+ 
++static GtkCssValue *
++cairo_filter_parse (GtkCssStyleProperty *property, GtkCssParser *parser)
++{
++  GtkCssValue *value = _gtk_css_eos_cairo_filter_value_try_parse (parser);
++
++  if (value == NULL)
++    _gtk_css_parser_error (parser, "unknown value for property");
++
++  return value;
++}
++
+ static void
+ css_image_value_query (GtkCssStyleProperty *property,
+                        const GtkCssValue   *css_value,
+@@ -1869,4 +1880,13 @@ G_GNUC_END_IGNORE_DEPRECATIONS
+                                           color_query,
+                                           color_assign,
+                                           _gtk_css_color_value_new_current_color ());
++  gtk_css_style_property_register        ("-eos-cairo-filter",
++                                          GTK_CSS_PROPERTY_EOS_CAIRO_FILTER,
++                                          G_TYPE_NONE,
++                                          GTK_STYLE_PROPERTY_INHERIT,
++                                          GTK_CSS_AFFECTS_BACKGROUND,
++                                          cairo_filter_parse,
++                                          NULL,
++                                          NULL,
++                                          _gtk_css_eos_cairo_filter_value_new (CAIRO_FILTER_GOOD));
+ }
+diff --git a/gtk/gtkcsstypesprivate.h b/gtk/gtkcsstypesprivate.h
+index 59f392a032..e9abbb0f34 100644
+--- a/gtk/gtkcsstypesprivate.h
++++ b/gtk/gtkcsstypesprivate.h
+@@ -227,6 +227,7 @@ enum { /*< skip >*/
+   GTK_CSS_PROPERTY_GTK_KEY_BINDINGS,
+   GTK_CSS_PROPERTY_CARET_COLOR,
+   GTK_CSS_PROPERTY_SECONDARY_CARET_COLOR,
++  GTK_CSS_PROPERTY_EOS_CAIRO_FILTER,
+   /* add more */
+   GTK_CSS_PROPERTY_N_PROPERTIES
+ };
+diff --git a/gtk/gtkrenderbackground.c b/gtk/gtkrenderbackground.c
+index 992cf20522..0931bd3d1b 100644
+--- a/gtk/gtkrenderbackground.c
++++ b/gtk/gtkrenderbackground.c
+@@ -22,6 +22,7 @@
+ #include "config.h"
+ 
+ #include "gtkrenderbackgroundprivate.h"
++#include "gtkcssimagesurfaceprivate.h"
+ 
+ #include "gtkcssarrayvalueprivate.h"
+ #include "gtkcssbgsizevalueprivate.h"
+@@ -148,6 +149,14 @@ _gtk_theming_background_paint_layer (GtkThemingBackground *bg,
+ 
+   cairo_save (cr);
+ 
++  if (GTK_IS_CSS_IMAGE_SURFACE (image))
++    {
++      const GtkCssValue *value;
++      value = gtk_css_style_get_value (bg->style, GTK_CSS_PROPERTY_EOS_CAIRO_FILTER);
++      _gtk_css_image_surface_set_filter (GTK_CSS_IMAGE_SURFACE (image),
++                                         _gtk_css_eos_cairo_filter_get (value));
++    }
++
+   _gtk_rounded_box_path (
+       &bg->boxes[
+           _gtk_css_area_value_get (
+-- 
+2.15.1
+
