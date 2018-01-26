@@ -69,46 +69,31 @@
         },
         {
             "name": "python-dbus",
-            "no-autogen": true,
-            "cleanup": ["*"],
-            "build-options": {
-                "env": {
-                    "PYTHON": "/usr/bin/python3"
-                }
-            },
+            "cleanup-platform": ["*"],
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --no-index --find-links \"file://${PWD}\" dbus-python"
+            ],
             "sources": [
                 {
-                    "type": "archive",
+                    "type": "file",
                     "url": "https://pypi.python.org/packages/ad/1b/76adc363212c642cabbf9329457a918308c0b9b5d38ce04d541a67255174/dbus-python-1.2.4.tar.gz",
                     "sha256": "e2f1d6871f74fba23652e51d10873e54f71adab0525833c19bad9e99b1b2f9cc"
-                },
-                {
-                    "type": "file",
-                    "path": "setuptools-makefile",
-                    "dest-filename": "Makefile"
                 }
             ]
         },
         {
             "name": "python-dbusmock",
-            "no-autogen": true,
-            "cleanup": ["*"],
-            "ensure-writable": ["/lib/python*/site-packages/easy-install.pth"],
-            "build-options": {
-                "env": {
-                    "PYTHON": "/usr/bin/python3"
-                }
-            },
+            "cleanup-platform": ["*"],
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --no-index --find-links \"file://${PWD}\" python-dbusmock"
+            ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://pypi.python.org/packages/61/08/31ccd635c7a73575ce3682471811de6f046793319374e455bf990451733c/python-dbusmock-0.16.7.tar.gz",
-                    "sha256": "2d2ea892fa4633c3ec6ac1e912120ec493047a5c6522849b7d1c95ad755bce75"
-                },
-                {
                     "type": "file",
-                    "path": "setuptools-makefile",
-                    "dest-filename": "Makefile"
+                    "url": "https://pypi.python.org/packages/4d/cd/a5f571ef37addb45a86eca2e66a6b4789d915dbb9170a997dba02b7a0a89/python-dbusmock-0.17.tar.gz",
+                    "sha256": "58f802ef4c659a1adbca31eb6c26688f1c09599b5832354eb258340b66673346"
                 }
             ]
         },
