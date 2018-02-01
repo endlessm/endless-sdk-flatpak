@@ -69,46 +69,31 @@
         },
         {
             "name": "python-dbus",
-            "no-autogen": true,
-            "cleanup": ["*"],
-            "build-options": {
-                "env": {
-                    "PYTHON": "/usr/bin/python3"
-                }
-            },
+            "cleanup-platform": ["*"],
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --no-index --find-links \"file://${PWD}\" dbus-python"
+            ],
             "sources": [
                 {
-                    "type": "archive",
+                    "type": "file",
                     "url": "https://pypi.python.org/packages/ad/1b/76adc363212c642cabbf9329457a918308c0b9b5d38ce04d541a67255174/dbus-python-1.2.4.tar.gz",
                     "sha256": "e2f1d6871f74fba23652e51d10873e54f71adab0525833c19bad9e99b1b2f9cc"
-                },
-                {
-                    "type": "file",
-                    "path": "setuptools-makefile",
-                    "dest-filename": "Makefile"
                 }
             ]
         },
         {
             "name": "python-dbusmock",
-            "no-autogen": true,
-            "cleanup": ["*"],
-            "ensure-writable": ["/lib/python*/site-packages/easy-install.pth"],
-            "build-options": {
-                "env": {
-                    "PYTHON": "/usr/bin/python3"
-                }
-            },
+            "cleanup-platform": ["*"],
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --no-index --find-links \"file://${PWD}\" python-dbusmock"
+            ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://pypi.python.org/packages/61/08/31ccd635c7a73575ce3682471811de6f046793319374e455bf990451733c/python-dbusmock-0.16.7.tar.gz",
-                    "sha256": "2d2ea892fa4633c3ec6ac1e912120ec493047a5c6522849b7d1c95ad755bce75"
-                },
-                {
                     "type": "file",
-                    "path": "setuptools-makefile",
-                    "dest-filename": "Makefile"
+                    "url": "https://pypi.python.org/packages/4d/cd/a5f571ef37addb45a86eca2e66a6b4789d915dbb9170a997dba02b7a0a89/python-dbusmock-0.17.tar.gz",
+                    "sha256": "58f802ef4c659a1adbca31eb6c26688f1c09599b5832354eb258340b66673346"
                 }
             ]
         },
@@ -214,6 +199,7 @@
         },
         {
             "name": "jasmine-gjs",
+            "cleanup-platform": ["*"],
             "sources": [
                 {
                     "type": "git",
@@ -392,6 +378,88 @@
             ]
         },
         {
+            "name": "python3-lxml",
+            "no-autogen": true,
+            "cleanup-platform": ["*"],
+            "ensure-writable": ["/lib/python*/site-packages/easy-install.pth"],
+            "build-options": {
+                "cflags": "-I/usr/include",
+                "env": {
+                    "XSLT_CONFIG": "pkg-config libxslt",
+                    "XML2_CONFIG": "pkg-config libxml-2.0"
+                }
+            },
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://pypi.python.org/packages/20/b3/9f245de14b7696e2d2a386c0b09032a2ff6625270761d6543827e667d8de/lxml-3.8.0.tar.gz",
+                    "sha256": "736f72be15caad8116891eb6aa4a078b590d231fdc63818c40c21624ac71db96"
+                },
+                {
+                    "type": "file",
+                    "path": "setuptools-makefile",
+                    "dest-filename": "Makefile"
+                },
+                {
+                    "type": "patch",
+                    "path": "lxml-Fix-getting-lib-version-when-using-pkg-config.patch"
+                }
+            ]
+        },
+        {
+            "name": "hotdoc",
+            "cleanup-platform": ["*"],
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --no-index --find-links \"file://${PWD}\" hotdoc"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://pypi.python.org/packages/f6/f7/875e23067652488ae40603336fdd63510a1e1853672b5b829a78452fd31c/toposort-1.4.tar.gz",
+                    "sha256": "c190b9d9a9e53ae2835f4d524130147af601fbd63677d19381c65067a80fa903"
+                },
+                {
+                    "type": "file",
+                    "url": "https://pypi.python.org/packages/b1/94/311326207d43dd0bcc7c98b9abef223a38841d2baf1a3bb53b09b7f5f625/SQLAlchemy-1.2.1.tar.gz",
+                    "sha256": "9ede7070d6fd18f28058be88296ed67893e2637465516d6a596cd9afea97b154"
+                },
+                {
+                    "type": "file",
+                    "url": "https://pypi.python.org/packages/b1/67/7f0a14a4cc9bd949b8d22383c26fec83a00e7bd428e15c697f998e3e37ba/wheezy.template-0.1.167.tar.gz",
+                    "sha256": "a2ee933452f0352fb8587d79bf6fc66dbf3a14779ef7d17b9fa75e80c0003f19"
+                },
+                {
+                    "type": "file",
+                    "url": "https://pypi.python.org/packages/ad/fd/07c85c70803465df171340d88b12b7f41f5181777053a5cd8d75ce2f4b89/schema-0.6.7.tar.gz",
+                    "sha256": "410f44cb025384959d20deef00b4e1595397fa30959947a4f0d92e9c84616f35"
+                },
+                {
+                    "type": "file",
+                    "url": "https://pypi.python.org/packages/48/69/d87c60746b393309ca30761f8e2b49473d43450b150cb08f3c6df5c11be5/appdirs-1.4.3.tar.gz",
+                    "sha256": "9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92"
+                },
+                {
+                    "type": "file",
+                    "url": "https://pypi.python.org/packages/0b/8e/07d19b56d5e4fc79d86f2dff69674841c8dec30a008dbda36d0d2dbc6e50/hotdoc-0.8.92.tar.gz",
+                    "sha256": "b9c7141ae71696e5da11974e2b012814d9cf76569a9934b184195237ada767bd"
+                }
+            ]
+        },
+        {
+            "name": "hotdoc-modular-framework",
+            "cleanup-platform": ["*"],
+            "buildsystem": "simple",
+            "build-commands": ["pip3 install ."],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/endlessm/hotdoc-modular-framework",
+                    "branch": "master"
+                }
+            ]
+        },
+        {
             "name": "eos-knowledge-lib",
             "cleanup-platform": [
                 "*.scss",
@@ -403,6 +471,7 @@
             ],
             "config-opts": [
                 "--disable-js-doc",
+                "--disable-documentation",
                 "--with-mathjax-dir=/usr/share/javascript/mathjax"
             ],
             "sources": [
