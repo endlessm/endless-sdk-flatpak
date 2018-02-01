@@ -471,11 +471,16 @@
                 "/bin/kermit",
                 "/bin/picard"
             ],
-            "config-opts": [
-                "--disable-js-doc",
-                "--disable-documentation",
-                "--with-mathjax-dir=/usr/share/javascript/mathjax"
-            ],
+            "build-options": {
+                "config-opts": [
+                    "--disable-js-doc",
+                    "--disable-documentation",
+                    "--with-mathjax-dir=/usr/share/javascript/mathjax"
+                ],
+                "env": {
+                    "HOTDOC": "/usr/bin/python3 /usr/bin/hotdoc"
+                }
+            },
             "sources": [
                 {
                     "type": "git",
