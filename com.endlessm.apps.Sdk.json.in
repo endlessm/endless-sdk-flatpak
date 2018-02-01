@@ -452,6 +452,7 @@
             "cleanup-platform": ["*"],
             "buildsystem": "simple",
             "build-commands": ["pip3 install ."],
+            "test-commands": ["python setup.py test"],
             "sources": [
                 {
                     "type": "git",
