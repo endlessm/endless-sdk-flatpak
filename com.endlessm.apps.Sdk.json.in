@@ -190,6 +190,7 @@
         },
         {
             "name": "xapian-glib",
+            "buildsystem": "meson",
             "sources": [
                 {
                     "type": "git",
