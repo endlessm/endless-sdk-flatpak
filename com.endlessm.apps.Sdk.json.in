@@ -132,7 +132,7 @@
         {
             "name": "tcl",
             "no-autogen": true,
-            "cleanup": ["*"],
+            "cleanup-platform": ["*"],
             "builddir": false,
             "subdir": "unix",
             "config-opts": [
@@ -190,6 +190,7 @@
         },
         {
             "name": "xapian-glib",
+            "buildsystem": "meson",
             "sources": [
                 {
                     "type": "git",
@@ -451,6 +452,7 @@
             "cleanup-platform": ["*"],
             "buildsystem": "simple",
             "build-commands": ["pip3 install ."],
+            "test-commands": ["python setup.py test"],
             "sources": [
                 {
                     "type": "git",
@@ -469,11 +471,16 @@
                 "/bin/kermit",
                 "/bin/picard"
             ],
-            "config-opts": [
-                "--disable-js-doc",
-                "--disable-documentation",
-                "--with-mathjax-dir=/usr/share/javascript/mathjax"
-            ],
+            "build-options": {
+                "config-opts": [
+                    "--disable-js-doc",
+                    "--disable-documentation",
+                    "--with-mathjax-dir=/usr/share/javascript/mathjax"
+                ],
+                "env": {
+                    "HOTDOC": "/usr/bin/python3 /usr/bin/hotdoc"
+                }
+            },
             "sources": [
                 {
                     "type": "git",
