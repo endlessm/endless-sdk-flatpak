@@ -132,7 +132,7 @@
         {
             "name": "tcl",
             "no-autogen": true,
-            "cleanup-platform": ["*"],
+            "cleanup": ["*"],
             "builddir": false,
             "subdir": "unix",
             "config-opts": [
