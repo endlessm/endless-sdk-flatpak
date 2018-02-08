@@ -152,6 +152,9 @@
             "post-install": [
                 "chmod 0755 /usr/lib/libtcl8.6.so",
                 "ln -s /usr/bin/tclsh8.6 /usr/bin/tclsh"
+            ],
+            "ensure-writable": [
+                "/usr/bin/tclsh"
             ]
         },
         {
