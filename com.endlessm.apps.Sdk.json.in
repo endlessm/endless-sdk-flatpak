@@ -167,6 +167,8 @@
             ],
             "post-install": [
                 "chmod 0755 /usr/lib/libtcl8.6.so",
+                "ls -l /usr/bin/tclsh",
+                "rm -f /usr/bin/tclsh",
                 "ln -s /usr/bin/tclsh8.6 /usr/bin/tclsh"
             ]
         },
