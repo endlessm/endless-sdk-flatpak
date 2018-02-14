@@ -14,27 +14,28 @@
     "platform-extensions": ["org.gnome.Platform.Locale"],
     "metadata": "metadata.sdk",
     "metadata-platform": "metadata.platform",
-    "cleanup": [ "/cache",
-                 "/man",
-                 "/share/man",
-                 "/lib/systemd",
-                 "*.la", "*.a"],
-    "cleanup-commands": [ "touch -d @0 /usr/share/fonts",
-                          "touch -d @0 /usr/share/fonts/*",
-                          "fc-cache -fs"
-                        ],
-    "cleanup-platform": [ "/include",
-                          "/share/aclocal",
-                          "/share/pkgconfig",
-                          "/lib/pkgconfig",
-                          "/share/gir-1.0",
-                          "/share/vala"
-                        ],
-    "cleanup-platform-commands": [ "touch -d @0 /usr/share/fonts",
-                                   "touch -d @0 /usr/share/fonts/*",
-                                   "fc-cache -fs",
-                                   "ldconfig -C /usr/etc/ld.so.cache"
-                                 ],
+    "cleanup": [
+        "/man",
+        "/share/man",
+        "/lib/systemd",
+        "*.la",
+        "*.a"
+    ],
+    "cleanup-commands": [
+        "update-desktop-database",
+        "/usr/libexec/freedesktop-post.sh"
+    ],
+    "cleanup-platform": [
+        "/include",
+        "/share/aclocal",
+        "/share/pkgconfig",
+        "/lib/pkgconfig",
+        "/share/gir-1.0",
+        "/share/vala"
+    ],
+    "cleanup-platform-commands": [
+        "/usr/libexec/freedesktop-post.sh"
+    ],
     "build-options": {
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
