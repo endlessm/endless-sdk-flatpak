@@ -36,8 +36,6 @@ SDK_DEPS = \
 	com.endlessm.apps.Sdk.json \
 	com.endlessm.apps.Sdk.appdata.xml \
 	com.endlessm.apps.Platform.appdata.xml \
-	metadata.sdk \
-	metadata.platform \
 	os-release \
 	issue \
 	issue.net \
@@ -127,6 +125,7 @@ clean:
 	@rm -rf builddir 
 	@rm -f ${SUBST_FILES}
 	@rm -f com.endlessm.apps.Sdk.json
+	@rm -f com.endlessm.apps.Sdk.json.in
 
 maintainer-clean: clean
 	@rm -rf .flatpak-builder
