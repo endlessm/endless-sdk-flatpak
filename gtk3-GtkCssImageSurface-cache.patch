@@ -1,17 +1,17 @@
-From 432132d479c35b6e250db5b719977f942598f9a4 Mon Sep 17 00:00:00 2001
-From: Juan Pablo Ugarte <juanpablougarte@gmail.com>
+From c9c193db728c8f2eabe68af56eb857bca3106563 Mon Sep 17 00:00:00 2001
+From: Juan Pablo Ugarte <ugarte@endlessm.com>
 Date: Fri, 29 Dec 2017 15:21:52 -0300
 Subject: [PATCH] GtkCssImageSurface: add cache for the last drawn size.
 
 Keep a copy of the scaled image to speed up rendering multiple times
 the image at the same size.
 ---
- gtk/gtkcssimagesurface.c        | 37 +++++++++++++++++++++++++++++++------
+ gtk/gtkcssimagesurface.c        | 44 +++++++++++++++++++++++++++++++++++------
  gtk/gtkcssimagesurfaceprivate.h |  3 +++
- 2 files changed, 34 insertions(+), 6 deletions(-)
+ 2 files changed, 41 insertions(+), 6 deletions(-)
 
 diff --git a/gtk/gtkcssimagesurface.c b/gtk/gtkcssimagesurface.c
-index 1570e83bed..8c439c9a52 100644
+index 1570e83bed..f6f694aff7 100644
 --- a/gtk/gtkcssimagesurface.c
 +++ b/gtk/gtkcssimagesurface.c
 @@ -20,6 +20,7 @@
@@ -22,7 +22,7 @@ index 1570e83bed..8c439c9a52 100644
  
  G_DEFINE_TYPE (GtkCssImageSurface, _gtk_css_image_surface, GTK_TYPE_CSS_IMAGE)
  
-@@ -51,15 +52,39 @@ gtk_css_image_surface_draw (GtkCssImage *image,
+@@ -51,15 +52,46 @@ gtk_css_image_surface_draw (GtkCssImage *image,
    image_width = cairo_image_surface_get_width (surface->surface);
    image_height = cairo_image_surface_get_height (surface->surface);
  
@@ -35,7 +35,13 @@ index 1570e83bed..8c439c9a52 100644
 +      ABS (width - surface->width) > 0.001 ||
 +      ABS (height - surface->height) > 0.001)
 +    {
++      double xscale, yscale;
 +      cairo_t *cache;
++
++      /* We need the device scale (HiDPI mode) to calculate the proper size in
++       * pixels for the image surface and set the cache device scale
++       */
++      cairo_surface_get_device_scale (cairo_get_target (cr), &xscale, &yscale);
 +
 +      /* Save original size to preserve precision */
 +      surface->width = width;
@@ -47,8 +53,9 @@ index 1570e83bed..8c439c9a52 100644
 +      /* Image big enough to contain scaled image with subpixel precision */
 +      surface->cache = cairo_surface_create_similar_image (surface->surface,
 +                                                           CAIRO_FORMAT_ARGB32,
-+                                                           ceil (width),
-+                                                           ceil (height));
++                                                           ceil (width*xscale),
++                                                           ceil (height*yscale));
++      cairo_surface_set_device_scale (surface->cache, xscale, yscale);
 +      cache = cairo_create (surface->cache);
 +      cairo_rectangle (cache, 0, 0, width, height);
 +      cairo_scale (cache, width / image_width, height / image_height);
@@ -83,5 +90,5 @@ index 87baab288c..9619d8483d 100644
  
  struct _GtkCssImageSurfaceClass
 -- 
-2.15.1
+2.16.2
 
