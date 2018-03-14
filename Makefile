@@ -89,7 +89,7 @@ icontheme: ${REPO} $(ICONTHEME_DEPS)
 ${REPO}:
 	ostree init --mode=archive-z2 --repo=${REPO}
 
-com.endlessm.apps.Sdk.json: com.endlessm.apps.Sdk.json.in generate-manifest.py Makefile
+com.endlessm.apps.Sdk.json: com.endlessm.apps.Sdk.json.tmpl generate-manifest.py Makefile
 	@echo "  GEN   $@"; \
 	./generate-manifest.py \
 		--arch=$(ARCH) \

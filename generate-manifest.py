@@ -59,23 +59,50 @@ def edit_manifest(data, arch, branch, runtime_version):
     data['branch'] = branch
     data['runtime-version'] = runtime_version
 
-    # This is nasty
-    gtk_patches = [
-        'gtk3-fix-atk-gjs-crash.patch',
-        'gtk3-CSS-eos-cairo-filter-property.patch'
-    ]
+    # Docs extension
+    data['add-extensions']['org.gnome.Sdk.Docs']['version'] = runtime_version
+
+    # Finish args
+    finish_args = []
+    for arg in data['finish-args']:
+        finish_args.append(arg.replace('@@SDK_BRANCH@@', branch))
+    data['finish-args'] = finish_args
+
+    # Override the GTK package, as we have custom patches and build
+    # options
+    gtk_patches = {
+        'all': [
+            'gtk3-fix-atk-gjs-crash.patch',
+            'gtk3-CSS-eos-cairo-filter-property.patch'
+        ],
+        'arm': [
+            'gtk3-egl-x11.patch',
+        ],
+        'x86_64': [
+        ]
+    }
+
+    gtk_config_opts = {
+        'all': [
+        ],
+        'arm': [
+            '--enable-egl-x11',
+            '--build=arm-unknown-linux-gnueabi',
+        ],
+        'x86_64': [
+        ],
+    }
+
     u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
     sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
     for m in sdk_manifest['modules']:
         if m['name'] == 'gtk3':
             gtk_module = m
-            if arch == 'arm':
-                gtk_module['config-opts'].append('--enable-egl-x11')
-                gtk_module['config-opts'].append('--build=arm-unknown-linux-gnueabi')
-                gtk_patches.append('gtk3-egl-x11.patch')
             gtk_module['rm-configure'] = True
             gtk_module['ensure-writable'] = ['/lib/gtk-3.0/3.0.0/immodules.cache']
-            for patch in gtk_patches:
+            for opt in (gtk_config_opts[arch] + gtk_config_opts['all']):
+                gtk_module['config-opts'].append(opt)
+            for patch in (gtk_patches[arch] + gtk_patches['all']):
                 gtk_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gtk_module)
             break
