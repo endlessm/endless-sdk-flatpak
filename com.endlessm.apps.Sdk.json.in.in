@@ -22,6 +22,7 @@
     ],
     "add-extensions": {
         "org.gnome.Sdk.Docs" : {
+            "version": "@@GNOME_RUNTIME_VERSION@@",
             "directory": "share/runtime/docs",
             "bundle": true,
             "autodelete": true,
