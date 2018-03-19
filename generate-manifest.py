@@ -62,7 +62,6 @@ def edit_manifest(data, arch, branch, runtime_version):
     # This is nasty
     gtk_patches = [
         'gtk3-fix-atk-gjs-crash.patch',
-        'gtk3-GtkCssImageSurface-cache.patch',
         'gtk3-CSS-eos-cairo-filter-property.patch'
     ]
     u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
