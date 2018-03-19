@@ -11,7 +11,7 @@ SDK_BRANCH ?= master
 FDO_RUNTIME_VERSION ?= 1.6
 
 # The version of the GNOME runtime we build on
-GNOME_RUNTIME_VERSION ?= 3.26
+GNOME_RUNTIME_VERSION ?= 3.28
 
 BUILD_TAG ?= $(shell date +%Y-%m-%d)
 
