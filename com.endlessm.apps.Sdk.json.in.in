@@ -503,6 +503,16 @@
             ]
         },
         {
+            "name": "mustache-c",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/x86-64/mustache-c.git",
+                    "commit": "01f1e4732c4862071bbf07242128abf1e28cc105"
+                }
+            ]
+        },
+        {
             "name": "eos-knowledge-lib",
             "cleanup-platform": [
                 "*.scss",
