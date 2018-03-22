@@ -208,7 +208,12 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://github.com/endlessm/xapian-core"
+                    "url": "https://git.xapian.org/xapian",
+                    "commit": "81dd4862b907fa40380996532b54b6633bd355dd"
+                },
+                {
+                    "type": "shell",
+                    "commands": [ "./bootstrap --download-tools=never xapian-core" ]
                 }
             ]
         },
