@@ -528,6 +528,20 @@
             ]
         },
         {
+            "name": "eos-knowledge-content-renderer",
+            "buildsystem": "meson",
+            "cleanup": [
+                "/include/*",
+                "/share/gir-1.0/*"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/endlessm/eos-knowledge-content-renderer.git"
+                }
+            ]
+        },
+        {
             "name": "eos-knowledge-lib",
             "cleanup-platform": [
                 "*.scss",
