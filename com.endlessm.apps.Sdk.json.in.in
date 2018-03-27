@@ -382,6 +382,17 @@
             ]
         },
         {
+            "name": "maxwell",
+            "buildsystem": "meson",
+            "builddir": true,
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/endlessm/maxwell.git"
+                }
+            ]
+        },
+        {
             "name": "popplerdata",
             "no-autogen": true,
             "make-install-args": ["prefix=/usr"],
