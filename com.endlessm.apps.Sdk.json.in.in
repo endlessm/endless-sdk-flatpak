@@ -295,6 +295,16 @@
             ]
         },
         {
+            "name": "libdmodel",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/endlessm/libdmodel.git"
+                }
+            ]
+        },
+        {
             "name": "basin",
             "cleanup-platform": [
                 "/bin/basin",
