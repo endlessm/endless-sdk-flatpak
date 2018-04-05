@@ -209,7 +209,7 @@
                 {
                     "type": "git",
                     "url": "https://git.xapian.org/xapian",
-                    "commit": "81dd4862b907fa40380996532b54b6633bd355dd"
+                    "commit": "68c1da95b835ca2abcc19f4cd2a6aafd6e23efd3"
                 },
                 {
                     "type": "shell",
