@@ -157,7 +157,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://sunsite.icm.edu.pl/pub/programming/tcl/tcl8_6/tcl8.6.6-src.tar.gz",
+                    "url": "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.6/tcl8.6.6-src.tar.gz",
                     "sha256": "a265409781e4b3edcc4ef822533071b34c3dc6790b893963809b9fe221befe07"
                 },
                 {
