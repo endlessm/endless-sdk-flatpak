@@ -100,11 +100,11 @@ com.endlessm.apps.Sdk.json: com.endlessm.apps.Sdk.json.in generate-manifest.py M
 		$< > $@
 
 add-repo:
-	flatpak remote-add --user --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
+	flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 install-dependencies: add-repo
 	for dep in $(FDO_DEPS) $(GNOME_DEPS); do \
-		flatpak install --user gnome $$dep ; \
+		flatpak install --user flathub $$dep ; \
 		flatpak update --user $$dep ; \
 	done
 	flatpak list --user --runtime --show-details
@@ -112,7 +112,7 @@ install-dependencies: add-repo
 install-locale-dependencies: add-repo
 	for dep in $(LOCALE_DEPS); do \
 		flatpak uninstall --user $$dep ; \
-		flatpak install --user gnome $$dep ; \
+		flatpak install --user flathub $$dep ; \
 	done
 	flatpak list --user --runtime --all --show-details
 
