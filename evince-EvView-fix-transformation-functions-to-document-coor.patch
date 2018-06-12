@@ -1,0 +1,37 @@
+From 22c31d6049b82b1aa52b2ba8843612515aeeba2c Mon Sep 17 00:00:00 2001
+From: Juan Pablo Ugarte <ugarte@endlessm.com>
+Date: Tue, 12 Jun 2018 10:51:06 -0300
+Subject: [PATCH] EvView: fix transformation functions to document coordinates.
+
+Use top border value instead of right in transformation functions.
+
+Fixes issue #914 "Text selection broken with different border widths"
+---
+ libview/ev-view.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libview/ev-view.c b/libview/ev-view.c
+index e99ee5dc..e6758944 100644
+--- a/libview/ev-view.c
++++ b/libview/ev-view.c
+@@ -1375,7 +1375,7 @@ _ev_view_transform_view_point_to_doc_point (EvView       *view,
+ 					    double       *doc_point_y)
+ {
+ 	*doc_point_x = MAX ((double) (view_point->x - page_area->x - border->left) / view->scale, 0);
+-	*doc_point_y = MAX ((double) (view_point->y - page_area->y - border->right) / view->scale, 0);
++	*doc_point_y = MAX ((double) (view_point->y - page_area->y - border->top) / view->scale, 0);
+ }
+ 
+ void
+@@ -1386,7 +1386,7 @@ _ev_view_transform_view_rect_to_doc_rect (EvView       *view,
+ 					  EvRectangle  *doc_rect)
+ {
+ 	doc_rect->x1 = MAX ((double) (view_rect->x - page_area->x - border->left) / view->scale, 0);
+-	doc_rect->y1 = MAX ((double) (view_rect->y - page_area->y - border->right) / view->scale, 0);
++	doc_rect->y1 = MAX ((double) (view_rect->y - page_area->y - border->top) / view->scale, 0);
+ 	doc_rect->x2 = doc_rect->x1 + (double) view_rect->width / view->scale;
+ 	doc_rect->y2 = doc_rect->y1 + (double) view_rect->height / view->scale;
+ }
+-- 
+2.17.1
+
