@@ -24,6 +24,9 @@ FLATPAK_TO_DEBIAN_ARCH_OVERRIDES = \
 FREEDESKTOP_MANIFEST_URL = \
     'https://raw.githubusercontent.com/flatpak/freedesktop-sdk-images/1.6/org.freedesktop.Sdk.json.in'
 
+GNOME_MANIFEST_URL = \
+    'https://gitlab.gnome.org/GNOME/gnome-sdk-images/raw/gnome-{version}/org.gnome.Sdk.json.in'
+
 def canonicalize_arch(arch, debian=False):
     """Transform arch names to the canonical names used by flatpak
 
@@ -93,6 +96,13 @@ def edit_manifest(data, arch, branch, runtime_version):
         ],
     }
 
+    # Override the WebKitGtk+ package, as we have custom build options
+    webkitgtk_config_opts = {
+        'arm': [
+            '-DENABLE_GLES2=ON',
+        ],
+    }
+
     u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
     sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
     for m in sdk_manifest['modules']:
@@ -105,6 +115,24 @@ def edit_manifest(data, arch, branch, runtime_version):
             for patch in (gtk_patches[arch] + gtk_patches['all']):
                 gtk_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gtk_module)
+            break
+
+    # GNOME SDK's WebkitGTK+ module is only needed for our arm SDK
+    if arch not in ['arm']:
+        return
+    version = runtime_version.replace('.', '-')
+    u = request.urlopen(GNOME_MANIFEST_URL.format(version=version))
+    sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
+    for m in sdk_manifest['modules']:
+        if m['name'] == 'WebKitGTK+':
+            webkitgtk_module = m
+            for arch in webkitgtk_config_opts:
+                webkitgtk_module.setdefault('build-options', {}) \
+                                .setdefault('arch', {}) \
+                                .setdefault(arch, {}) \
+                                .setdefault('config-opts', []) \
+                                .extend(webkitgtk_config_opts[arch])
+            data['modules'].insert(1, webkitgtk_module)
             break
 
 def sha256(filename):
