@@ -102,21 +102,21 @@ add-repo:
 
 install-dependencies: add-repo
 	for dep in $(FDO_DEPS) $(GNOME_DEPS); do \
-		flatpak install --user flathub $$dep ; \
-		flatpak update --user $$dep ; \
+		flatpak install -y --user flathub $$dep ; \
+		flatpak update -y --user $$dep ; \
 	done
 	flatpak list --user --runtime --show-details
 
 install-locale-dependencies: add-repo
 	for dep in $(LOCALE_DEPS); do \
-		flatpak uninstall --user $$dep ; \
-		flatpak install --user flathub $$dep ; \
+		flatpak uninstall -y --user $$dep ; \
+		flatpak install -y --user flathub $$dep ; \
 	done
 	flatpak list --user --runtime --all --show-details
 
 clean-dependencies: add-repo
-	flatpak uninstall --user $(FDO_DEPS)
-	flatpak uninstall --user $(GNOME_DEPS)
+	flatpak uninstall -y --user $(FDO_DEPS)
+	flatpak uninstall -y --user $(GNOME_DEPS)
 
 check: com.endlessm.apps.Sdk.json
 	@echo "  CHK   $<"; json-glib-validate com.endlessm.apps.Sdk.json
