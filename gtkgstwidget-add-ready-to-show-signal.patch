@@ -1,0 +1,54 @@
+From a76037f34e8acf8642b8a313152a0bdeeec5c335 Mon Sep 17 00:00:00 2001
+From: Juan Pablo Ugarte <ugarte@endlessm.com>
+Date: Wed, 12 Dec 2018 14:11:28 -0800
+Subject: [PATCH] gtkgstwidget: add ready-to-show signal.
+
+Add a way to know when the widget is ready to show video content.
+
+Closes issue #528
+---
+ ext/gtk/gtkgstbasewidget.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/ext/gtk/gtkgstbasewidget.c b/ext/gtk/gtkgstbasewidget.c
+index 4858f2764..a3808c57f 100644
+--- a/ext/gtk/gtkgstbasewidget.c
++++ b/ext/gtk/gtkgstbasewidget.c
+@@ -203,11 +203,15 @@ _queue_draw (GtkGstBaseWidget * widget)
+     widget->pending_resize = FALSE;
+ 
+     widget->v_info = widget->pending_v_info;
+-    widget->negotiated = TRUE;
+ 
+     _apply_par (widget);
+ 
+     gtk_widget_queue_resize (GTK_WIDGET (widget));
++
++    if (!widget->negotiated && widget->pending_buffer)
++      g_signal_emit_by_name (widget, "ready-to-show");
++
++    widget->negotiated = TRUE;
+   } else {
+     gtk_widget_queue_draw (GTK_WIDGET (widget));
+   }
+@@ -395,6 +399,17 @@ gtk_gst_base_widget_class_init (GtkGstBaseWidgetClass * klass)
+           "When enabled, alpha will be ignored and converted to black",
+           DEFAULT_IGNORE_ALPHA, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+ 
++  /**
++   * GtkGstBaseWidget::ready-to-show:
++   * @self: the #GtkGstBaseWidgetClass which received the signal.
++   *
++   * This signal is emited in the main thread once when the widget is ready
++   * to display a video frame if shown on the screen.
++   */
++  g_signal_new_class_handler ("ready-to-show",
++      G_TYPE_FROM_CLASS (gobject_klass),
++      G_SIGNAL_RUN_LAST, NULL, NULL, NULL, NULL, G_TYPE_NONE, 0);
++
+   widget_klass->get_preferred_width = gtk_gst_base_widget_get_preferred_width;
+   widget_klass->get_preferred_height = gtk_gst_base_widget_get_preferred_height;
+   widget_klass->key_press_event = gtk_gst_base_widget_key_event;
+-- 
+2.20.0
+
