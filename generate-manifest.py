@@ -106,6 +106,7 @@ def edit_manifest(data, arch, branch, runtime_version):
     gst_plugins_good_patches = {
         'all': [
             'gtkgstwidget-add-ready-to-show-signal.patch',
+            'gstgtkgl-Also-try-retrieving-an-EGL-context.patch',
         ],
         'arm': [
         ],
@@ -136,12 +137,6 @@ def edit_manifest(data, arch, branch, runtime_version):
                 gtk_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gtk_module)
             break
-        if m['name'] == 'gstreamer-plugins-good':
-            gst_module = m
-            for patch in (gst_plugins_good_patches[arch] + gst_plugins_good_patches['all']):
-                gst_module['sources'].append({ 'type': 'patch', 'path': patch })
-            data['modules'].insert(0, gst_module)
-            break
     # GNOME SDK's WebkitGTK+ module is only needed for our arm SDK
     if arch not in ['arm']:
         return
@@ -166,6 +161,13 @@ def edit_manifest(data, arch, branch, runtime_version):
             for opt in gst_plugins_base_config_opts[arch]:
                 gst_plugins_base_module['config-opts'].append(opt)
             data['modules'].insert(0, gst_plugins_base_module)
+            break
+    for m in sdk_manifest['modules']:
+        if m['name'] == 'gstreamer-plugins-good':
+            gst_module = m
+            for patch in (gst_plugins_good_patches[arch] + gst_plugins_good_patches['all']):
+                gst_module['sources'].append({ 'type': 'patch', 'path': patch })
+            data['modules'].insert(0, gst_module)
             break
 
 def sha256(filename):
