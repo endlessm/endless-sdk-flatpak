@@ -113,6 +113,16 @@ def edit_manifest(data, arch, branch, runtime_version):
         ]
     }
 
+    gst_plugins_base_config_opts = {
+        'arm': [
+            '--enable-gles2',
+            # glx includes OpenGL headers which conflict with the GLES2 headers
+            '--disable-glx',
+        ],
+        'x86_64': [
+        ],
+    }
+
     u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
     sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
     for m in sdk_manifest['modules']:
@@ -148,6 +158,14 @@ def edit_manifest(data, arch, branch, runtime_version):
                                 .setdefault('config-opts', []) \
                                 .extend(webkitgtk_config_opts[arch])
             data['modules'].insert(1, webkitgtk_module)
+            break
+    # order is important. This builds -base before -good
+    for m in sdk_manifest['modules']:
+        if m['name'] == 'gstreamer-plugins-base':
+            gst_plugins_base_module = m
+            for opt in gst_plugins_base_config_opts[arch]:
+                gst_plugins_base_module['config-opts'].append(opt)
+            data['modules'].insert(0, gst_plugins_base_module)
             break
 
 def sha256(filename):
