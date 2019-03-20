@@ -106,11 +106,22 @@ def edit_manifest(data, arch, branch, runtime_version):
     gst_plugins_good_patches = {
         'all': [
             'gtkgstwidget-add-ready-to-show-signal.patch',
+            'gstgtkgl-Also-try-retrieving-an-EGL-context.patch',
         ],
         'arm': [
         ],
         'x86_64': [
         ]
+    }
+
+    gst_plugins_base_config_opts = {
+        'arm': [
+            '--enable-gles2',
+            # glx includes OpenGL headers which conflict with the GLES2 headers
+            '--disable-glx',
+        ],
+        'x86_64': [
+        ],
     }
 
     u = request.urlopen(FREEDESKTOP_MANIFEST_URL)
@@ -126,6 +137,17 @@ def edit_manifest(data, arch, branch, runtime_version):
                 gtk_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gtk_module)
             break
+    version = runtime_version.replace('.', '-')
+    u = request.urlopen(GNOME_MANIFEST_URL.format(version=version))
+    sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
+    for m in sdk_manifest['modules']:
+        if m['name'] == 'gstreamer-plugins-base':
+            gst_plugins_base_module = m
+            for opt in gst_plugins_base_config_opts[arch]:
+                gst_plugins_base_module['config-opts'].append(opt)
+            data['modules'].insert(0, gst_plugins_base_module)
+            break
+    for m in sdk_manifest['modules']:
         if m['name'] == 'gstreamer-plugins-good':
             gst_module = m
             for patch in (gst_plugins_good_patches[arch] + gst_plugins_good_patches['all']):
@@ -135,9 +157,6 @@ def edit_manifest(data, arch, branch, runtime_version):
     # GNOME SDK's WebkitGTK+ module is only needed for our arm SDK
     if arch not in ['arm']:
         return
-    version = runtime_version.replace('.', '-')
-    u = request.urlopen(GNOME_MANIFEST_URL.format(version=version))
-    sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
     for m in sdk_manifest['modules']:
         if m['name'] == 'WebKitGTK+':
             webkitgtk_module = m
