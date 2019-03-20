@@ -137,24 +137,9 @@ def edit_manifest(data, arch, branch, runtime_version):
                 gtk_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gtk_module)
             break
-    # GNOME SDK's WebkitGTK+ module is only needed for our arm SDK
-    if arch not in ['arm']:
-        return
     version = runtime_version.replace('.', '-')
     u = request.urlopen(GNOME_MANIFEST_URL.format(version=version))
     sdk_manifest = json.loads(re.sub(r'(^|\s)/\*.*?\*/', '', u.read().decode('utf-8'), flags=re.DOTALL))
-    for m in sdk_manifest['modules']:
-        if m['name'] == 'WebKitGTK+':
-            webkitgtk_module = m
-            for arch in webkitgtk_config_opts:
-                webkitgtk_module.setdefault('build-options', {}) \
-                                .setdefault('arch', {}) \
-                                .setdefault(arch, {}) \
-                                .setdefault('config-opts', []) \
-                                .extend(webkitgtk_config_opts[arch])
-            data['modules'].insert(1, webkitgtk_module)
-            break
-    # order is important. This builds -base before -good
     for m in sdk_manifest['modules']:
         if m['name'] == 'gstreamer-plugins-base':
             gst_plugins_base_module = m
@@ -168,6 +153,20 @@ def edit_manifest(data, arch, branch, runtime_version):
             for patch in (gst_plugins_good_patches[arch] + gst_plugins_good_patches['all']):
                 gst_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gst_module)
+            break
+    # GNOME SDK's WebkitGTK+ module is only needed for our arm SDK
+    if arch not in ['arm']:
+        return
+    for m in sdk_manifest['modules']:
+        if m['name'] == 'WebKitGTK+':
+            webkitgtk_module = m
+            for arch in webkitgtk_config_opts:
+                webkitgtk_module.setdefault('build-options', {}) \
+                                .setdefault('arch', {}) \
+                                .setdefault(arch, {}) \
+                                .setdefault('config-opts', []) \
+                                .extend(webkitgtk_config_opts[arch])
+            data['modules'].insert(1, webkitgtk_module)
             break
 
 def sha256(filename):
