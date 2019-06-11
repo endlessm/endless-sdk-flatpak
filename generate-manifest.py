@@ -80,6 +80,7 @@ def edit_manifest(data, arch, branch, runtime_version):
         ],
         'arm': [
             'gtk3-egl-x11.patch',
+            '0001-temporary-commit.patch'
         ],
         'x86_64': [
         ]

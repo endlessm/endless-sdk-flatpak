@@ -1,0 +1,112 @@
+From 0723ca64dd524f6ca72e240e07f66036411baa7a Mon Sep 17 00:00:00 2001
+From: Dylan McCall <dylan@endlessm.com>
+Date: Mon, 10 Jun 2019 14:14:24 -0700
+Subject: [PATCH] temporary commit
+
+---
+ gdk/gdkglcontext.c              | 9 +++++++++
+ gdk/gdkwindow.c                 | 7 ++++++-
+ gdk/x11/gdkglcontext-x11-eglx.c | 6 ++++++
+ 3 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/gdk/gdkglcontext.c b/gdk/gdkglcontext.c
+index fb1c989a95..3b211cf4ca 100644
+--- a/gdk/gdkglcontext.c
++++ b/gdk/gdkglcontext.c
+@@ -986,12 +986,16 @@ gdk_gl_context_make_current (GdkGLContext *context)
+   GdkGLContextPrivate *priv = gdk_gl_context_get_instance_private (context);
+   GdkGLContext *current;
+ 
++  g_critical("gdk_gl_context_make_current: %p", (void*)context);
++
+   g_return_if_fail (GDK_IS_GL_CONTEXT (context));
+ 
+   current = g_private_get (&thread_current_context);
+   if (current == context)
+     return;
+ 
++  g_critical("gdk_gl_context_make_current is realized: %d", priv->realized);
++
+   /* we need to realize the GdkGLContext if it wasn't explicitly realized */
+   if (!priv->realized)
+     {
+@@ -1004,10 +1008,15 @@ gdk_gl_context_make_current (GdkGLContext *context)
+           g_error_free (error);
+           return;
+         }
++      else
++        {
++          g_critical("gdk_gl_context_make_current realized context");
++        }
+     }
+ 
+   if (gdk_display_make_gl_context_current (priv->display, context))
+     {
++      g_critical("gdk_gl_context_make_current finished: %p", (void*)context);
+       g_private_replace (&thread_current_context, g_object_ref (context));
+       gdk_gl_context_check_extensions (context);
+     }
+diff --git a/gdk/gdkwindow.c b/gdk/gdkwindow.c
+index 14164092d0..6fb697a390 100644
+--- a/gdk/gdkwindow.c
++++ b/gdk/gdkwindow.c
+@@ -2957,7 +2957,8 @@ gdk_window_begin_paint_internal (GdkWindow            *window,
+         }
+       else
+         {
+-	  gdk_gl_context_make_current (context);
++	        gdk_gl_context_make_current (context);
++
+           /* With gl we always need a surface to combine the gl
+              drawing with the native drawing. */
+           needs_surface = TRUE;
+@@ -3005,6 +3006,8 @@ gdk_window_end_paint_internal (GdkWindow *window)
+   GdkRectangle clip_box = { 0, };
+   cairo_t *cr;
+ 
++  g_critical("gdk_window_end_paint_internal: %p", (void*)window);
++
+   if (GDK_WINDOW_DESTROYED (window) ||
+       !gdk_window_has_impl (window))
+     return;
+@@ -3032,6 +3035,8 @@ gdk_window_end_paint_internal (GdkWindow *window)
+           cairo_region_subtract (opaque_region, window->current_paint.flushed_region);
+           cairo_region_subtract (opaque_region, window->current_paint.need_blend_region);
+ 
++          g_critical("gdk_window_end_paint_internal make context current: %p", (void*)window->gl_paint_context);
++
+           gdk_gl_context_make_current (window->gl_paint_context);
+ 
+           if (!cairo_region_is_empty (opaque_region))
+diff --git a/gdk/x11/gdkglcontext-x11-eglx.c b/gdk/x11/gdkglcontext-x11-eglx.c
+index 7c1d11dde3..e40da167f2 100644
+--- a/gdk/x11/gdkglcontext-x11-eglx.c
++++ b/gdk/x11/gdkglcontext-x11-eglx.c
+@@ -921,6 +921,8 @@ gdk_x11_display_make_gl_context_current (GdkDisplay   *display,
+ 
+   egl_display = gdk_x11_display_get_egl_display (display);
+ 
++  g_critical("gdk_x11_display_make_gl_context_current: %p, %p", (void*)display, (void*)context);
++
+   if (context == NULL)
+     {
+       eglMakeCurrent (egl_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+@@ -939,11 +941,15 @@ gdk_x11_display_make_gl_context_current (GdkDisplay   *display,
+   GDK_NOTE (OPENGL,
+             g_message ("Making EGL context current"));
+ 
++  g_critical("gdk_x11_display_make_gl_context_current context is_attached: %p, %d", (void*)context_x11, context_x11->is_attached);
++
+   if (context_x11->is_attached)
+     surface = gdk_x11_window_get_egl_surface (window, context_x11->egl_config);
+   else
+     surface = gdk_x11_display_get_egl_dummy_surface (display, context_x11->egl_config);
+ 
++  g_critical("gdk_x11_display_make_gl_context_current surface: %p", (void*)surface);
++
+   if (!eglMakeCurrent (egl_display, surface, surface, context_x11->egl_context))
+     {
+       GDK_NOTE (OPENGL,
+-- 
+2.21.0
+
