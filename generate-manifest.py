@@ -114,6 +114,16 @@ def edit_manifest(data, arch, branch, runtime_version):
         ]
     }
 
+    gst_plugins_base_patches = {
+        'all': [
+            'gstgldisplay-Add-public-foreign_display-property.patch',
+        ],
+        'arm': [
+        ],
+        'x86_64': [
+        ]
+    }
+
     gst_plugins_base_config_opts = {
         'arm': [
             '--enable-gles2',
@@ -145,6 +155,8 @@ def edit_manifest(data, arch, branch, runtime_version):
             gst_plugins_base_module = m
             for opt in gst_plugins_base_config_opts[arch]:
                 gst_plugins_base_module['config-opts'].append(opt)
+            for patch in (gst_plugins_base_patches[arch] + gst_plugins_base_patches['all']):
+                gst_plugins_base_module['sources'].append({ 'type': 'patch', 'path': patch })
             data['modules'].insert(0, gst_plugins_base_module)
             break
     for m in sdk_manifest['modules']:
