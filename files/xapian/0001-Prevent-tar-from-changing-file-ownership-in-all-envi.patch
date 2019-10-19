@@ -1,0 +1,31 @@
+From b64d8f42a994cce7e0a1ffbe8592d7813973d1b3 Mon Sep 17 00:00:00 2001
+From: Dylan McCall <dylan@endlessm.com>
+Date: Wed, 23 Oct 2019 15:57:37 -0700
+Subject: [PATCH] Prevent tar from changing file ownership in all environments
+
+---
+ bootstrap | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/bootstrap b/bootstrap
+index 781f4538bc9a..39ad32ae6eb0 100755
+--- a/bootstrap
++++ b/bootstrap
+@@ -249,11 +249,11 @@ END
+ 
+     case $ext in
+     tar.xz)
+-      ${XZ-xz} -dc "$tarball"| tar xf - || exit $? ;;
++      ${XZ-xz} -dc "$tarball"| tar --no-same-owner -xf - || exit $? ;;
+     tar.bz2)
+-      bzip2 -dc "$tarball"| tar xf - || exit $?  ;;
++      bzip2 -dc "$tarball"| tar --no-same-owner -xf - || exit $?  ;;
+     *)
+-      gzip -dc "$tarball"| tar xf - || exit $? ;;
++      gzip -dc "$tarball"| tar --no-same-owner -xf - || exit $? ;;
+     esac
+ 
+     cd "$basename" || exit $?
+-- 
+2.23.0
+

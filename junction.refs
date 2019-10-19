@@ -1,0 +1,6 @@
+projects:
+  endless-sdk:
+    freedesktop-sdk.bst:
+    - ref: freedesktop-sdk-19.08.3-0-g816a8ddf806ff686d3cfbd69463e8b59f6b5720f
+    gnome-sdk.bst:
+    - ref: 3.34.1-0-g2eee0d69f901c422e778e7e66d30ccd3de253d4d
