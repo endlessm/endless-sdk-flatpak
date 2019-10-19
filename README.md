@@ -1,32 +1,20 @@
-# Endless SDK and platform run times for Flatpak-based applications
+# Endless SDK and platform runtime for Flatpak-based applications
 
-This repository contains the manifest and eventual patches necessary to
-build the Endless SDK and platform run times to be used by applications
-distributed through Flatpak that target the Endless platform.
+This repository contains a [BuildStream](https://buildstream.build) project that produces the Platform and SDK Flatpak runtimes for applications on Endless OS.
 
-The Endless run times are based on the GNOME run times, with additional
-modules for the Endless platform.
+### Building the runtime
 
-### Building the run times
+Our Buildstream project is based on [gnome-build-meta](https://gitlab.gnome.org/GNOME/gnome-build-meta) and [freedesktop-sdk](https://gitlab.com/freedesktop-sdk/freedesktop-sdk). It mostly contains the same elements as those projects, but certain elements are replaced with our own modified versions, and several new ones are added. To build flatpak runtimes and extensions, use _bst build_:
 
-In order to build the run times, you will need `flatpak-builder` and the
-following run times:
+    bst track flatpak-runtimes.bst --track-all --track-cross-junctions
+    bst build flatpak-runtimes.bst
 
- * org.freedesktop.Sdk
- * org.freedesktop.Platform
- * org.gnome.Sdk
- * org.gnome.Platform
+Afterwards, you can checkout the runtimes to an ostree repository:
 
-Run:
-
-```
-    $ make
-```
-
-To build the Endless run time.
+    bst checkout -f flatpak-runtimes.bst /path/to/repo/
+    flatpak remote-add --user --no-gpg-verify endless-sdk-flatpak-repo /path/to/repo/
+    flatpak remote-ls --user endless-sdk-flatpak-repo
 
 # Default theme fonts
 
-All zip files in fonts subdir will be automaticaly added to the manifest by generate-manifest.py
-Use makefile rule update-fonts to update fonts from google fonts servers.
-
+TODO: The runtime should contain fonts from zip files in the fonts subdir. There should be a utility to update these fonts from Google Fonts.
