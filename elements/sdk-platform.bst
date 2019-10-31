@@ -11,12 +11,12 @@ depends:
 - sdk/eos-knowledge-lib.bst
 - sdk/eos-metrics.bst
 - sdk/eos-sdk.bst
-- sdk/fonts-fira-sans.bst
+- sdk/fonts-firasans.bst
 - sdk/fonts-lato.bst
-- sdk/fonts-libre-baskerville.bst
+- sdk/fonts-librebaskerville.bst
 - sdk/fonts-merriweather.bst
-- sdk/fonts-noto-sans.bst
-- sdk/fonts-noto-serif.bst
+- sdk/fonts-notosans.bst
+- sdk/fonts-notoserif.bst
 - sdk/fonts-raleway.bst
 - sdk/fonts-roboto.bst
 - sdk/libdmodel.bst

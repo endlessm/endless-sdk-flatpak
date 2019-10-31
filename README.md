@@ -13,7 +13,3 @@ Next, you can checkout the runtimes to an ostree repository:
     bst checkout -f flatpak-runtimes.bst /path/to/repo/
     flatpak remote-add --user --no-gpg-verify endless-sdk-flatpak-repo /path/to/repo/
     flatpak remote-ls --user endless-sdk-flatpak-repo
-
-# Default theme fonts
-
-TODO: The runtime should contain fonts from zip files in the fonts subdir. There should be a utility to update these fonts from Google Fonts.
