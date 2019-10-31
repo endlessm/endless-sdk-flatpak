@@ -1,0 +1,5 @@
+sources:
+- kind: git_tag
+  url: github_com:google/fonts.git
+  track: master
+  ref: 3fcf54a1009c15ca73c01a72a56c821cad413289
