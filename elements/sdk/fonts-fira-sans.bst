@@ -6,10 +6,67 @@ build-depends:
 variables:
   fontsdir: "%{install-root}%{datadir}/fonts"
 
-(@): include/source-google-fonts.yml
-
 config:
   install-commands:
   - |
     install -m 0755 -d "%{fontsdir}/firasans"
-    install -p -m 0644 ofl/firasans/* "%{fontsdir}/firasans"
+    install -p -m 0644 * "%{fontsdir}/firasans"
+
+sources:
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-Black.ttf
+  ref: 0ab27e9178d7f74898dd26e3a5f10eb7922bb2a88a2903e00796c4f7c7e08cc0
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-BlackItalic.ttf
+  ref: 81bc0f5fac5b1ba562c1625319676e8202fec01b47e1e09b35db88210c30cf68
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-Bold.ttf
+  ref: a4d8e149ecdd4874a0726eb0af894488b3b31c423d6b0017c8f415ed1b795b45
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-BoldItalic.ttf
+  ref: 1b96c16db9819bcaa9d588068bb397bb6e977c4874965d3d50d789a1943757eb
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-ExtraBold.ttf
+  ref: 0a26cff904d790f7ade2bffaf227b5fecdbeffdac1695fdbd640e086fe4e7152
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-ExtraBoldItalic.ttf
+  ref: eb26df1afeec1f817977c8729b4a1ba5ef07d7c821d39cbff6348e491c748f5f
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-ExtraLight.ttf
+  ref: f575442d8b863086599208c9b69d0e345a0936f3ec27b12b3fbc41526b56e838
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-ExtraLightItalic.ttf
+  ref: f4d66af27c828a269d5df483a488404605957d0f4aeead8ebbc9a20dad24b115
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-Italic.ttf
+  ref: a4204f9a8029c1c55daa5385ac95936f74abea3e232770f1fb2862a19d1dfa13
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-Light.ttf
+  ref: e2172f4a23e9be22f977c34de3897d890401bbc5e9c47df968dfa2c01fb32235
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-LightItalic.ttf
+  ref: ca4228bdd77761e229e74e3e30f3a3786a75275b77e675decb75f7d356d7f7b4
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-Medium.ttf
+  ref: cbc1842cbed8c1d1146ba7c9db97d8f28c9bedfd25f41c5b0e1259ca48622328
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-MediumItalic.ttf
+  ref: d892b7a6e874d839bc7e712b1d57cf64bcf8013ae143c3eab09e0fd9a0604411
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-Regular.ttf
+  ref: c29556a2719bf613ef3d5e070e40d903a8965d9c081beca1375dc1e6e0f93c23
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-SemiBold.ttf
+  ref: db0321f83eb3e9f527b8af384a1b3fefdc1039cf2b06fd39b3f61492bda9561c
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-SemiBoldItalic.ttf
+  ref: 97dc5696fe0aabcabf7e041527e0ca39215661cb8174cd1a92c01d9fe224c73d
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-Thin.ttf
+  ref: cd9d582ffae151bc616b26cf84b3c4912d04363b9c5e1b3e599b66e0e7d532a4
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/FiraSans-ThinItalic.ttf
+  ref: 7275879630990f5bc13a3c3fcd68eea1c902aa8827769de4985390104a71a149
+- kind: remote
+  url: raw_githubusercontent_com:google/fonts/ed7143b8f0c9587f9dcfbcdf5b34ec1a7bc07fca/ofl/firasans/OFL.txt
+  ref: 8f24842e9174beda18a556c2ae7d54f5dc444340c19a3a9ef77e23bca366adbd
