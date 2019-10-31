@@ -9,6 +9,7 @@ kind: cmake
 sources:
 - kind: tar
   url: https://poppler.freedesktop.org/poppler-0.72.0.tar.xz
+  ref: c1747eb8f26e9e753c4001ed951db2896edc1021b6d0f547a0bd2a27c30ada51
 - kind: patch
   path: files/poppler/0001-glib-Don-t-create-PopplerInputStream-with-length-0.patch
 

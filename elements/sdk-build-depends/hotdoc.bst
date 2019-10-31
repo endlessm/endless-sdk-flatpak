@@ -12,3 +12,4 @@ depends:
 sources:
 - kind: tar
   url: https://files.pythonhosted.org/packages/c7/bf/5f243e2d2deeeea8a192694825b3fccc3d960acc4ee55b37c85dd2b22a8c/hotdoc-0.10.0.tar.gz
+  ref: f918683c2b9dfe616e9c054fececb2f5609b7ee1900faf36f4c9e58e80b97d99

@@ -18,3 +18,4 @@ sources:
   track: core-8-6-10
 
 # TODO: Apply tcl-no-docs.patch
+  ref: core-8-6-10-0-g2abfa2c03ddc0419e6525f86c2c0323b2ba1932e

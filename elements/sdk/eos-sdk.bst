@@ -23,3 +23,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-sdk.git
   track: sdk-6
+  ref: Release_3.3.18-56-g046c835870f14d53297435dc022740185c756cd1

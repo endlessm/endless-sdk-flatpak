@@ -6,10 +6,9 @@ This repository contains a [BuildStream](https://buildstream.build) project that
 
 Our Buildstream project is based on [gnome-build-meta](https://gitlab.gnome.org/GNOME/gnome-build-meta) and [freedesktop-sdk](https://gitlab.com/freedesktop-sdk/freedesktop-sdk). It mostly contains the same elements as those projects, but certain elements are replaced with our own modified versions, and several new ones are added. To build flatpak runtimes and extensions, use _bst build_:
 
-    bst track flatpak-runtimes.bst --track-all --track-cross-junctions
     bst build flatpak-runtimes.bst
 
-Afterwards, you can checkout the runtimes to an ostree repository:
+Next, you can checkout the runtimes to an ostree repository:
 
     bst checkout -f flatpak-runtimes.bst /path/to/repo/
     flatpak remote-add --user --no-gpg-verify endless-sdk-flatpak-repo /path/to/repo/

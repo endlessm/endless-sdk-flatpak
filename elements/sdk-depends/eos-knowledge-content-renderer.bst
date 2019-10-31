@@ -15,3 +15,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-knowledge-content-renderer.git
   track: sdk-6
+  ref: 576f07d8eb844c4806b925b3cbe469176c712ac0
