@@ -14,3 +14,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/maxwell.git
   track: sdk-6
+  ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7

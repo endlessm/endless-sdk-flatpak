@@ -49,5 +49,6 @@ sources:
     common:
       checkout: false
       url: git_freedesktop_org:gstreamer/common
+  ref: 1.16.1-3-g0141c2f010574165b3b12be51e395778d39a6640
 - kind: patch
   path: files/gstreamer-plugins-good/0001-gtkgstwidget-add-ready-to-show-signal.patch

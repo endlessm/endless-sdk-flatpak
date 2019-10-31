@@ -9,6 +9,7 @@ kind: cmake
 sources:
 - kind: tar
   url: webkitgtk_org:webkitgtk-2.26.1.tar.xz
+  ref: 6b4b21801d2b1008422a1075dbd6fb4ae8b5127503faf657cf9671289d9cd155
 - kind: patch
   path: gnome-sdk-files/webkitgtk/gtk-doc-introspection-cross-compiling.patch
 - kind: local
@@ -58,11 +59,11 @@ variables:
   webkitgtk_toolchain: ''
   endless_arch_options: ''
   (?):
-    - arch == "i686" or arch == "arm":
-        webkitgtk_toolchain: -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=toolchain.%{arch}
-    - arch == "arm":
-        endless_arch_options: |
-          -DENABLE_GLES2=ON
+  - arch == "i686" or arch == "arm":
+      webkitgtk_toolchain: -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=toolchain.%{arch}
+  - arch == "arm":
+      endless_arch_options: |
+        -DENABLE_GLES2=ON
   cmake-local: >-
     -DPORT=GTK
     -DENABLE_BUBBLEWRAP_SANDBOX=OFF
