@@ -16,6 +16,7 @@ from gi.repository import Flatpak
 DEBIAN_TO_FLATPAK_ARCH_OVERRIDES = {
     'armhf': 'arm',
     'amd64': 'x86_64',
+    'arm64': 'aarch64',
 }
 
 FLATPAK_TO_DEBIAN_ARCH_OVERRIDES = \
@@ -82,7 +83,9 @@ def edit_manifest(data, arch, branch, runtime_version):
             'gtk3-egl-x11.patch',
         ],
         'x86_64': [
-        ]
+        ],
+        'aarch64': [
+        ],
     }
 
     gtk_config_opts = {
@@ -93,6 +96,9 @@ def edit_manifest(data, arch, branch, runtime_version):
             '--build=arm-unknown-linux-gnueabi',
         ],
         'x86_64': [
+        ],
+        'aarch64': [
+            '--build=aarch64-unknown-linux-gnu',
         ],
     }
 
@@ -111,7 +117,9 @@ def edit_manifest(data, arch, branch, runtime_version):
         'arm': [
         ],
         'x86_64': [
-        ]
+        ],
+        'aarch64': [
+        ],
     }
 
     gst_plugins_base_patches = {
