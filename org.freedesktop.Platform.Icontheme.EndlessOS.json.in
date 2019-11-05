@@ -18,7 +18,8 @@
             "config-opts": [
                 "--enable-app-icons",
                 "--disable-fonts",
-                "--disable-settings"
+                "--disable-settings",
+                "--disable-faces"
             ],
             "sources": [
                 {
