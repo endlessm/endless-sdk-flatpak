@@ -5,7 +5,8 @@ depends:
 # There are certain elements inside gnome-sdk and freedesktop-sdk that we need
 # to build ourselves. As a result, we can't depend on gnome-sdk directly. This
 # list should be kept in sync with the dependencies in sdk-platform.bst from
-# gnome-sdk.
+# gnome-sdk:
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/sdk-platform.bst>
 
 # new elements:
 - sdk/eos-knowledge-lib.bst
