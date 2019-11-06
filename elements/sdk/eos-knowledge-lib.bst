@@ -34,5 +34,5 @@ environment:
 sources:
 - kind: git_tag
   url: github_com:endlessm/eos-knowledge-lib.git
-  track: sdk-6
-  ref: Release_3.2.6-684-g59777cc65a86e78247ceb289f8b5e4febe662a45
+  track: dylanmccall-gnome-3-32
+  ref: Release_3.2.6-688-g1f023007e4e83d55dde8bf48442dae1b10587beb
