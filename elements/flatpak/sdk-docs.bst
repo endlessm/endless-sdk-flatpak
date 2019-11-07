@@ -11,4 +11,3 @@ config:
 
     ExtensionOf:
       ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{branch}
-
