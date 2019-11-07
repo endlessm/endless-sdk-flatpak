@@ -1,7 +1,7 @@
 kind: flatpak_image
 
 build-depends:
-- flatpak/extension-icon-theme-endless-os-image.bst
+- extensions/icon-theme-endless-os.bst
 
 config:
   directory: '%{datadir}/icons/EndlessOS'
