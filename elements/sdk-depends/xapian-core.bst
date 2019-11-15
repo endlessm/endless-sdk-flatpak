@@ -13,6 +13,12 @@ variables:
     --enable-maintainer-mode \
     --disable-documentation
 
+(?):
+- arch == "arm":
+    environment:
+      CFLAGS: '%{flags_arm} -Wno-error=cast-align'
+      CXXFLAGS: '%{flags_arm} -Wno-error=cast-align'
+
 config:
   configure-commands:
     (<):
