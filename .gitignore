@@ -3,3 +3,5 @@ plugins/__pycache__
 
 # Ignore BuildStream local state
 .bst
+
+/out

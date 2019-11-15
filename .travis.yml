@@ -1,0 +1,26 @@
+sudo: false
+
+branches:
+  - master
+
+os:
+  - linux
+
+services:
+  - docker
+
+env:
+  global:
+    - IMAGE_ID: '79c3f5dec59f95e34e16b0a9307a9d56b382e093'
+    - DOCKER_REGISTRY: "registry.gitlab.com/freedesktop-sdk/infrastructure/freedesktop-sdk-docker-images"
+    - DOCKER_AMD64: "${DOCKER_REGISTRY}/bst14/amd64:${IMAGE_ID}"
+    - DOCKER_AARCH64: "${DOCKER_REGISTRY}/bst14/arm64:${IMAGE_ID}"
+
+before_script:
+  - docker pull ${DOCKER_AMD64}
+  - echo "FROM ${DOCKER_AMD64}" > Dockerfile
+  - echo "ADD . /endless-sdk-flatpak" >> Dockerfile
+  - docker build -t local-endless-sdk-ci .
+
+script:
+  - docker run --privileged -t local-endless-sdk-ci make -C /endless-sdk-flatpak check
