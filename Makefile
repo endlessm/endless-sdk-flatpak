@@ -13,7 +13,12 @@ flatpak-runtimes: elements/**/*.bst
 	$(BST) -o arch $(ARCH) build flatpak-runtimes.bst
 .PHONY: flatpak-runtimes
 
-check-flatpak-runtimes:
+fetch-junctions:
+	$(BST) -o arch $(ARCH) fetch freedesktop-sdk.bst
+	$(BST) -o arch $(ARCH) fetch gnome-sdk.bst
+.PHONY: fetch-junctions
+
+check-flatpak-runtimes: | fetch-junctions
 	$(BST) -o arch $(ARCH) show flatpak-runtimes.bst
 .PHONY: check-flatpak-runtimes
 check: check-flatpak-runtimes
@@ -30,7 +35,7 @@ flatpak-platform-extensions: elements/**/*.bst
 	$(BST) -o arch $(ARCH) build flatpak-platform-extensions.bst
 .PHONY: flatpak-platform-extensions
 
-check-flatpak-platform-extensions:
+check-flatpak-platform-extensions: | fetch-junctions
 	$(BST) -o arch $(ARCH) show flatpak-platform-extensions.bst
 .PHONY: check-flatpak-platform-extensions
 check: check-flatpak-platform-extensions
