@@ -35,4 +35,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-knowledge-lib.git
   track: dylanmccall-gnome-3-32
-  ref: Release_3.2.6-688-g1f023007e4e83d55dde8bf48442dae1b10587beb
+  ref: Release_3.2.6-689-gc191c5050441481170b8e27ef27a0f35a52a45e3
