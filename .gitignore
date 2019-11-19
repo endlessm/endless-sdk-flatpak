@@ -5,3 +5,5 @@ plugins/__pycache__
 .bst
 
 /out
+/cache
+/repo
