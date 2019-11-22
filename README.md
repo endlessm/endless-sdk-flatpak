@@ -43,3 +43,16 @@ If you do not have BuildStream available on your system, you can try installing 
 BuildStream also has several runtime dependencies which you will need to install. For example, using apt on Debian 10:
 
     apt install bubblewrap python3-pip libostree-dev lzip libgirepository1.0-dev
+
+On EndlessOS you'll need to install some dependencies and unlock the ostree first as well:
+
+    sudo ostree admin unlock  # add --hotfix if desired
+    sudo apt install python3-dev minilzip gir1.2-ostree-1.0
+
+EndlessOS has a 3.x version of FUSE, incompatible with the latest stable version of BuildStream which expects 2.x.
+Luckily, it's easy to adapt.
+Make sure to install BuildStream with `--user`:
+
+    pip3 install --user buildstream buildstream-external
+
+Then edit `~/.local/lib/python3.7/site-packages/buildstream/_fuse/mount.py` and remove `, nonempty=True` from line 187.
