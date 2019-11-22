@@ -13,5 +13,5 @@ config:
     Runtime:
       name: com.endlessm.apps.Platform.Compat.%{gcc_arch}
     ExtensionOf:
-      ref: runtime/com.endlessm.apps.Platform/%{gcc_arch}/%{branch}
+      ref: runtime/com.endlessm.apps.Platform/%{gcc_arch}/%{sdk-branch}
 

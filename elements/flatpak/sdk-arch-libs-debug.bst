@@ -12,4 +12,4 @@ config:
     Runtime:
       name: com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug
     ExtensionOf:
-      ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{branch}
+      ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{sdk-branch}

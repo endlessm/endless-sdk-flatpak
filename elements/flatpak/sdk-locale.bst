@@ -10,4 +10,4 @@ config:
       name: com.endlessm.apps.Sdk.Locale
 
     ExtensionOf:
-      ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{branch}
+      ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{sdk-branch}

@@ -10,4 +10,4 @@ config:
       name: com.endlessm.apps.Sdk.Docs
 
     ExtensionOf:
-      ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{branch}
+      ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{sdk-branch}

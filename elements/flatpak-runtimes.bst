@@ -33,33 +33,34 @@ config:
   environment:
   - deploy-tools/flatpak.bst
   arch: '%{gcc_arch}'
+  branch: '%{sdk-branch}'
   repo-mode: bare-user-only
   (?):
   - arch == 'i686':
       copy-refs:
-      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/x86_64/%{branch}
-      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/x86_64/%{branch}
-      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/x86_64/%{branch}
-      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/x86_64/%{branch}
+      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/x86_64/%{sdk-branch}
+      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/x86_64/%{sdk-branch}
+      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/x86_64/%{sdk-branch}
+      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/x86_64/%{sdk-branch}
 
   - arch == 'arm':
       copy-refs:
-      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/aarch64/%{branch}
-      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/aarch64/%{branch}
-      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/x86_64/%{branch}
-      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/x86_64/%{branch}
+      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}/aarch64/%{sdk-branch}
+      - src: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Platform.Compat.%{gcc_arch}.Debug/aarch64/%{sdk-branch}
+      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/x86_64/%{sdk-branch}
+      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/x86_64/%{sdk-branch}
 
   - arch == 'aarch64':
       copy-refs:
-      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/x86_64/%{branch}
-      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{branch}
-        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/x86_64/%{branch}
+      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}/x86_64/%{sdk-branch}
+      - src: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/%{gcc_arch}/%{sdk-branch}
+        dest: runtime/com.endlessm.apps.Sdk.Compat.%{gcc_arch}.Debug/x86_64/%{sdk-branch}

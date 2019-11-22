@@ -5,7 +5,10 @@
   <metadata_license>CC0</metadata_license>
   <!-- FIXME -->
   <project_license>LGPL-2.1+</project_license>
-  <name>Endless Application Platform version __SDK_BRANCH__</name>
+  <name>Endless Application Platform version</name>
   <summary>Shared libraries used by Endless applications</summary>
+  <releases>
+    <release version="__RUNTIME_VERSION__" date="__RUNTIME_VERSION_DATE__"/>
+  </releases>
   <url type="homepage">https://endlessos.com/</url>
 </component>

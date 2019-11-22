@@ -17,8 +17,8 @@ config:
   metadata:
     Runtime:
       name: com.endlessm.apps.Platform
-      runtime: com.endlessm.apps.Platform/%{gcc_arch}/%{branch}
-      sdk: com.endlessm.apps.Sdk/%{gcc_arch}/%{branch}
+      runtime: com.endlessm.apps.Platform/%{gcc_arch}/%{sdk-branch}
+      sdk: com.endlessm.apps.Sdk/%{gcc_arch}/%{sdk-branch}
 
     Environment:
       GI_TYPELIB_PATH: /app/lib/girepository-1.0
