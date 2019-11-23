@@ -16,4 +16,4 @@ sources:
 - kind: git_tag
   url: github_com:tcltk/tcl
   track: core-8-6-10
-  ref: core-8-6-10-0-g2abfa2c03ddc0419e6525f86c2c0323b2ba1932e
+  ref: core-8-6-10-0-g35674d41c77c78cba3841eb6275e9cbe07f28140
