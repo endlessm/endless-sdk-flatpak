@@ -1,8 +1,13 @@
 # Replaces sdk/gtk+-3.bst from gnome-sdk.
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/sdk/gtk+-3.bst#L48-54>
 
 # Because the upstream version of this is required by other elements in
 # gnome-sdk, we need to keep the existing element intact, and put this one on
 # top of it during integration by using an overlap whitelist.
+
+# TODO: This is dangerous, because our gtk+-3 fork may be out of sync with
+# upstream. Instead, we should maintain a patch or a separate fork for the
+# SDK, based against the same version of gtk+-3 that is in gnome-sdk.
 
 kind: autotools
 

@@ -1,4 +1,5 @@
 # Replaces sdk/gstreamer-plugins-good.bst from freedesktop-sdk.
+# <https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/19.08/elements/components/gstreamer-plugins-good.bst>
 
 kind: meson
 
@@ -44,11 +45,13 @@ variables:
 sources:
 - kind: git_tag
   url: git_freedesktop_org:gstreamer/gst-plugins-good
-  track: '1.16'
+  # Changed to track git commit from upstream bst
+  # track: '1.16'
+  track: 'd7d290b64c1282398f3265522a33e093b7233310'
   submodules:
     common:
       checkout: false
       url: git_freedesktop_org:gstreamer/common
-  ref: 1.16.1-3-g0141c2f010574165b3b12be51e395778d39a6640
+  ref: 1.16.1-0-gd7d290b64c1282398f3265522a33e093b7233310
 - kind: patch
   path: files/gstreamer-plugins-good/0001-gtkgstwidget-add-ready-to-show-signal.patch
