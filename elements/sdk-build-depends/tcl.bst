@@ -5,6 +5,8 @@ build-depends:
 
 variables:
   command-subdir: unix
+  conf-local: |
+    --enable-man-suffix=tcl
 
 config:
   install-commands:
