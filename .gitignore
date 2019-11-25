@@ -7,3 +7,5 @@ plugins/__pycache__
 /out
 /cache
 /repo
+
+/flatpak-version.yml

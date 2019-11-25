@@ -12,6 +12,9 @@ FLATPAK_PLATFORM_EXTENSIONS_REPO = $(CACHEDIR)/flatpak-platform-extensions-repo
 
 FLATPAK_REFS = $(shell [ -d "$(REPO)" ] && ostree refs --repo $(REPO))
 
+GIT_HOOKS = $(shell [ -d ".git/hooks" ] && echo ".git/hooks/pre-commit")
+
+
 define bundle-ref
 	$(shell flatpak build-bundle $(1) "$(OUTDIR)/$(subst /,-,$(2)).flatpak" $(2))
 endef
@@ -19,6 +22,7 @@ endef
 define clean-ref
 	$(shell rm -f "$(OUTDIR)/$(subst /,-,$(1)).flatpak")
 endef
+
 
 all: export
 
@@ -57,13 +61,16 @@ $(REPO):
 	ostree init --repo=$(REPO) --mode=bare-user-only
 
 
-flatpak-version.yml:
-	git checkout HEAD $@
+.git/hooks/pre-commit: utils/git-pre-commit
+	ln -frs $< .git/hooks/pre-commit
+
+
+flatpak-version.yml: $(GIT_HOOKS) | CLEAN-flatpak-version.yml
 	./utils/generate-version $@
 .PHONY: flatpak-version.yml
 
 CLEAN-flatpak-version.yml:
-	git checkout HEAD $@
+	git checkout HEAD flatpak-version.yml
 .PHONY: CLEAN-flatpak-version.yml
 clean: CLEAN-flatpak-version.yml
 
@@ -72,7 +79,7 @@ BUILD-flatpak-runtimes: flatpak-version.yml elements/**/*.bst
 	$(BST) $(BST_ARGS) build flatpak-runtimes.bst
 .PHONY: BUILD-flatpak-runtimes
 
-CHECK-flatpak-runtimes: | fetch-junctions
+CHECK-flatpak-runtimes: flatpak-version.yml | fetch-junctions
 	$(BST) $(BST_ARGS) show flatpak-runtimes.bst
 .PHONY: CHECK-flatpak-runtimes
 check: CHECK-flatpak-runtimes
@@ -82,6 +89,7 @@ $(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
 
 EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(REPO)
 	ostree pull-local --repo=$(REPO) $(FLATPAK_RUNTIMES_REPO)
+	ostree summary --repo=$(REPO) --update
 .PHONY: EXPORT-$(FLATPAK_RUNTIMES_REPO)
 export: EXPORT-$(FLATPAK_RUNTIMES_REPO)
 
@@ -91,7 +99,7 @@ CLEAN-$(FLATPAK_RUNTIMES_REPO):
 clean: CLEAN-$(FLATPAK_RUNTIMES_REPO)
 
 
-BUILD-flatpak-platform-extensions: flatpak-version.yml elements/**/*.bst
+BUILD-flatpak-platform-extensions: elements/**/*.bst
 	$(BST) $(BST_ARGS) build flatpak-platform-extensions.bst
 .PHONY: BUILD-flatpak-platform-extensions
 
@@ -105,6 +113,7 @@ $(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHE
 
 EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(REPO)
 	ostree pull-local --repo=$(REPO) $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+	ostree summary --repo=$(REPO) --update
 .PHONY: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 export: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 
