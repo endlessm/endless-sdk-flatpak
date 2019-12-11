@@ -129,7 +129,9 @@ def edit_manifest(data, arch, branch, runtime_version):
         'arm': [
         ],
         'x86_64': [
-        ]
+        ],
+        'aarch64': [
+        ],
     }
 
     gst_plugins_base_config_opts = {
@@ -139,6 +141,8 @@ def edit_manifest(data, arch, branch, runtime_version):
             '--disable-glx',
         ],
         'x86_64': [
+        ],
+        'aarch64': [
         ],
     }
 
