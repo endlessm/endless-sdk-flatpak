@@ -1,7 +1,11 @@
 ARCH ?= $(shell flatpak --default-arch)
 
+GIT ?= git
+
 BST ?= bst
-BST_ARGS = -o arch $(ARCH)
+BST_ARGS = -o arch $(ARCH) --no-interactive
+
+OSTREE ?= ostree
 
 OUTDIR ?= out
 CACHEDIR ?= cache
@@ -10,7 +14,7 @@ REPO ?= repo
 FLATPAK_RUNTIMES_REPO = $(CACHEDIR)/flatpak-runtimes-repo
 FLATPAK_PLATFORM_EXTENSIONS_REPO = $(CACHEDIR)/flatpak-platform-extensions-repo
 
-FLATPAK_REFS = $(shell [ -d "$(REPO)" ] && ostree refs --repo $(REPO))
+FLATPAK_REFS = $(shell [ -d "$(REPO)" ] && $(OSTREE) refs --repo $(REPO))
 
 GIT_HOOKS = $(shell [ -d ".git/hooks" ] && echo ".git/hooks/pre-commit")
 
@@ -58,7 +62,7 @@ $(CACHEDIR):
 	mkdir -p $(CACHEDIR)
 
 $(REPO):
-	ostree init --repo=$(REPO) --mode=bare-user-only
+	$(OSTREE) init --repo=$(REPO) --mode=bare-user-only
 
 
 .git/hooks/pre-commit: utils/git-pre-commit
@@ -70,7 +74,7 @@ flatpak-version.yml: $(GIT_HOOKS) | CLEAN-flatpak-version.yml
 .PHONY: flatpak-version.yml
 
 CLEAN-flatpak-version.yml:
-	git checkout HEAD flatpak-version.yml
+	$(GIT) checkout HEAD flatpak-version.yml
 .PHONY: CLEAN-flatpak-version.yml
 clean: CLEAN-flatpak-version.yml
 
@@ -88,8 +92,8 @@ $(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
 	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-runtimes.bst $@
 
 EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(REPO)
-	ostree pull-local --repo=$(REPO) $(FLATPAK_RUNTIMES_REPO)
-	ostree summary --repo=$(REPO) --update
+	$(OSTREE) pull-local --repo=$(REPO) $(FLATPAK_RUNTIMES_REPO)
+	$(OSTREE) summary --repo=$(REPO) --update
 .PHONY: EXPORT-$(FLATPAK_RUNTIMES_REPO)
 export: EXPORT-$(FLATPAK_RUNTIMES_REPO)
 
@@ -112,8 +116,8 @@ $(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHE
 	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-platform-extensions.bst $@
 
 EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(REPO)
-	ostree pull-local --repo=$(REPO) $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
-	ostree summary --repo=$(REPO) --update
+	$(OSTREE) pull-local --repo=$(REPO) $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+	$(OSTREE) summary --repo=$(REPO) --update
 .PHONY: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 export: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 
