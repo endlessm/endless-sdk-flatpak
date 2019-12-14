@@ -19,4 +19,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-metrics.git
   track: sdk-6
-  ref: Release_3.7.4-0-gab66c7319c573999740f636555b14b6f658e82c0
+  ref: Release_3.7.5-0-gab66c7319c573999740f636555b14b6f658e82c0

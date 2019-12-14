@@ -15,7 +15,7 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/gtk
   track: eos3.7
-  ref: Release_3.7.3-0-g3c4b214b6d2fc54a81b8447584e55601fddb9e9d
+  ref: Release_3.7.5-0-g3c4b214b6d2fc54a81b8447584e55601fddb9e9d
 - kind: patch
   path: files/gtk+-3/0001-CSS-add-vendor-specific-eos-cairo-filter-property.patch
 
