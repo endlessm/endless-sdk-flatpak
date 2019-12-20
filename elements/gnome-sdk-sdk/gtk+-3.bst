@@ -55,6 +55,9 @@ variables:
       endless_arch_options: |
         --enable-egl-x11 \
         --build=arm-unknown-linux-gnueabi
+  - arch == "aarch64":
+      endless_arch_options: |
+        --build=aarch64-unknown-linux-gnu
   conf-local: |
     --enable-broadway-backend \
     --enable-installed-tests \
