@@ -1,4 +1,5 @@
 ARCH ?= $(shell flatpak --default-arch)
+GPG_KEY_ID ?= 
 
 GIT ?= git
 
@@ -27,6 +28,10 @@ define clean-ref
 	$(shell rm -f "$(OUTDIR)/$(subst /,-,$(1)).flatpak")
 endef
 
+define sign-ref
+	$(shell ostree gpg-sign --repo=$(1) $(2) $(GPG_KEY_ID))
+endef
+
 
 all: export
 
@@ -41,6 +46,9 @@ clean:
 
 export: ;
 .PHONY: export
+
+sign: export
+.PHONY: sign
 
 bundle: ;
 .PHONY: bundle
@@ -125,6 +133,12 @@ CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO):
 	rm -rf $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 .PHONY: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 clean: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+
+
+SIGN-$(REPO): $(REPO) export | $(OUTDIR)
+	$(foreach ref,$(FLATPAK_REFS),$(call sign-ref,$(REPO),$(ref)))
+.PHONY: SIGN-$(REPO)
+sign: SIGN-$(REPO)
 
 
 BUNDLE-$(REPO): $(REPO) export | $(OUTDIR)
