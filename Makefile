@@ -4,7 +4,7 @@ GPG_KEY_ID ?=
 GIT ?= git
 
 BST ?= bst
-BST_ARGS = -o arch $(ARCH) --no-interactive
+BST_ARGS = -o arch $(ARCH) --config build.conf --no-interactive
 
 OSTREE ?= ostree
 
