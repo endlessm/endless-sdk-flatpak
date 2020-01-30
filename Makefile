@@ -1,5 +1,5 @@
 ARCH ?= $(shell flatpak --default-arch)
-GPG_KEY_ID ?= 
+EXPORT_ARGS ?=
 
 GIT ?= git
 
@@ -28,10 +28,6 @@ define clean-ref
 	$(shell rm -f "$(OUTDIR)/$(subst /,-,$(1)).flatpak")
 endef
 
-define sign-ref
-	$(shell ostree gpg-sign --repo=$(1) $(2) $(GPG_KEY_ID))
-endef
-
 
 all: export
 
@@ -44,11 +40,12 @@ clean:
 	if [ -d "$(REPO)" ]; then rm -r $(REPO); fi
 .PHONY: clean
 
-export: ;
+export: | $(REPO)
+ifneq ($(EXPORT_ARGS),)
+	flatpak build-sign $(EXPORT_ARGS) $|
+endif
+	flatpak build-update-repo $(EXPORT_ARGS) $|
 .PHONY: export
-
-sign: export
-.PHONY: sign
 
 bundle: ;
 .PHONY: bundle
@@ -100,8 +97,7 @@ $(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
 	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-runtimes.bst $@
 
 EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(REPO)
-	$(OSTREE) pull-local --repo=$(REPO) $(FLATPAK_RUNTIMES_REPO)
-	$(OSTREE) summary --repo=$(REPO) --update
+	$(OSTREE) pull-local --repo=$| $<
 .PHONY: EXPORT-$(FLATPAK_RUNTIMES_REPO)
 export: EXPORT-$(FLATPAK_RUNTIMES_REPO)
 
@@ -124,8 +120,7 @@ $(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHE
 	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-platform-extensions.bst $@
 
 EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(REPO)
-	$(OSTREE) pull-local --repo=$(REPO) $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
-	$(OSTREE) summary --repo=$(REPO) --update
+	$(OSTREE) pull-local --repo=$| $<
 .PHONY: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 export: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 
@@ -133,12 +128,6 @@ CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO):
 	rm -rf $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 .PHONY: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 clean: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
-
-
-SIGN-$(REPO): $(REPO) export | $(OUTDIR)
-	$(foreach ref,$(FLATPAK_REFS),$(call sign-ref,$(REPO),$(ref)))
-.PHONY: SIGN-$(REPO)
-sign: SIGN-$(REPO)
 
 
 BUNDLE-$(REPO): $(REPO) export | $(OUTDIR)
