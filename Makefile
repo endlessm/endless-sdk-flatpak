@@ -14,8 +14,9 @@ REPO ?= repo
 
 FLATPAK_RUNTIMES_REPO = $(CACHEDIR)/flatpak-runtimes-repo
 FLATPAK_PLATFORM_EXTENSIONS_REPO = $(CACHEDIR)/flatpak-platform-extensions-repo
+EXPORT_REPO = $(REPO)
 
-FLATPAK_REFS = $(shell [ -d "$(REPO)" ] && $(OSTREE) refs --repo $(REPO))
+EXPORT_REFS = $(shell [ -d "$(EXPORT_REPO)" ] && $(OSTREE) refs --repo $(EXPORT_REPO))
 
 GIT_HOOKS = $(shell [ -d ".git/hooks" ] && echo ".git/hooks/pre-commit")
 
@@ -37,10 +38,10 @@ check: ;
 clean:
 	if [ -d "$(OUTDIR)" ]; then rmdir $(OUTDIR); fi
 	if [ -d "$(CACHEDIR)" ]; then rmdir $(CACHEDIR); fi
-	if [ -d "$(REPO)" ]; then rm -r $(REPO); fi
+	if [ -d "$(EXPORT_REPO)" ]; then rm -r $(EXPORT_REPO); fi
 .PHONY: clean
 
-export: | $(REPO)
+export: | $(EXPORT_REPO)
 ifneq ($(EXPORT_ARGS),)
 	flatpak build-sign $(EXPORT_ARGS) $|
 endif
@@ -61,13 +62,13 @@ update-refs:
 
 
 $(OUTDIR):
-	mkdir -p $(OUTDIR)
+	mkdir -p $@
 
 $(CACHEDIR):
-	mkdir -p $(CACHEDIR)
+	mkdir -p $@
 
-$(REPO):
-	$(OSTREE) init --repo=$(REPO) --mode=bare-user-only
+$(EXPORT_REPO):
+	$(OSTREE) init --repo=$@ --mode=archive
 
 
 .git/hooks/pre-commit: utils/git-pre-commit
@@ -96,7 +97,7 @@ check: CHECK-flatpak-runtimes
 $(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
 	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-runtimes.bst $@
 
-EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(REPO)
+EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(EXPORT_REPO)
 	$(OSTREE) pull-local --repo=$| $<
 .PHONY: EXPORT-$(FLATPAK_RUNTIMES_REPO)
 export: EXPORT-$(FLATPAK_RUNTIMES_REPO)
@@ -119,7 +120,7 @@ check: CHECK-flatpak-platform-extensions
 $(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHEDIR)
 	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-platform-extensions.bst $@
 
-EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(REPO)
+EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(EXPORT_REPO)
 	$(OSTREE) pull-local --repo=$| $<
 .PHONY: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 export: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
@@ -130,12 +131,12 @@ CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO):
 clean: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 
 
-BUNDLE-$(REPO): $(REPO) export | $(OUTDIR)
-	$(foreach ref,$(FLATPAK_REFS),$(call bundle-ref,$(REPO),$(ref)))
-.PHONY: BUNDLE-$(REPO)
-bundle: BUNDLE-$(REPO)
+BUNDLE-$(EXPORT_REPO): $(EXPORT_REPO) export | $(OUTDIR)
+	$(foreach ref,$(EXPORT_REFS),$(call bundle-ref,$(EXPORT_REPO),$(ref)))
+.PHONY: BUNDLE-$(EXPORT_REPO)
+bundle: BUNDLE-$(EXPORT_REPO)
 
-CLEAN-BUNDLE-$(REPO):
-	$(foreach ref,$(FLATPAK_REFS),$(call clean-ref,$(ref)))
-.PHONY: CLEAN-BUNDLE-$(REPO)
-clean: CLEAN-BUNDLE-$(REPO)
+CLEAN-BUNDLE-$(EXPORT_REPO):
+	$(foreach ref,$(EXPORT_REFS),$(call clean-ref,$(ref)))
+.PHONY: CLEAN-BUNDLE-$(EXPORT_REPO)
+clean: CLEAN-BUNDLE-$(EXPORT_REPO)
