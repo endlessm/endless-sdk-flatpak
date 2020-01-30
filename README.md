@@ -80,7 +80,7 @@ This project uses reproducible builds, which means any commit in the endless-sdk
 
 First, use `bst track` to update the references for included code, telling buildstream to use the newest commit from the tracked git branches. For example, if you wish to include a change to eos-knowledge-lib, you can use `bst track sdk/eos-knowledge-lib`. For convenience, you can use `make update-refs` to update the references for all of the elements in this project.
 
-Once you have a release to test, create a new branch and make a pull request. Once the pull request is merged to the sdk-6 branch, the CI system will create a development build of the new release and push it to the staging Flatpak repository. Before releasing to production, create an annotated git tag in the sdk-6 branch:
+Once you have a release to test, create a new branch and make a pull request. After the pull request is merged to the sdk-6 branch, the CI system will create a development build of the new release and push it to the staging Flatpak repository. Before releasing to production, create an annotated git tag in the sdk-6 branch:
 
     git tag -a v6.0 -m "Releasing version v6.0"
 

@@ -16,4 +16,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/emeus.git
   track: sdk-6
-  ref: Release_3.3.18-0-g6ae2373bd9e652337b6dca3901f3b7c570257c31
+  ref: Release_3.3.20-0-g6ae2373bd9e652337b6dca3901f3b7c570257c31

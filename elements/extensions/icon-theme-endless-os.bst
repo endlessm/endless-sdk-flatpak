@@ -29,7 +29,8 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-theme.git
   track: master
-  ref: Release_3.7.5-9-gd246ce79c26194e25b58f42c1721752ac2fdee13
+  track-tags: true
+  ref: Release_3.7.6-0-gef7e91b5820a6ac0c96804b1ac67fd3656cc33d2
 - kind: local
   path: files/icon-theme-endless-os
   directory: bst-local

@@ -35,4 +35,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-knowledge-lib.git
   track: sdk-6
-  ref: Release_3.2.6-699-g7de89777bf721bd257e2b9240401d18f8a8add12
+  ref: Release_3.2.6-700-g0edfe808c6394d511959775ba6d20898eeda77c5
