@@ -1,149 +1,142 @@
-# Replace with `make ARCH=xxx` to build for another architecture
 ARCH ?= $(shell flatpak --default-arch)
+EXPORT_ARGS ?=
 
-# Replace with `make REPO=xxx` to build another repository
+GIT ?= git
+
+BST ?= bst
+BST_ARGS = -o arch $(ARCH) --config build.conf --no-interactive
+
+OSTREE ?= ostree
+
+OUTDIR ?= out
+CACHEDIR ?= cache
 REPO ?= repo
 
-# The branch of the Endless SDK to build
-SDK_BRANCH ?= master
+FLATPAK_RUNTIMES_REPO = $(CACHEDIR)/flatpak-runtimes-repo
+FLATPAK_PLATFORM_EXTENSIONS_REPO = $(CACHEDIR)/flatpak-platform-extensions-repo
+EXPORT_REPO = $(REPO)
 
-# The version of the Freedesktop runtime we build on
-FDO_RUNTIME_VERSION ?= 1.6
+EXPORT_REFS = $(shell [ -d "$(EXPORT_REPO)" ] && $(OSTREE) refs --repo $(EXPORT_REPO))
 
-# The version of the GNOME runtime we build on
-GNOME_RUNTIME_VERSION ?= 3.28
+GIT_HOOKS = $(shell [ -d ".git/hooks" ] && echo ".git/hooks/pre-commit")
 
-BUILD_TAG ?= $(shell date +%Y-%m-%d)
 
-FDO_DEPS = \
-	org.freedesktop.Sdk/${ARCH}/${FDO_RUNTIME_VERSION} \
-	org.freedesktop.Platform/${ARCH}/${FDO_RUNTIME_VERSION} \
-	$()
-
-GNOME_DEPS = \
-	org.gnome.Sdk/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk.Debug/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk.Docs/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	org.gnome.Platform/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	$()
-
-LOCALE_DEPS = \
-	org.gnome.Platform.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	org.gnome.Sdk.Locale/${ARCH}/${GNOME_RUNTIME_VERSION} \
-	$()
-
-SDK_DEPS = \
-	com.endlessm.apps.Sdk.json \
-	com.endlessm.apps.Sdk.appdata.xml \
-	com.endlessm.apps.Platform.appdata.xml \
-	os-release \
-	issue \
-	issue.net \
-	$()
-
-GOOGLE_FONTS = \
-	Fira+Sans \
-	Lato \
-	Libre+Baskerville \
-	Merriweather \
-	Noto+Sans \
-	Noto+Serif \
-	Raleway \
-	Roboto \
-	$()
-
-ICONTHEME_DEPS = \
-	org.freedesktop.Platform.Icontheme.EndlessOS.json \
-	org.freedesktop.Platform.Icontheme.EndlessOS.appdata.xml \
-	$()
-
-# Generic substitution rule
-%: %.in
-	@echo "  GEN   $@" &&                                            \
-	sed -e 's/@@SDK_ARCH@@/${ARCH}/g'                                \
-	    -e 's/@@SDK_BRANCH@@/${SDK_BRANCH}/g'                        \
-	    -e 's/@@GNOME_RUNTIME_VERSION@@/${GNOME_RUNTIME_VERSION}/g'  \
-	    -e 's/@@FDO_RUNTIME_VERSION@@/${FDO_RUNTIME_VERSION}/g'      \
-	    $< > $@.tmp && mv $@.tmp $@
-
-define build-manifest
-	@flatpak-builder --version
-	flatpak-builder \
-		--force-clean --ccache --require-changes \
-		--repo=${REPO} \
-		--arch=${ARCH} \
-		--subject="Build of $1, `date`" \
-		${EXPORT_ARGS} \
-		builddir \
-		$1
+define bundle-ref
+	$(shell flatpak build-bundle $(1) "$(OUTDIR)/$(subst /,-,$(2)).flatpak" $(2))
 endef
 
-all: sdk icontheme
+define clean-ref
+	$(shell rm -f "$(OUTDIR)/$(subst /,-,$(1)).flatpak")
+endef
 
-sdk: ${REPO} $(SDK_DEPS)
-	$(call build-manifest,com.endlessm.apps.Sdk.json)
 
-icontheme: ${REPO} $(ICONTHEME_DEPS)
-	$(call build-manifest,org.freedesktop.Platform.Icontheme.EndlessOS.json)
+all: export
 
-${REPO}:
-	ostree init --mode=archive-z2 --repo=${REPO}
-
-com.endlessm.apps.Sdk.json: com.endlessm.apps.Sdk.json.tmpl generate-manifest.py Makefile
-	@echo "  GEN   $@"; \
-	./generate-manifest.py \
-		--arch=$(ARCH) \
-		--sdk-branch=$(SDK_BRANCH) \
-		--base-runtime-version=$(GNOME_RUNTIME_VERSION) \
-		$< > $@
-
-add-repo:
-	flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-install-dependencies: add-repo
-	for dep in $(FDO_DEPS) $(GNOME_DEPS); do \
-		flatpak install -y --user flathub $$dep ; \
-		flatpak update -y --user $$dep ; \
-	done
-	flatpak list --user --runtime --show-details
-
-install-locale-dependencies: add-repo
-	for dep in $(LOCALE_DEPS); do \
-		flatpak uninstall -y --user $$dep ; \
-		flatpak install -y --user flathub $$dep ; \
-	done
-	flatpak list --user --runtime --all --show-details
-
-clean-dependencies: add-repo
-	flatpak uninstall -y --user $(FDO_DEPS)
-	flatpak uninstall -y --user $(GNOME_DEPS)
-
-check: com.endlessm.apps.Sdk.json
-	@echo "  CHK   $<"; json-glib-validate com.endlessm.apps.Sdk.json
+check: ;
+.PHONY: check
 
 clean:
-	@rm -rf builddir 
-	@rm -f ${SUBST_FILES}
-	@rm -f com.endlessm.apps.Sdk.json
-	@rm -f com.endlessm.apps.Sdk.json.in
+	if [ -d "$(OUTDIR)" ]; then rmdir $(OUTDIR); fi
+	if [ -d "$(CACHEDIR)" ]; then rmdir $(CACHEDIR); fi
+	if [ -d "$(EXPORT_REPO)" ]; then rm -r $(EXPORT_REPO); fi
+.PHONY: clean
 
-maintainer-clean: clean
-	@rm -rf .flatpak-builder
-	@rm -rf ${REPO}
+export: | $(EXPORT_REPO)
+ifneq ($(EXPORT_ARGS),)
+	flatpak build-sign $(EXPORT_ARGS) $|
+endif
+	flatpak build-update-repo $(EXPORT_ARGS) $|
+.PHONY: export
 
-import-artefacts:
-	@if [ -f ${REPO}.tar ]; then \
-	    tar xf ${REPO}.tar && \
-	    ostree fsck --repo=${REPO} ; \
-	    rm -f ${REPO}.tar
-	fi
+bundle: ;
+.PHONY: bundle
 
-bundle-artefacts:
-	@tar cf ${REPO}.tar ${REPO}
+fetch-junctions:
+	$(BST) $(BST_ARGS) fetch freedesktop-sdk.bst gnome-sdk.bst
+.PHONY: fetch-junctions
 
-update-fonts:
-	@for font in $(GOOGLE_FONTS); do \
-		wget https://fonts.google.com/download?family=$$font -O fonts/$$font.zip; \
-	done
+update-refs:
+	$(BST) $(BST_ARGS) track freedesktop-sdk.bst gnome-sdk.bst
+	$(BST) $(BST_ARGS) track flatpak-runtimes.bst flatpak-platform-extensions.bst --deps=all
+.PHONY: update-refs
 
-.PHONY: sdk icontheme add-repo install-dependencies clean-dependencies maintainer-clean bundle-artefacts
+
+$(OUTDIR):
+	mkdir -p $@
+
+$(CACHEDIR):
+	mkdir -p $@
+
+$(EXPORT_REPO):
+	$(OSTREE) init --repo=$@ --mode=archive
+
+
+.git/hooks/pre-commit: utils/git-pre-commit
+	ln -frs $< .git/hooks/pre-commit
+
+
+flatpak-version.yml: $(GIT_HOOKS) | CLEAN-flatpak-version.yml
+	./utils/generate-version $@
+.PHONY: flatpak-version.yml
+
+CLEAN-flatpak-version.yml:
+	$(GIT) checkout HEAD flatpak-version.yml
+.PHONY: CLEAN-flatpak-version.yml
+clean: CLEAN-flatpak-version.yml
+
+
+BUILD-flatpak-runtimes: flatpak-version.yml elements/**/*.bst
+	$(BST) $(BST_ARGS) build flatpak-runtimes.bst
+.PHONY: BUILD-flatpak-runtimes
+
+CHECK-flatpak-runtimes: flatpak-version.yml | fetch-junctions
+	$(BST) $(BST_ARGS) show flatpak-runtimes.bst
+.PHONY: CHECK-flatpak-runtimes
+check: CHECK-flatpak-runtimes
+
+$(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
+	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-runtimes.bst $@
+
+EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(EXPORT_REPO)
+	$(OSTREE) pull-local --repo=$| $<
+.PHONY: EXPORT-$(FLATPAK_RUNTIMES_REPO)
+export: EXPORT-$(FLATPAK_RUNTIMES_REPO)
+
+CLEAN-$(FLATPAK_RUNTIMES_REPO):
+	rm -rf $(FLATPAK_RUNTIMES_REPO)
+.PHONY: CLEAN-$(FLATPAK_RUNTIMES_REPO)
+clean: CLEAN-$(FLATPAK_RUNTIMES_REPO)
+
+
+BUILD-flatpak-platform-extensions: elements/**/*.bst
+	$(BST) $(BST_ARGS) build flatpak-platform-extensions.bst
+.PHONY: BUILD-flatpak-platform-extensions
+
+CHECK-flatpak-platform-extensions: | fetch-junctions
+	$(BST) $(BST_ARGS) show flatpak-platform-extensions.bst
+.PHONY: CHECK-flatpak-platform-extensions
+check: CHECK-flatpak-platform-extensions
+
+$(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHEDIR)
+	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-platform-extensions.bst $@
+
+EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(EXPORT_REPO)
+	$(OSTREE) pull-local --repo=$| $<
+.PHONY: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+export: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+
+CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO):
+	rm -rf $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+.PHONY: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+clean: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+
+
+BUNDLE-$(EXPORT_REPO): $(EXPORT_REPO) export | $(OUTDIR)
+	$(foreach ref,$(EXPORT_REFS),$(call bundle-ref,$(EXPORT_REPO),$(ref)))
+.PHONY: BUNDLE-$(EXPORT_REPO)
+bundle: BUNDLE-$(EXPORT_REPO)
+
+CLEAN-BUNDLE-$(EXPORT_REPO):
+	$(foreach ref,$(EXPORT_REFS),$(call clean-ref,$(ref)))
+.PHONY: CLEAN-BUNDLE-$(EXPORT_REPO)
+clean: CLEAN-BUNDLE-$(EXPORT_REPO)

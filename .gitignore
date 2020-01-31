@@ -1,13 +1,12 @@
-.flatpak-builder/
-com.endlessm.apps.Platform.appdata.xml
-com.endlessm.apps.Sdk.appdata.xml
-com.endlessm.apps.Sdk.json
-com.endlessm.apps.Sdk.json.in
-org.freedesktop.Platform.Icontheme.EndlessOS.json
-issue
-issue.net
-metadata.platform
-metadata.sdk
-os-release
-repo/
-sdk/
+# Ignore Python local cache
+plugins/__pycache__
+
+# Ignore BuildStream local state
+.bst
+
+/out
+/cache
+/logs
+/repo
+
+/flatpak-version.yml
