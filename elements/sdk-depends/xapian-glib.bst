@@ -11,5 +11,5 @@ depends:
 sources:
 - kind: git_tag
   url: github_com:endlessm/xapian-glib
-  track: sdk-6
+  track: master
   ref: 1.6.0-27-g7b50cb8f0fdad8ad3297e4c37e321ed254212a43

@@ -10,5 +10,5 @@ depends:
 sources:
 - kind: git_tag
   url: github_com:endlessm/eos-shard.git
-  track: sdk-6
+  track: master
   ref: Release_3.7.6-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
