@@ -19,4 +19,4 @@ variables:
 sources:
 - kind: git_tag
   url: github_com:endlessm/eos-metrics.git
-  track: master
+  track: sdk-6

@@ -19,7 +19,7 @@ kind: autotools
 sources:
 - kind: git_tag
   url: github_com:endlessm/gtk
-  track: sdk-master
+  track: sdk-6
 - kind: patch
   path: files/gtk+-3/0001-CSS-add-vendor-specific-eos-cairo-filter-property.patch
 

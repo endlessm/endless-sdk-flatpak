@@ -15,4 +15,4 @@ depends:
 sources:
 - kind: git_tag
   url: github_com:endlessm/basin.git
-  track: master
+  track: sdk-6

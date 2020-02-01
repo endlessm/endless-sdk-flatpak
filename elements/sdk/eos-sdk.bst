@@ -22,4 +22,4 @@ variables:
 sources:
 - kind: git_tag
   url: github_com:endlessm/eos-sdk.git
-  track: master
+  track: sdk-6

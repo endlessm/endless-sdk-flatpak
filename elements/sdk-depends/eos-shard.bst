@@ -10,4 +10,4 @@ depends:
 sources:
 - kind: git_tag
   url: github_com:endlessm/eos-shard.git
-  track: master
+  track: sdk-6

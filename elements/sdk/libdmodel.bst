@@ -17,4 +17,4 @@ depends:
 sources:
 - kind: git_tag
   url: github_com:endlessm/libdmodel.git
-  track: master
+  track: sdk-6
