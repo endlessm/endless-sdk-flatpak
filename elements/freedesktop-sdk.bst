@@ -6,12 +6,16 @@ kind: junction
 
 sources:
 - kind: git_tag
-  url: gitlab_com:freedesktop-sdk/freedesktop-sdk.git
+  # Temporarily use a fork until
+  # https://gitlab.com/freedesktop-sdk/freedesktop-sdk/-/merge_requests/2306
+  # is accepted and in a branch we can use.
+  #url: gitlab_com:freedesktop-sdk/freedesktop-sdk.git
+  url: https://gitlab.com/dbnicholson/freedesktop-sdk.git
   # Changed to track git commit from upstream bst
   # track: 19.08
   # track-tags: true
-  track: '3fd3a60ab6fcfffa7c98ced1eb8349963722b491'
-  ref: freedesktop-sdk-19.08.4-0-g3fd3a60ab6fcfffa7c98ced1eb8349963722b491
+  track: 'cfa9b8b795e33e9d8764b3916688be0278ce55ab'
+  ref: arm-images-19.08
 
 config:
   options:
