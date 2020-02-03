@@ -1,10 +1,12 @@
 ARCH ?= $(shell flatpak --default-arch)
+BOOTSTRAP_ARCH ?= $(shell flatpak --default-arch)
+
 EXPORT_ARGS ?=
 
 GIT ?= git
 
 BST ?= bst
-BST_ARGS = -o arch $(ARCH) --config build.conf --no-interactive
+BST_ARGS = --config build.conf --no-interactive -o arch $(ARCH) -o bootstrap_build_arch $(BOOTSTRAP_ARCH)
 
 OSTREE ?= ostree
 

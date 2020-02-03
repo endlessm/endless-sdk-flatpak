@@ -16,3 +16,4 @@ sources:
 config:
   options:
     target_arch: '%{arch}'
+    bootstrap_build_arch: '%{bootstrap_build_arch}'
