@@ -6,7 +6,8 @@ EXPORT_ARGS ?=
 GIT ?= git
 
 BST ?= bst
-BST_ARGS = --config build.conf --no-interactive -o arch $(ARCH) -o bootstrap_build_arch $(BOOTSTRAP_ARCH)
+BST_ARGS ?= --config build.conf
+_BST_ARGS ?= --no-interactive -o arch $(ARCH) -o bootstrap_build_arch $(BOOTSTRAP_ARCH)
 
 OSTREE ?= ostree
 
@@ -54,12 +55,12 @@ bundle: ;
 .PHONY: bundle
 
 fetch-junctions:
-	$(BST) $(BST_ARGS) fetch freedesktop-sdk.bst gnome-sdk.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) fetch freedesktop-sdk.bst gnome-sdk.bst
 .PHONY: fetch-junctions
 
 update-refs:
-	$(BST) $(BST_ARGS) track freedesktop-sdk.bst gnome-sdk.bst
-	$(BST) $(BST_ARGS) track flatpak-runtimes.bst flatpak-platform-extensions.bst --deps=all
+	$(BST) $(BST_ARGS) $(_BST_ARGS) track freedesktop-sdk.bst gnome-sdk.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) track flatpak-runtimes.bst flatpak-platform-extensions.bst --deps=all
 .PHONY: update-refs
 
 
@@ -88,16 +89,16 @@ clean: CLEAN-flatpak-version.yml
 
 
 BUILD-flatpak-runtimes: flatpak-version.yml elements/**/*.bst
-	$(BST) $(BST_ARGS) build flatpak-runtimes.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-runtimes.bst
 .PHONY: BUILD-flatpak-runtimes
 
 CHECK-flatpak-runtimes: flatpak-version.yml | fetch-junctions
-	$(BST) $(BST_ARGS) show flatpak-runtimes.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) show flatpak-runtimes.bst
 .PHONY: CHECK-flatpak-runtimes
 check: CHECK-flatpak-runtimes
 
 $(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
-	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-runtimes.bst $@
+	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks --force flatpak-runtimes.bst $@
 
 EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(EXPORT_REPO)
 	$(OSTREE) pull-local --repo=$| $<
@@ -111,16 +112,16 @@ clean: CLEAN-$(FLATPAK_RUNTIMES_REPO)
 
 
 BUILD-flatpak-platform-extensions: elements/**/*.bst
-	$(BST) $(BST_ARGS) build flatpak-platform-extensions.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-platform-extensions.bst
 .PHONY: BUILD-flatpak-platform-extensions
 
 CHECK-flatpak-platform-extensions: | fetch-junctions
-	$(BST) $(BST_ARGS) show flatpak-platform-extensions.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) show flatpak-platform-extensions.bst
 .PHONY: CHECK-flatpak-platform-extensions
 check: CHECK-flatpak-platform-extensions
 
 $(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHEDIR)
-	$(BST) $(BST_ARGS) checkout --hardlinks --force flatpak-platform-extensions.bst $@
+	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks --force flatpak-platform-extensions.bst $@
 
 EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(EXPORT_REPO)
 	$(OSTREE) pull-local --repo=$| $<

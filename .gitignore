@@ -9,4 +9,6 @@ plugins/__pycache__
 /logs
 /repo
 
+/local.conf
+
 /flatpak-version.yml
