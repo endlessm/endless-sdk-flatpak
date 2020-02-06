@@ -12,8 +12,10 @@ depends:
 - sdk/eos-sdk.bst
 
 variables:
-  meson-local: |
-    -Djasmine_junit_reports_dir="%{build-root}/_reports"
+  (?):
+  - eos_tests:
+      meson-local: |
+        -Djasmine_junit_reports_dir="%{build-root}/_reports"
 
 sources:
 - kind: git_tag

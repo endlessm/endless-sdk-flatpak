@@ -30,8 +30,10 @@ variables:
 
 environment:
   HOTDOC: "%{bindir}/python3 %{bindir}/hotdoc"
-  JASMINE_JUNIT_REPORTS_DIR: "%{build-root}/_reports"
-  EOS_COVERAGE_DIR: "%{build-root}/_reports/coverage"
+  (?):
+  - eos_tests:
+      JASMINE_JUNIT_REPORTS_DIR: "%{build-root}/_reports"
+      EOS_COVERAGE_DIR: "%{build-root}/_reports/coverage"
 
 sources:
 - kind: git_tag
