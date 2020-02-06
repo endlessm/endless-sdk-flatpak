@@ -12,6 +12,10 @@ depends:
 - sdk-depends/xapian-glib.bst
 - sdk/eos-sdk.bst
 
+variables:
+  meson-local: |
+    -Djasmine_junit_reports_dir="%{build-root}/_reports"
+
 sources:
 - kind: git_tag
   url: github_com:endlessm/libdmodel.git

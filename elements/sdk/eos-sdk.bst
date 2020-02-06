@@ -19,6 +19,10 @@ variables:
     --disable-js-doc \
     --disable-webhelper
 
+environment:
+  JASMINE_JUNIT_REPORTS_DIR: "%{build-root}/_reports"
+  EOS_COVERAGE_DIR: "%{build-root}/_reports/coverage"
+
 sources:
 - kind: git_tag
   url: github_com:endlessm/eos-sdk.git

@@ -30,9 +30,11 @@ variables:
 
 environment:
   HOTDOC: "%{bindir}/python3 %{bindir}/hotdoc"
+  JASMINE_JUNIT_REPORTS_DIR: "%{build-root}/_reports"
+  EOS_COVERAGE_DIR: "%{build-root}/_reports/coverage"
 
 sources:
 - kind: git_tag
   url: github_com:endlessm/eos-knowledge-lib.git
   track: master
-  ref: Release_3.2.6-700-g0edfe808c6394d511959775ba6d20898eeda77c5
+  ref: Release_3.2.6-701-g63d947a8aebf540fb60404327d64995785813c4e
