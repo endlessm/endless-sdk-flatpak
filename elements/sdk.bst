@@ -6,7 +6,6 @@ depends:
 - sdk/basin.bst
 
 - sdk-build-depends/jasmine-gjs.bst
-- sdk-build-depends/python-dbusmock.bst
 
 # We can't depend on sdk.bst from gnome-sdk directly, as that would bring
 # unwanted dependencies. See sdk-platform.bst for details. This list should

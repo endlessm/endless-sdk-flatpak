@@ -16,8 +16,8 @@ depends:
 - sdk-depends/eos-knowledge-content-renderer.bst
 - sdk-depends/mathjax.bst
 - sdk-depends/maxwell.bst
-- sdk-depends/python-polib.bst
-- sdk-depends/python-pyyaml.bst
+- sdk-depends/python3-polib.bst
+- sdk-depends/python3-pyyaml.bst
 - sdk-depends/sassc.bst
 - sdk/eos-sdk.bst
 - sdk/libdmodel.bst

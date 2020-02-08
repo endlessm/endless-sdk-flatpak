@@ -1,14 +1,14 @@
 kind: autotools
 
 build-depends:
+- freedesktop-sdk.bst:components/python3-dbusmock.bst
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
 - gnome-sdk.bst:sdk/gtk-doc.bst
-- sdk-build-depends/python-dbusmock.bst
 
 depends:
 - gnome-sdk.bst:sdk/glib.bst
 - gnome-sdk.bst:sdk/gobject-introspection.bst
-- sdk-depends/python-dbus.bst
+- freedesktop-sdk.bst:components/python3-dbus.bst
 
 variables:
   conf-local: |
