@@ -6,10 +6,17 @@ build-depends:
 
 depends:
 - freedesktop-sdk.bst:components/libxml2.bst
+- freedesktop-sdk.bst:components/python3-setuptools.bst
 - gnome-sdk.bst:sdk/glib.bst
 - gnome-sdk.bst:sdk/json-glib.bst
+- sdk-build-depends/python3-sqlalchemy.bst
+- sdk-build-depends/python3-schema.bst
+- sdk-build-depends/python3-toposort.bst
+- sdk-build-depends/python3-lxml.bst
+- sdk-build-depends/python3-wheezy.bst
+- sdk-build-depends/python3-appdirs.bst
 
 sources:
 - kind: tar
-  url: https://files.pythonhosted.org/packages/c7/bf/5f243e2d2deeeea8a192694825b3fccc3d960acc4ee55b37c85dd2b22a8c/hotdoc-0.10.0.tar.gz
-  ref: f918683c2b9dfe616e9c054fececb2f5609b7ee1900faf36f4c9e58e80b97d99
+  url: https://pypi.python.org/packages/0b/8e/07d19b56d5e4fc79d86f2dff69674841c8dec30a008dbda36d0d2dbc6e50/hotdoc-0.8.92.tar.gz
+  ref: b9c7141ae71696e5da11974e2b012814d9cf76569a9934b184195237ada767bd

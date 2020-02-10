@@ -6,6 +6,7 @@ build-depends:
 - sdk-build-depends/hotdoc-modular-framework.bst
 - sdk-build-depends/hotdoc.bst
 - sdk-build-depends/jasmine-gjs.bst
+- sdk-build-depends/lcov.bst
 
 depends:
 - freedesktop-sdk.bst:components/gstreamer.bst
@@ -25,7 +26,8 @@ depends:
 variables:
   conf-local: |
     --disable-js-doc \
-    --disable-documentation \
+    --enable-documentation \
+    --enable-coverage \
     --with-mathjax-dir="%{datadir}/javascript/mathjax"
 
 environment:
