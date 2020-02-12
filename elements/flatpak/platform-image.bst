@@ -5,6 +5,7 @@ build-depends:
 - freedesktop-sdk.bst:integration/split-locales.bst
 - freedesktop-sdk.bst:multiarch/multiarch-platform.bst
 - sdk-platform.bst
+- manifests/platform-manifest.bst
 
 config:
   exclude:
