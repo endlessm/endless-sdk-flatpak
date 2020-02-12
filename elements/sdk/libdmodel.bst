@@ -5,6 +5,7 @@ build-depends:
 - sdk-build-depends/jasmine-gjs.bst
 
 depends:
+- freedesktop-sdk.bst:components/libarchive.bst
 - gnome-sdk.bst:sdk/glib.bst
 - gnome-sdk.bst:sdk/json-glib.bst
 - gnome-sdk.bst:sdk/libsoup.bst
