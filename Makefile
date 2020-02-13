@@ -6,7 +6,7 @@ EXPORT_ARGS ?=
 GIT ?= git
 
 BST ?= bst
-BST_ARGS ?= --config build.conf
+BST_ARGS ?=
 _BST_ARGS ?= --no-interactive -o arch $(ARCH) -o bootstrap_build_arch $(BOOTSTRAP_ARCH)
 
 OSTREE ?= ostree

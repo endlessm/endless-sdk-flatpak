@@ -6,9 +6,6 @@ plugins/__pycache__
 
 /out
 /cache
-/logs
 /repo
-
-/local.conf
 
 /flatpak-version.yml
