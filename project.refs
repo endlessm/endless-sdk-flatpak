@@ -226,3 +226,7 @@ projects:
     - ref: 0.10-0-ge1e39f3639e39360ceebb2f7ed533cede4623070
     gnome-sdk-sdk/cogl-endless-arm.bst:
     - ref: a805b2b019184710ff53d0496f9f0ce6dcca420c141a0f4f6fcc02131581d759
+    sdk-build-depends/sysprof.bst:
+    - ref: sysprof-3.36.0-7-g5148ffbb9f25f5b65b42cca9ead630c73f963f5b
+    gnome-sdk-sdk/gjs--profile.bst:
+    - ref: a3cc3a8eda87074b2c363ffe28b29a5202d7f12914b6973f199acf2d1816d44c

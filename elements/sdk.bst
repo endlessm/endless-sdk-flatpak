@@ -8,4 +8,6 @@ depends:
 
 - sdk-build-depends/jasmine-gjs.bst
 
+- gnome-sdk-sdk/gjs--profile.bst
+
 - sdk-upstream.bst
