@@ -8,4 +8,6 @@ plugins/__pycache__
 /cache
 /repo
 
+/elements/.app
+
 /flatpak-version.yml
