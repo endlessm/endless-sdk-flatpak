@@ -1,0 +1,367 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+import pathlib
+import re
+import subprocess
+import sys
+import yaml
+
+from configparser import ConfigParser
+from typing import NamedTuple
+
+import gi
+gi.require_version('Flatpak', '1.0')
+
+from gi.repository import Flatpak, GLib
+
+FLATPAK_INSTALL_SYSTEM = 'system'
+FLATPAK_INSTALL_USER = 'user'
+
+class RefQuery(NamedTuple):
+    kind: Flatpak.RefKind
+    name: str
+    arch: str = None
+    branch: str = None
+
+    def find_matching_refs(self, flatpak_install: Flatpak.Installation):
+        yield from (
+            ref for ref in flatpak_install.list_installed_refs()
+            if self.matches(ref)
+        )
+
+    def matches(self, ref: Flatpak.Ref):
+        if ref.get_name() != self.name:
+            return False
+        if self.kind and ref.get_kind() != self.kind:
+            return False
+        elif self.arch and ref.get_arch() != self.arch:
+            return False
+        elif self.branch and ref.get_branch() != self.branch:
+            return False
+        else:
+            return True
+
+
+class Extension(NamedTuple):
+    base_ref: Flatpak.Ref
+    name: str
+    directory: str
+    subdirectories: bool
+
+    def matches(self, ref: Flatpak.Ref):
+        if ref.get_name() == self.name:
+            return True
+        elif self.subdirectories and ref.get_name().startswith(self.name + '.'):
+            return True
+        else:
+            False
+
+    def directory_for_ref(self, ref: Flatpak.Ref):
+        if ref.get_name() == self.name:
+            return self.directory
+        elif self.subdirectories and ref.get_name().startswith(self.name + '.'):
+            extra_id = ref.get_name().lstrip(self.name + '.')
+            extra_path = extra_id.split('.').join('/')
+            return self.directory + '/' + extra_path
+        else:
+            return None
+
+
+class InstalledExtension(NamedTuple):
+    extension: Extension
+    ref: Flatpak.Ref
+    directory: str
+
+
+class BstFile(NamedTuple):
+    name: str
+    data: dict
+
+    @classmethod
+    def for_all(cls, base_ref: Flatpak.InstalledRef, base_bst, extension_bsts_list: list):
+        return cls(
+            'stack-' + base_ref.get_name(),
+            {
+                'kind': 'stack',
+                'depends': [
+                    base_bst.get_bst_name(),
+                    *(extension_bst.get_bst_name() for extension_bst in extension_bsts_list)
+                ],
+                'environment': {
+                    'PATH': '/app/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+                    'GI_TYPELIB_PATH': '/app/lib/girepository-1.0',
+                    'GST_PLUGIN_SYSTEM_PATH': '/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:%{libdir}/gstreamer-1.0',
+                    'XDG_DATA_DIRS': '/app/share:/usr/share:/usr/share/runtime/share:/run/host/share'
+                }
+            }
+        )
+
+    @classmethod
+    def for_base_ref(cls, base_ref: Flatpak.InstalledRef, repo_uri: str):
+        return cls(
+            base_ref.get_name(),
+            {
+                'kind': 'import',
+                'depends': [
+                    'sdk.bst'
+                ],
+                'sources': [
+                    {
+                        'kind': 'ostree',
+                        'url': repo_uri,
+                        'track': base_ref.format_ref(),
+                        'ref': base_ref.get_commit()
+                    }
+                ],
+                'config': {
+                    'source': 'files',
+                    'target': 'app'
+                }
+            }
+        )
+
+    @classmethod
+    def for_installed_extension(cls, installed_extension: InstalledExtension, repo_uri: str, base_bst):
+        return cls(
+            installed_extension.ref.get_name(),
+            {
+                'kind': 'import',
+                'depends': [
+                    base_bst.get_bst_name()
+                ],
+                'sources': [
+                    {
+                        'kind': 'ostree',
+                        'url': repo_uri,
+                        'track': installed_extension.ref.format_ref(),
+                        'ref': installed_extension.ref.get_commit()
+                    }
+                ],
+                'config': {
+                    'source': 'files',
+                    'target': 'app/' + installed_extension.directory
+                }
+            }
+        )
+
+    def get_bst_name(self):
+        return os.path.join('.run-flatpak-app', '{}.bst'.format(self.name))
+
+    def get_real_path(self):
+        return pathlib.Path('elements', self.get_bst_name())
+
+    def write_file(self):
+        out_path = self.get_real_path()
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, 'w') as out_file:
+            yaml.dump(self.data, out_file)
+
+
+def parse_ref_query(ref: str):
+    ref_parts = ref.split('/')
+
+    if ref_parts[0] == 'app' and len(ref_parts) > 1:
+        kind = Flatpak.RefKind.APP
+        ref_parts = ref_parts[1:]
+    elif ref_parts[0] == 'runtime' and len(ref_parts) > 1:
+        kind = Flatpak.RefKind.RUNTIME
+        ref_parts = ref_parts[1:]
+    else:
+        kind = None
+
+    if len(ref_parts) > 3:
+        raise ValueError("Unable to parse ref", ref)
+
+    return RefQuery(kind, *ref_parts)
+
+
+class FlatpakMetadata(ConfigParser):
+    EXTENSION_SECTION_RE = r'^Extension (?P<name>.+)$'
+
+    def __init__(self, installed_ref: Flatpak.InstalledRef):
+        self.__base_ref = installed_ref
+        super().__init__()
+
+    @classmethod
+    def for_installed_ref(cls, installed_ref: Flatpak.InstalledRef):
+        metadata = installed_ref.load_metadata()
+        metadata_str = metadata.get_data().decode()
+        parser = cls(installed_ref)
+        parser.read_string(metadata_str)
+        return parser
+
+    def get_command(self):
+        return self['Application']['command']
+
+    def extension_sections(self):
+        return list(self.__iter_extension_sections())
+
+    def __iter_extension_sections(self):
+        for section_name in self.sections():
+            match = re.match(self.EXTENSION_SECTION_RE, section_name)
+            if match:
+                yield match.group('name'), self[section_name]
+
+    def find_installed_extensions(self, flatpak_install: Flatpak.Installation):
+        related_refs = flatpak_install.list_installed_related_refs_sync(
+            self.__base_ref.get_origin(),
+            self.__base_ref.format_ref()
+        )
+
+        for name, section in self.extension_sections():
+            extension = Extension(self.__base_ref, name, section['directory'], section['subdirectories'])
+            extension_refs = (
+                ref for ref in related_refs if extension.matches(ref)
+            )
+            for ref in extension_refs:
+                directory = extension.directory_for_ref(ref)
+                yield InstalledExtension(extension, ref, directory)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        'app',
+        help="An installed application"
+    )
+    parser.add_argument(
+        'arg',
+        nargs=argparse.REMAINDER,
+        help="Arguments to pass to the application"
+    )
+    install_group = parser.add_mutually_exclusive_group()
+    install_group.add_argument(
+        '--system',
+        dest='flatpak_install',
+        action='store_const',
+        const=FLATPAK_INSTALL_SYSTEM,
+        help="Work on the system-wide installation (default)"
+    )
+    install_group.add_argument(
+        '--user',
+        dest='flatpak_install',
+        action='store_const',
+        const=FLATPAK_INSTALL_USER,
+        help="Work on the user installation"
+    )
+    install_group.add_argument(
+        '--installation',
+        dest='flatpak_install_id',
+        metavar='NAME',
+        help="Work on the system-wide installation specified by NAME"
+    )
+    parser.add_argument(
+        '--command',
+        dest='command',
+        help="Command to run"
+    )
+    parser.add_argument(
+        '--mount',
+        dest='mount_list',
+        metavar=('HOSTPATH', 'PATH'),
+        action='append',
+        nargs=2,
+        help="Mount a file or directory into the sandbox"
+    )
+    parser.add_argument(
+        '-o', '--option',
+        dest='bst_options_list',
+        metavar=('OPTION', 'VALUE'),
+        action='append',
+        nargs=2,
+        help="Set a BuildStream project option"
+    )
+    parser.add_argument(
+        '--strict',
+        dest='bst_args_list',
+        const='--strict',
+        action='append_const',
+        help="Pass the --strict argument to bst"
+    )
+    parser.add_argument(
+        '--no-strict',
+        dest='bst_args_list',
+        const='--no-strict',
+        action='append_const',
+        help="Pass the --no-strict argument to bst"
+    )
+
+    parser.set_defaults(
+        flatpak_install='system',
+        mount_list=[],
+        bst_options_list=[],
+        bst_args_list=[]
+    )
+
+    options = parser.parse_args()
+
+    if options.flatpak_install == FLATPAK_INSTALL_USER:
+        flatpak_install = Flatpak.Installation.new_user()
+    elif options.flatpak_install_id:
+        flatpak_install = Flatpak.Installation.new_system_with_id(options.flatpak_install_id)
+    else:
+        flatpak_install = Flatpak.Installation.new_system()
+
+    ref_query = parse_ref_query(options.app)
+
+    install_glocalfile = flatpak_install.get_path()
+    repo_uri = pathlib.Path(install_glocalfile.get_path(), 'repo').as_uri()
+
+    matching_refs_list = list(ref_query.find_matching_refs(flatpak_install))
+    if len(matching_refs_list) == 0:
+        print("Error: Ref {} not installed".format(options.app))
+        return 1
+    elif len(matching_refs_list) > 1:
+        print("Please specify one of these refs to run:")
+        for ref in matching_refs_list:
+            print(' * {}'.format(ref.format_ref()))
+        return 1
+    else:
+        base_ref = matching_refs_list[0]
+
+    if base_ref.get_kind() != Flatpak.RefKind.APP:
+        print("Please specify an app to run")
+        return 1
+
+    base_metadata = FlatpakMetadata.for_installed_ref(base_ref)
+
+    base_bst = BstFile.for_base_ref(base_ref, repo_uri=repo_uri)
+
+    extension_bsts_list = [
+        BstFile.for_installed_extension(extension, repo_uri=repo_uri, base_bst=base_bst)
+        for extension in base_metadata.find_installed_extensions(flatpak_install)
+    ]
+
+    stack_bst = BstFile.for_all(base_ref, base_bst, extension_bsts_list)
+
+    stack_bst.write_file()
+    base_bst.write_file()
+    for extension_bst in extension_bsts_list:
+        extension_bst.write_file()
+
+    bst_args = []
+    bst_args.append('--no-interactive')
+    for arg in options.bst_args_list:
+        bst_args.append(arg)
+    for option, value in options.bst_options_list:
+        bst_args.extend(['-o', option, value])
+
+    bst_shell_args = []
+    for hostpath, path in options.mount_list:
+        bst_shell_args.extend(['--mount', hostpath, path])
+
+    if options.command:
+        bst_shell_command = options.command
+    else:
+        bst_shell_command = base_metadata.get_command()
+
+    subprocess.run(['bst', *bst_args, 'build', stack_bst.get_bst_name()])
+    subprocess.run(['bst', *bst_args, 'shell', *bst_shell_args, stack_bst.get_bst_name(), bst_shell_command])
+
+
+if __name__== "__main__":
+    exitcode = main()
+    sys.exit(exitcode)
