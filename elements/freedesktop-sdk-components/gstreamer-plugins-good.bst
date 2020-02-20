@@ -44,14 +44,14 @@ variables:
 
 sources:
 - kind: git_tag
-  url: git_freedesktop_org:gstreamer/gst-plugins-good
+  url: gitlab_freedesktop_org:gstreamer/gst-plugins-good
   # Changed to track git commit from upstream bst
   # track: '1.16'
   track: 'd7d290b64c1282398f3265522a33e093b7233310'
   submodules:
     common:
       checkout: false
-      url: git_freedesktop_org:gstreamer/common
+      url: gitlab_freedesktop_org:gstreamer/common
   ref: 1.16.1-0-gd7d290b64c1282398f3265522a33e093b7233310
 - kind: patch
   path: files/gstreamer-plugins-good/0001-gtkgstwidget-add-ready-to-show-signal.patch
