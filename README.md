@@ -26,7 +26,7 @@ In addition, you can use the ARCH variable to build for a different architecture
 Our Makefile includes some other targets which may be useful.
 
  * `make check`: Check that the BuildStream project is valid
- * `make update-refs`: Update references to the newest versions.
+ * `make track`: Update references to the newest versions.
  * `make bundle`: Create a set of Flatpak bundle files in _out_.
 
 ### Installing BuildStream
@@ -78,7 +78,7 @@ Note that you must include `-o arch arm` for any _bst_ commands, including _bst 
 
 This project uses reproducible builds, which means any commit in the endless-sdk-flatpak repository should always produce the same build output regardless of when it is built. To release a change in the Endless SDK, including changes in separate repositories such as [eos-knowledge-lib](https://github.com/endlessm/eos-knowledge-lib/) or [libdmodel](https://github.com/endlessm/libdmodel), you must create a new release of endless-sdk-flatpak.
 
-First, use `bst track` to update the references for included code, telling buildstream to use the newest commit from the tracked git branches. For example, if you wish to include a change to eos-knowledge-lib, you can use `bst track sdk/eos-knowledge-lib`. For convenience, you can use `make update-refs` to update the references for all of the elements in this project.
+First, use `bst track` to update the references for included code, telling buildstream to use the newest commit from the tracked git branches. For example, if you wish to include a change to eos-knowledge-lib, you can use `bst track sdk/eos-knowledge-lib`. For convenience, you can use `make track` to update the references for all of the elements in this project.
 
 Once you have a release to test, create a new branch and make a pull request. After the pull request is merged to the sdk-6 branch, the CI system will create a development build of the new release and push it to the staging Flatpak repository. Before releasing to production, create an annotated git tag in the sdk-6 branch:
 

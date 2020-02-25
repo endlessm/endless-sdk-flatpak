@@ -58,10 +58,10 @@ fetch-junctions:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) fetch freedesktop-sdk.bst gnome-sdk.bst
 .PHONY: fetch-junctions
 
-update-refs:
+track:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) track freedesktop-sdk.bst gnome-sdk.bst
 	$(BST) $(BST_ARGS) $(_BST_ARGS) track flatpak-runtimes.bst flatpak-platform-extensions.bst --deps=all
-.PHONY: update-refs
+.PHONY: track
 
 
 $(OUTDIR):
