@@ -15,7 +15,7 @@ sources:
   # track: 19.08
   # track-tags: true
   track: 'cfa9b8b795e33e9d8764b3916688be0278ce55ab'
-  ref: arm-images-19.08
+  ref: freedesktop-sdk-19.08.6-1-gcfa9b8b795e33e9d8764b3916688be0278ce55ab
 
 config:
   options:

@@ -41,4 +41,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-knowledge-lib.git
   track: master
-  ref: Release_3.2.6-701-g63d947a8aebf540fb60404327d64995785813c4e
+  ref: Release_3.2.6-705-g269087663561ee08f4ab6e1d895035111745a36b

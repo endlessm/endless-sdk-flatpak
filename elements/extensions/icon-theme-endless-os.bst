@@ -30,7 +30,7 @@ sources:
   url: github_com:endlessm/eos-theme.git
   track: master
   track-tags: true
-  ref: Release_3.7.6-0-gef7e91b5820a6ac0c96804b1ac67fd3656cc33d2
+  ref: Release_3.7.7-0-gef7e91b5820a6ac0c96804b1ac67fd3656cc33d2
 - kind: local
   path: files/icon-theme-endless-os
   directory: bst-local
