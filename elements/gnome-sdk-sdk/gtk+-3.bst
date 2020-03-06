@@ -1,5 +1,5 @@
 # Replaces sdk/gtk+-3.bst from gnome-sdk.
-# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/sdk/gtk+-3.bst#L48-54>
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/sdk/gtk+-3.bst#L48-54>
 
 # Because the upstream version of this is required by other elements in
 # gnome-sdk, we need to keep the existing element intact, and put this one on
@@ -75,6 +75,12 @@ public:
         fi
       done
     - gtk-query-immodules-3.0 --update-cache
+    split-rules:
+      devel:
+        (>):
+        - '%{libdir}/libgailutil-3.so'
+        - '%{libdir}/libgdk-3.so'
+        - '%{libdir}/libgtk-3.so'
     overlap-whitelist:
     - '**'
   cpe:

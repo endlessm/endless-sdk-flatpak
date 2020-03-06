@@ -10,7 +10,7 @@ depends:
 # We can't depend on sdk.bst from gnome-sdk directly, as that would bring
 # unwanted dependencies. See sdk-platform.bst for details. This list should
 # be kept in sync with the dependencies in sdk.bst from gnome-sdk:
-# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/sdk.bst>
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/sdk.bst>
 
 - gnome-sdk.bst:sdk/gtk-doc.bst
 - gnome-sdk.bst:sdk/python-pygments.bst

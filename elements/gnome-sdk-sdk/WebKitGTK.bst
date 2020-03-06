@@ -1,5 +1,5 @@
 # Replaces sdk/WebKitGTK.bst from gnome-sdk.
-<https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/sdk/WebKitGTK.bst>
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/sdk/WebKitGTK.bst>
 
 # Because the upstream version of this is required by other elements in
 # gnome-sdk, we need to keep the existing element intact, and put this one on
@@ -9,8 +9,8 @@ kind: cmake
 
 sources:
 - kind: tar
-  url: webkitgtk_org:webkitgtk-2.26.3.tar.xz
-  ref: add51153943cc11d90a7038d0ea5f6332281e6c0be0640f802a211b035f0e611
+  url: webkitgtk_org:webkitgtk-2.27.91.tar.xz
+  ref: 30411781f620c33f5542a745930b48a19a6072bea0e68982c1ad863d1148bdea
 - kind: patch
   path: gnome-sdk-files/webkitgtk/gtk-doc-introspection-cross-compiling.patch
 - kind: local
@@ -82,6 +82,11 @@ variables:
 
 public:
   bst:
+    split-rules:
+      devel:
+        (>):
+        - '%{libdir}/libjavascriptcoregtk-4.0.so'
+        - '%{libdir}/libwebkit2gtk-4.0.so'
     overlap-whitelist:
     - '**'
   cpe:

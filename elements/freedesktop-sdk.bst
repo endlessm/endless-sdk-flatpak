@@ -1,6 +1,6 @@
 # Follows freedesktop-sdk.bst from gnome-sdk.
-# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/freedesktop-sdk.bst>
-# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/junction.refs>
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/freedesktop-sdk.bst>
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/junction.refs>
 
 kind: junction
 
