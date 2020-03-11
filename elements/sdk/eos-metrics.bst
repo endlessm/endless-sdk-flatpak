@@ -19,4 +19,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-metrics.git
   track: master
-  ref: Release_3.7.7-2-g6b78996c7aa86892227c2ab6cbb8c173f469e4ec
+  ref: Release_3.7.8-2-g6b78996c7aa86892227c2ab6cbb8c173f469e4ec
