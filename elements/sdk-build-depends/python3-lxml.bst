@@ -2,7 +2,7 @@ kind: pip
 
 build-depends:
 - freedesktop-sdk.bst:public-stacks/buildsystem-python.bst
-- sdk-build-depends/cython.bst
+- freedesktop-sdk.bst:components/cython.bst
 
 depends:
 - freedesktop-sdk.bst:components/libxml2.bst
