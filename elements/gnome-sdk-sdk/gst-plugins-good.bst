@@ -1,5 +1,5 @@
 # Replaces sdk/gst-plugins-good.bst from gnome-sdk.
-# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/sdk/gst-plugins-good.bst>
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/sdk/gst-plugins-good.bst>
 
 # Because the upstream version of this is required by other elements in
 # gnome-sdk, we need to keep the existing element intact, and put this one on

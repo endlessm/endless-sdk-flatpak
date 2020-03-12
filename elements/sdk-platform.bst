@@ -6,7 +6,7 @@ depends:
 # to build ourselves. As a result, we can't depend on gnome-sdk directly. This
 # list should be kept in sync with the dependencies in sdk-platform.bst from
 # gnome-sdk:
-# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-34/elements/sdk-platform.bst>
+# <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/sdk-platform.bst>
 
 # new elements:
 - sdk/eos-knowledge-lib.bst
@@ -58,26 +58,27 @@ depends:
 - gnome-sdk.bst:sdk/gst-plugins-base.bst
 # - gnome-sdk.bst:sdk/gst-plugins-good.bst
 # - gnome-sdk.bst:sdk/gtk+-3.bst
+# disabled for stable release
+# - gnome-sdk.bst:sdk/gtk.bst
+- gnome-sdk.bst:sdk/gtksourceview.bst
 - gnome-sdk.bst:sdk/gvfs.bst
 - gnome-sdk.bst:sdk/ibus.bst
 - gnome-sdk.bst:sdk/json-glib.bst
 - gnome-sdk.bst:sdk/krb5.bst
 - gnome-sdk.bst:sdk/libcanberra.bst
-- gnome-sdk.bst:sdk/libcroco.bst
 - gnome-sdk.bst:sdk/libgee.bst
 - gnome-sdk.bst:sdk/libnotify.bst
 - gnome-sdk.bst:sdk/librsvg.bst
 - gnome-sdk.bst:sdk/libsecret.bst
 - gnome-sdk.bst:sdk/libsoup.bst
 - gnome-sdk.bst:sdk/libwpe.bst
-- gnome-sdk.bst:sdk/mozjs60.bst
+- gnome-sdk.bst:sdk/mozjs68.bst
 - gnome-sdk.bst:sdk/openjpeg.bst
 # - gnome-sdk.bst:sdk/os-release.bst
 - gnome-sdk.bst:sdk/pango.bst
 - gnome-sdk.bst:sdk/pipewire.bst
 - gnome-sdk.bst:sdk/pycairo.bst
 - gnome-sdk.bst:sdk/pygobject.bst
-- gnome-sdk.bst:sdk/vte.bst
 - gnome-sdk.bst:sdk/woff2.bst
 - gnome-sdk.bst:sdk/wpebackend-fdo.bst
 - gnome-sdk.bst:sdk/yelp-xsl.bst
