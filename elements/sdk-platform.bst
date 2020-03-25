@@ -25,10 +25,11 @@ depends:
 # replaced (patched) elements:
 - gnome-sdk-sdk/gst-plugins-good.bst
 - gnome-sdk-sdk/gtk+-3.bst
+- gnome-sdk-sdk/WebKitGTK.bst
 - sdk/os-release.bst
 
 # upstream modules:
-- gnome-sdk.bst:sdk/WebKitGTK.bst
+# - gnome-sdk.bst:sdk/WebKitGTK.bst
 - gnome-sdk.bst:sdk/adwaita-icon-theme.bst
 - gnome-sdk.bst:sdk/appstream-glib.bst
 - gnome-sdk.bst:sdk/at-spi2-atk.bst
