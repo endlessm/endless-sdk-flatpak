@@ -5,6 +5,11 @@
 # gnome-sdk, we need to keep the existing element intact, and put this one on
 # top of it during integration by using an overlap whitelist.
 
+# Changes from upstream:
+# - Use git source from endlessm/gtk+-3, which carries changes specific to
+#   Endless OS.
+# - Apply an additional patch, adding a eos-cairo-filter property.
+
 # TODO: This is dangerous, because our gtk+-3 fork may be out of sync with
 # upstream. Instead, we should maintain a patch or a separate fork for the
 # SDK, based against the same version of gtk+-3 that is in gnome-sdk.

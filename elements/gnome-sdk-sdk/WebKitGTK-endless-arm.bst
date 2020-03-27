@@ -5,6 +5,10 @@
 # gnome-sdk, we need to keep the existing element intact, and put this one on
 # top of it during integration by using an overlap whitelist.
 
+# Changes from upstream:
+# - Modify cmake-local to build with -DENABLE_GLES2=ON on 32-bit ARM, to take
+#   advantage of hardware acceleration on Endless Mini.
+
 kind: cmake
 
 sources:
@@ -58,18 +62,18 @@ runtime-depends:
 
 variables:
   webkitgtk_toolchain: ''
-  endless_arch_options: ''
+  webkitgtk_arch_options: ''
   (?):
   - arch == "i686" or arch == "arm":
       webkitgtk_toolchain: -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=toolchain.%{arch}
   - arch == "arm":
-      endless_arch_options: |
+      webkitgtk_arch_options: |
         -DENABLE_GLES2=ON
   cmake-local: >-
     -DPORT=GTK
     -DENABLE_BUBBLEWRAP_SANDBOX=OFF
     %{webkitgtk_toolchain}
-    %{endless_arch_options}
+    %{webkitgtk_arch_options}
 (?):
 - arch == "i686":
     environment:

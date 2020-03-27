@@ -5,6 +5,10 @@
 # gnome-sdk, we need to keep the existing element intact, and put this one on
 # top of it during integration by using an overlap whitelist.
 
+# Changes from upstream:
+# - Depenend on custom version of gstreamer-plugins-good.bst from
+#   freedesktop-sdk.
+
 kind: filter
 
 build-depends:
