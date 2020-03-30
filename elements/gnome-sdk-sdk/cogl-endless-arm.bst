@@ -14,8 +14,8 @@ sources:
 - kind: git_tag
   url: gitlab_gnome_org:GNOME/cogl.git
   track: cogl-1.22
-
   ref: 1.22.6-22-g122b390bbf4bf4283ef2a94f25a44ed23ead3e05
+
 build-depends:
 - gnome-sdk.bst:sdk/gtk-doc.bst
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
