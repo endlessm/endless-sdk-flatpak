@@ -16,14 +16,14 @@ sources:
   track: cogl-1.22
 
 build-depends:
-- sdk/gtk-doc.bst
+- gnome-sdk.bst:sdk/gtk-doc.bst
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
 
 depends:
-- sdk/glib.bst
-- sdk/gobject-introspection.bst
-- sdk/gst-plugins-base.bst
-- sdk/pango.bst
+- gnome-sdk.bst:sdk/glib.bst
+- gnome-sdk.bst:sdk/gobject-introspection.bst
+- gnome-sdk.bst:sdk/gst-plugins-base.bst
+- gnome-sdk.bst:sdk/pango.bst
 - freedesktop-sdk.bst:components/gstreamer.bst
 - freedesktop-sdk.bst:components/wayland.bst
 - freedesktop-sdk.bst:components/xorg-lib-x11.bst
