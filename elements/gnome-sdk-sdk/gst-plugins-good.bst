@@ -6,8 +6,8 @@
 # top of it during integration by using an overlap whitelist.
 
 # Changes from upstream:
-# - Depenend on custom version of gstreamer-plugins-good.bst from
-#   freedesktop-sdk.
+# - Depend on custom version of gstreamer-plugins-good.bst from
+#   freedesktop-sdk-components.
 
 kind: filter
 

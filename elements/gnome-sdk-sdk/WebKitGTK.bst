@@ -7,4 +7,3 @@ kind: stack
 - arch != "arm":
     depends:
     - gnome-sdk.bst:sdk/WebKitGTK.bst
-

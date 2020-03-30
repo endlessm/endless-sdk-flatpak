@@ -23,6 +23,7 @@ depends:
 - sdk/libdmodel.bst
 
 # replaced (patched) elements:
+- gnome-sdk-sdk/cogl.bst
 - gnome-sdk-sdk/gst-plugins-good.bst
 - gnome-sdk-sdk/gtk+-3.bst
 - gnome-sdk-sdk/WebKitGTK.bst
@@ -40,7 +41,7 @@ depends:
 - gnome-sdk.bst:sdk/clutter-gst.bst
 - gnome-sdk.bst:sdk/clutter-gtk.bst
 - gnome-sdk.bst:sdk/clutter.bst
-- gnome-sdk.bst:sdk/cogl.bst
+# - gnome-sdk.bst:sdk/cogl.bst
 - gnome-sdk.bst:sdk/dconf.bst
 - gnome-sdk.bst:sdk/enchant-2.bst
 - gnome-sdk.bst:sdk/fcitx.bst
