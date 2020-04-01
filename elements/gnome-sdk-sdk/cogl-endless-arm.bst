@@ -11,7 +11,6 @@
 kind: autotools
 
 sources:
-sources:
 - kind: tar
   url: download_gnome_org_sources:cogl/1.22/cogl-1.22.6.tar.xz
   ref: 6d134bd3e48c067507167c001200b275997fb9c68b08b48ff038211c8c251b75
