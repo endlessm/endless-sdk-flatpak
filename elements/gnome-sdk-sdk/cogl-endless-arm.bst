@@ -34,6 +34,10 @@ depends:
 - freedesktop-sdk.bst:components/xorg-lib-xrandr.bst
 - freedesktop-sdk.bst:bootstrap-import.bst
 
+runtime-depends:
+# dummy dependency so this is staged on top of the element from gnome-sdk
+- gnome-sdk.bst:sdk/cogl.bst
+
 variables:
   cogl_arch_options: ''
   (?):
