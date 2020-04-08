@@ -1,0 +1,231 @@
+From 3ca591145a51a2a2a0ced0282962be4fc7072173 Mon Sep 17 00:00:00 2001
+From: Dylan McCall <dylan@endlessm.com>
+Date: Tue, 25 Jun 2019 19:15:29 -0700
+Subject: [PATCH] gstgldisplay: Add public foreign_display property
+
+We use this property in gst_gl_display_egl_from_gl_display, to set
+foreign_display for the new GstGLDisplayEGL instance. This fixes a
+problem where gst_gl_display_egl_finalize calls EglTerminate on a
+pre-existing EGL connection.
+---
+ gst-libs/gst/gl/egl/gstgldisplay_egl.c        | 13 +++++++++
+ gst-libs/gst/gl/gstgldisplay.c                | 29 +++++++++++++++++++
+ gst-libs/gst/gl/gstgldisplay.h                | 11 ++++---
+ .../gst/gl/wayland/gstgldisplay_wayland.c     | 10 +++++++
+ gst-libs/gst/gl/x11/gstgldisplay_x11.c        |  9 ++++++
+ 5 files changed, 68 insertions(+), 4 deletions(-)
+
+diff --git a/gst-libs/gst/gl/egl/gstgldisplay_egl.c b/gst-libs/gst/gl/egl/gstgldisplay_egl.c
+index af0635171..8724b023a 100644
+--- a/gst-libs/gst/gl/egl/gstgldisplay_egl.c
++++ b/gst-libs/gst/gl/egl/gstgldisplay_egl.c
+@@ -53,12 +53,15 @@ G_DEFINE_TYPE (GstGLDisplayEGL, gst_gl_display_egl, GST_TYPE_GL_DISPLAY);
+ 
+ static void gst_gl_display_egl_finalize (GObject * object);
+ static guintptr gst_gl_display_egl_get_handle (GstGLDisplay * display);
++static gboolean gst_gl_display_egl_get_foreign_display (GstGLDisplay * display);
+ 
+ static void
+ gst_gl_display_egl_class_init (GstGLDisplayEGLClass * klass)
+ {
+   GST_GL_DISPLAY_CLASS (klass)->get_handle =
+       GST_DEBUG_FUNCPTR (gst_gl_display_egl_get_handle);
++  GST_GL_DISPLAY_CLASS (klass)->get_foreign_display =
++      GST_DEBUG_FUNCPTR (gst_gl_display_egl_get_foreign_display);
+ 
+   G_OBJECT_CLASS (klass)->finalize = gst_gl_display_egl_finalize;
+ }
+@@ -253,6 +256,7 @@ gst_gl_display_egl_from_gl_display (GstGLDisplay * display)
+   GstGLDisplayEGL *ret;
+   GstGLDisplayType display_type;
+   guintptr native_display;
++  gboolean foreign_display;
+ 
+   g_return_val_if_fail (GST_IS_GL_DISPLAY (display), NULL);
+ 
+@@ -278,6 +282,7 @@ gst_gl_display_egl_from_gl_display (GstGLDisplay * display)
+ 
+   display_type = gst_gl_display_get_handle_type (display);
+   native_display = gst_gl_display_get_handle (display);
++  foreign_display = gst_gl_display_get_foreign_display (display);
+ 
+   g_return_val_if_fail (native_display != 0, NULL);
+   g_return_val_if_fail (display_type != GST_GL_DISPLAY_TYPE_NONE, NULL);
+@@ -287,12 +292,14 @@ gst_gl_display_egl_from_gl_display (GstGLDisplay * display)
+ 
+   ret->display =
+       gst_gl_display_egl_get_from_native (display_type, native_display);
++  ret->foreign_display = foreign_display;
+ 
+   if (!ret->display) {
+     GST_WARNING_OBJECT (ret, "failed to get EGLDisplay from native display");
+     gst_object_unref (ret);
+     return NULL;
+   }
++
+   g_object_set_data_full (G_OBJECT (display), GST_GL_DISPLAY_EGL_NAME,
+       gst_object_ref (ret), (GDestroyNotify) gst_object_unref);
+ 
+@@ -304,3 +311,9 @@ gst_gl_display_egl_get_handle (GstGLDisplay * display)
+ {
+   return (guintptr) GST_GL_DISPLAY_EGL (display)->display;
+ }
++
++static gboolean
++gst_gl_display_egl_get_foreign_display (GstGLDisplay * display)
++{
++  return GST_GL_DISPLAY_EGL (display)->foreign_display;
++}
+diff --git a/gst-libs/gst/gl/gstgldisplay.c b/gst-libs/gst/gl/gstgldisplay.c
+index 3b72a566d..0ec387f21 100644
+--- a/gst-libs/gst/gl/gstgldisplay.c
++++ b/gst-libs/gst/gl/gstgldisplay.c
+@@ -94,6 +94,8 @@ static guint gst_gl_display_signals[LAST_SIGNAL] = { 0 };
+ static void gst_gl_display_dispose (GObject * object);
+ static void gst_gl_display_finalize (GObject * object);
+ static guintptr gst_gl_display_default_get_handle (GstGLDisplay * display);
++static gboolean gst_gl_display_default_get_foreign_display (GstGLDisplay *
++    display);
+ static GstGLWindow *gst_gl_display_default_create_window (GstGLDisplay *
+     display);
+ 
+@@ -173,6 +175,7 @@ gst_gl_display_class_init (GstGLDisplayClass * klass)
+       GST_TYPE_GL_CONTEXT, 1, GST_TYPE_GL_CONTEXT);
+ 
+   klass->get_handle = gst_gl_display_default_get_handle;
++  klass->get_foreign_display = gst_gl_display_default_get_foreign_display;
+   klass->create_window = gst_gl_display_default_create_window;
+ 
+   G_OBJECT_CLASS (klass)->finalize = gst_gl_display_finalize;
+@@ -360,6 +363,32 @@ gst_gl_display_default_get_handle (GstGLDisplay * display)
+   return 0;
+ }
+ 
++/**
++ * gst_gl_display_get_foreign_display:
++ * @context: a #GstGLDisplay
++ *
++ * Returns: whether the context belongs to a foreign display
++ *
++ * Since: 1.18
++ */
++gboolean
++gst_gl_display_get_foreign_display (GstGLDisplay * display)
++{
++  GstGLDisplayClass *klass;
++
++  g_return_val_if_fail (GST_IS_GL_DISPLAY (display), FALSE);
++  klass = GST_GL_DISPLAY_GET_CLASS (display);
++  g_return_val_if_fail (klass->get_foreign_display != NULL, 0);
++
++  return klass->get_foreign_display (display);
++}
++
++static gboolean
++gst_gl_display_default_get_foreign_display (GstGLDisplay * display)
++{
++  return FALSE;
++}
++
+ /**
+  * gst_gl_display_filter_gl_api:
+  * @display: a #GstGLDisplay
+diff --git a/gst-libs/gst/gl/gstgldisplay.h b/gst-libs/gst/gl/gstgldisplay.h
+index d4c7f4cd5..b6d0ad172 100644
+--- a/gst-libs/gst/gl/gstgldisplay.h
++++ b/gst-libs/gst/gl/gstgldisplay.h
+@@ -93,11 +93,12 @@ struct _GstGLDisplayClass
+ {
+   GstObjectClass object_class;
+ 
+-  guintptr          (*get_handle)      (GstGLDisplay * display);
+-  GstGLWindow *     (*create_window)    (GstGLDisplay * display);
++  guintptr          (*get_handle)           (GstGLDisplay * display);
++  GstGLWindow *     (*create_window)        (GstGLDisplay * display);
++  gboolean          (*get_foreign_display)  (GstGLDisplay * display);
+ 
+-  /* <private> */
+-  gpointer _padding[GST_PADDING];
++  /*< private >*/
++  gpointer _padding[GST_PADDING-1];
+ };
+ 
+ GST_GL_API
+@@ -111,6 +112,8 @@ guintptr         gst_gl_display_get_handle             (GstGLDisplay * display);
+ GST_GL_API
+ GstGLDisplayType gst_gl_display_get_handle_type        (GstGLDisplay * display);
+ GST_GL_API
++gboolean         gst_gl_display_get_foreign_display    (GstGLDisplay * display);
++GST_GL_API
+ void             gst_gl_display_filter_gl_api          (GstGLDisplay * display,
+                                                         GstGLAPI gl_api);
+ GST_GL_API
+diff --git a/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c b/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c
+index 52147b4ef..e2fb39118 100644
+--- a/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c
++++ b/gst-libs/gst/gl/wayland/gstgldisplay_wayland.c
+@@ -39,6 +39,8 @@ G_DEFINE_TYPE_WITH_PRIVATE (GstGLDisplayWayland, gst_gl_display_wayland,
+ 
+ static void gst_gl_display_wayland_finalize (GObject * object);
+ static guintptr gst_gl_display_wayland_get_handle (GstGLDisplay * display);
++static gboolean gst_gl_display_wayland_get_foreign_display (GstGLDisplay *
++    display);
+ 
+ static void
+ handle_xdg_wm_base_ping (void *user_data, struct xdg_wm_base *xdg_wm_base,
+@@ -98,6 +100,8 @@ gst_gl_display_wayland_class_init (GstGLDisplayWaylandClass * klass)
+ {
+   GST_GL_DISPLAY_CLASS (klass)->get_handle =
+       GST_DEBUG_FUNCPTR (gst_gl_display_wayland_get_handle);
++  GST_GL_DISPLAY_CLASS (klass)->get_foreign_display =
++      GST_DEBUG_FUNCPTR (gst_gl_display_wayland_get_foreign_display);
+ 
+   G_OBJECT_CLASS (klass)->finalize = gst_gl_display_wayland_finalize;
+ }
+@@ -211,3 +215,9 @@ gst_gl_display_wayland_get_xdg_wm_base (GstGLDisplayWayland * display)
+ 
+   return priv->xdg_wm_base;
+ }
++
++static gboolean
++gst_gl_display_wayland_get_foreign_display (GstGLDisplay * display)
++{
++  return GST_GL_DISPLAY_WAYLAND (display)->foreign_display;
++}
+diff --git a/gst-libs/gst/gl/x11/gstgldisplay_x11.c b/gst-libs/gst/gl/x11/gstgldisplay_x11.c
+index 00cdd3f9a..c841800d9 100644
+--- a/gst-libs/gst/gl/x11/gstgldisplay_x11.c
++++ b/gst-libs/gst/gl/x11/gstgldisplay_x11.c
+@@ -33,6 +33,7 @@ G_DEFINE_TYPE (GstGLDisplayX11, gst_gl_display_x11, GST_TYPE_GL_DISPLAY);
+ 
+ static void gst_gl_display_x11_finalize (GObject * object);
+ static guintptr gst_gl_display_x11_get_handle (GstGLDisplay * display);
++static gboolean gst_gl_display_x11_get_foreign_display (GstGLDisplay * display);
+ 
+ G_GNUC_INTERNAL
+     gboolean gst_gl_display_x11_handle_event (GstGLDisplayX11 * display_x11);
+@@ -45,6 +46,8 @@ gst_gl_display_x11_class_init (GstGLDisplayX11Class * klass)
+ {
+   GST_GL_DISPLAY_CLASS (klass)->get_handle =
+       GST_DEBUG_FUNCPTR (gst_gl_display_x11_get_handle);
++  GST_GL_DISPLAY_CLASS (klass)->get_foreign_display =
++      GST_DEBUG_FUNCPTR (gst_gl_display_x11_get_foreign_display);
+ 
+   G_OBJECT_CLASS (klass)->finalize = gst_gl_display_x11_finalize;
+ }
+@@ -157,6 +160,12 @@ gst_gl_display_x11_get_handle (GstGLDisplay * display)
+   return (guintptr) GST_GL_DISPLAY_X11 (display)->display;
+ }
+ 
++static gboolean
++gst_gl_display_x11_get_foreign_display (GstGLDisplay * display)
++{
++  return GST_GL_DISPLAY_X11 (display)->foreign_display;
++}
++
+ static int
+ _compare_xcb_window (GstGLWindowX11 * window_x11, xcb_window_t * window_id)
+ {
+-- 
+2.26.0
+

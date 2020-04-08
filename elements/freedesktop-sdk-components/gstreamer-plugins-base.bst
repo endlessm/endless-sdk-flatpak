@@ -3,6 +3,8 @@
 
 # Changes from upstream:
 # - Use only egl and gles2 on arm.
+# - Add a patch which keeps track of when gstreamer is using an existing EGL
+#   display and avoids terminating it.
 
 kind: meson
 
@@ -94,4 +96,5 @@ sources:
   directory: subprojects/gl-headers
   track: master
   ref: 5c8c7c0d3ca1f0b783272dac0b95e09414e49bc8
-
+- kind: patch
+  path: files/gstreamer-plugins-base/0001-gstgldisplay-Add-public-foreign_display-property.patch
