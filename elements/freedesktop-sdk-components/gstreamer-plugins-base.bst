@@ -39,7 +39,7 @@ variables:
   - arch == "arm":
       gl-api: gles2
       gl-platform: egl
-  - arch != "i686" and arch != "arm" and arch != "aarch64":
+  - arch != "i686" and arch != "arm":
       gl-api: opengl,gles2
       gl-platform: egl,glx
 
