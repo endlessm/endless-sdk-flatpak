@@ -88,6 +88,7 @@ sources:
     common:
       checkout: false
       url: gitlab_freedesktop_org:gstreamer/common.git
+  ref: 1.16.2-0-g9d3581b2e6f12f0b7e790d1ebb63b90cf5b1ef4e
 - kind: git_tag
   url: gitlab_freedesktop_org:gstreamer/meson-ports/gl-headers.git
   directory: subprojects/gl-headers
