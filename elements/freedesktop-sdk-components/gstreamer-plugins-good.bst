@@ -2,9 +2,8 @@
 # <https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/19.08/elements/components/gstreamer-plugins-good.bst>
 
 # Changes from upstream:
-# - Add patches specific to Endless OS, such as for hardware acceleration
-#   on Endless Mini, and adding a ready-to-show signal used by certain
-#   applications.
+# - Include a patch which adds a ready-to-show signal used by certain
+#   applications in Endless OS.
 
 kind: meson
 

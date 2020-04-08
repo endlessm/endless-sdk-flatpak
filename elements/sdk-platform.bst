@@ -24,6 +24,7 @@ depends:
 
 # replaced (patched) elements:
 - gnome-sdk-sdk/cogl.bst
+- gnome-sdk-sdk/gst-plugins-base.bst
 - gnome-sdk-sdk/gst-plugins-good.bst
 - gnome-sdk-sdk/gtk+-3.bst
 - gnome-sdk-sdk/WebKitGTK.bst
@@ -57,7 +58,7 @@ depends:
 - gnome-sdk.bst:sdk/gsettings-desktop-schemas.bst
 - gnome-sdk.bst:sdk/gst-libav.bst
 - gnome-sdk.bst:sdk/gst-plugins-bad.bst
-- gnome-sdk.bst:sdk/gst-plugins-base.bst
+# - gnome-sdk.bst:sdk/gst-plugins-base.bst
 # - gnome-sdk.bst:sdk/gst-plugins-good.bst
 # - gnome-sdk.bst:sdk/gtk+-3.bst
 # disabled for stable release

@@ -20,10 +20,7 @@ build-depends:
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
 
 depends:
-- gnome-sdk.bst:sdk/glib.bst
-- gnome-sdk.bst:sdk/gobject-introspection.bst
-- gnome-sdk.bst:sdk/gst-plugins-base.bst
-- gnome-sdk.bst:sdk/pango.bst
+- freedesktop-sdk.bst:bootstrap-import.bst
 - freedesktop-sdk.bst:components/gstreamer.bst
 - freedesktop-sdk.bst:components/wayland.bst
 - freedesktop-sdk.bst:components/xorg-lib-x11.bst
@@ -32,7 +29,10 @@ depends:
 - freedesktop-sdk.bst:components/xorg-lib-xext.bst
 - freedesktop-sdk.bst:components/xorg-lib-xfixes.bst
 - freedesktop-sdk.bst:components/xorg-lib-xrandr.bst
-- freedesktop-sdk.bst:bootstrap-import.bst
+- gnome-sdk.bst:sdk/glib.bst
+- gnome-sdk.bst:sdk/gobject-introspection.bst
+- gnome-sdk.bst:sdk/pango.bst
+- gnome-sdk-sdk/gst-plugins-base.bst
 
 runtime-depends:
 # dummy dependency so this is staged on top of the element from gnome-sdk

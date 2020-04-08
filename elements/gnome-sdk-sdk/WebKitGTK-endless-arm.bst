@@ -36,13 +36,11 @@ depends:
 - freedesktop-sdk.bst:components/libxslt.bst
 - freedesktop-sdk.bst:components/wayland.bst
 - freedesktop-sdk.bst:components/xorg-lib-xt.bst
-- gnome-sdk-sdk/gtk+-3.bst
 - gnome-sdk.bst:sdk/at-spi2-core.bst
 - gnome-sdk.bst:sdk/brotli.bst
 - gnome-sdk.bst:sdk/enchant-2.bst
 - gnome-sdk.bst:sdk/geoclue.bst
 - gnome-sdk.bst:sdk/gobject-introspection.bst
-- gnome-sdk.bst:sdk/gst-plugins-base.bst
 - gnome-sdk.bst:sdk/libnotify.bst
 - gnome-sdk.bst:sdk/libsecret.bst
 - gnome-sdk.bst:sdk/libsoup.bst
@@ -51,6 +49,8 @@ depends:
 - gnome-sdk.bst:sdk/pango.bst
 - gnome-sdk.bst:sdk/woff2.bst
 - gnome-sdk.bst:sdk/wpebackend-fdo.bst
+- gnome-sdk-sdk/gst-plugins-base.bst
+- gnome-sdk-sdk/gtk+-3.bst
 
 runtime-depends:
 - gnome-sdk-sdk/gst-plugins-good.bst

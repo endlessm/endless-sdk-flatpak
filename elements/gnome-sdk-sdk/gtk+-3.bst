@@ -7,7 +7,7 @@
 
 # Changes from upstream:
 # - Use git source from endlessm/gtk+-3, which carries changes specific to
-#   Endless OS.
+#   Endless OS including EGL support on X11.
 # - Apply an additional patch, adding a eos-cairo-filter property.
 
 # TODO: This is dangerous, because our gtk+-3 fork may be out of sync with
