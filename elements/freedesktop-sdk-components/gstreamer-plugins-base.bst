@@ -10,10 +10,10 @@
 kind: meson
 
 build-depends:
-- freedesktop-sdk.bst:components/gobject-introspection.bst
-- freedesktop-sdk.bst:public-stacks/buildsystem-meson.bst
 - freedesktop-sdk.bst:components/git-minimal.bst
-- freedesktop-sdk.bst:components/gtk-doc.bst
+- freedesktop-sdk.bst:public-stacks/buildsystem-meson.bst
+- gnome-sdk.bst:sdk/gobject-introspection.bst
+- gnome-sdk.bst:sdk/gtk-doc.bst
 
 depends:
 - freedesktop-sdk.bst:bootstrap-import.bst
