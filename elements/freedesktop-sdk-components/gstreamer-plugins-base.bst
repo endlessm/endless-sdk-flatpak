@@ -3,6 +3,7 @@
 
 # Changes from upstream:
 # - Use only egl and gles2 on arm.
+# - Build against downstream version of gtk+-3 and related dependencies.
 # - Add a patch which keeps track of when gstreamer is using an existing EGL
 #   display and avoids terminating it.
 
@@ -16,20 +17,20 @@ build-depends:
 
 depends:
 - freedesktop-sdk.bst:bootstrap-import.bst
-- freedesktop-sdk.bst:components/orc.bst
+- freedesktop-sdk.bst:components/alsa-lib.bst
 - freedesktop-sdk.bst:components/gstreamer.bst
-- freedesktop-sdk.bst:components/pango.bst
-- freedesktop-sdk.bst:components/xorg-lib-xv.bst
+- freedesktop-sdk.bst:components/iso-codes.bst
 - freedesktop-sdk.bst:components/libogg.bst
 - freedesktop-sdk.bst:components/libtheora.bst
 - freedesktop-sdk.bst:components/libvorbis.bst
-- freedesktop-sdk.bst:components/opus.bst
-- freedesktop-sdk.bst:components/gdk-pixbuf.bst
-- freedesktop-sdk.bst:components/gtk3.bst
 - freedesktop-sdk.bst:components/mesa-headers.bst
-- freedesktop-sdk.bst:components/iso-codes.bst
-- freedesktop-sdk.bst:components/alsa-lib.bst
+- freedesktop-sdk.bst:components/opus.bst
+- freedesktop-sdk.bst:components/orc.bst
 - freedesktop-sdk.bst:components/sdl2.bst
+- freedesktop-sdk.bst:components/xorg-lib-xv.bst
+- gnome-sdk.bst:sdk/gdk-pixbuf.bst
+- gnome-sdk.bst:sdk/pango.bst
+- gnome-sdk-sdk/gtk+-3.bst
 
 variables:
   (?):

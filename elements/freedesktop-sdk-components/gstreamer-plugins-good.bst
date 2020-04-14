@@ -2,6 +2,8 @@
 # <https://gitlab.com/freedesktop-sdk/freedesktop-sdk/blob/19.08/elements/components/gstreamer-plugins-good.bst>
 
 # Changes from upstream:
+# - Build against downstream version of gtk+-3 and related dependencies.
+# - Build against downstream version of gstreamer-plugins-base.
 # - Include a patch which adds a ready-to-show signal used by certain
 #   applications in Endless OS.
 
@@ -14,21 +16,21 @@ build-depends:
 depends:
 - freedesktop-sdk.bst:bootstrap-import.bst
 - freedesktop-sdk.bst:components/cairo.bst
-- freedesktop-sdk.bst:components/gdk-pixbuf.bst
-- freedesktop-sdk.bst:components/gstreamer-plugins-base.bst
 - freedesktop-sdk.bst:components/gstreamer.bst
-- freedesktop-sdk.bst:components/gtk3.bst
 - freedesktop-sdk.bst:components/jpeg.bst
 - freedesktop-sdk.bst:components/lame.bst
 - freedesktop-sdk.bst:components/libflac.bst
 - freedesktop-sdk.bst:components/libpng.bst
 - freedesktop-sdk.bst:components/libpulse.bst
-- freedesktop-sdk.bst:components/libsoup.bst
 - freedesktop-sdk.bst:components/libvpx.bst
 - freedesktop-sdk.bst:components/mpg123.bst
 - freedesktop-sdk.bst:components/orc.bst
 - freedesktop-sdk.bst:components/speex.bst
 - freedesktop-sdk.bst:components/wavpack.bst
+- freedesktop-sdk-components/gstreamer-plugins-base.bst
+- gnome-sdk.bst:sdk/gdk-pixbuf.bst
+- gnome-sdk.bst:sdk/libsoup.bst
+- gnome-sdk-sdk/gtk+-3.bst
 
 variables:
   meson-local: >-
