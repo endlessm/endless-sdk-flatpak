@@ -30,4 +30,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-sdk.git
   track: master
-  ref: Release_3.3.20-62-gef9bd212044985b6c51b5e4f5988e26b01236abf
+  ref: Release_3.3.20-63-ge8ba17c190ca9e1c985036c6498a55690f684f86

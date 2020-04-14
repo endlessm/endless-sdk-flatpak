@@ -5,7 +5,7 @@ sources:
   url: gitlab_gnome_org:GNOME/gnome-build-meta.git
   track: gnome-3-36
   track-tags: true
-  ref: 3.36.0-7-g209e9ad8ca2463a478d9375a00fa27b82bc70b45
+  ref: 3.36.1-0-g22064f1bb20d029935b101e0301feb76b12f3a09
 
 config:
   options:
