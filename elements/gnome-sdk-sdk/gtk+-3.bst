@@ -27,7 +27,6 @@ sources:
 build-depends:
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
 - gnome-sdk.bst:sdk/gtk-doc.bst
-- sdk-build-depends/patchelf.bst
 
 depends:
 - freedesktop-sdk.bst:bootstrap-import.bst
@@ -70,12 +69,6 @@ variables:
     --enable-x11-backend \
     --enable-wayland-backend \
     %{endless_arch_options}
-
-config:
-  install-commands:
-    (>):
-    - patchelf --remove-rpath %{install-root}%{libdir}/libgtk-3.so
-    - patchelf --remove-rpath %{install-root}%{libdir}/libgdk-3.so
 
 public:
   bst:
