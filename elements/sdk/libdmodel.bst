@@ -10,6 +10,7 @@ depends:
 - gnome-sdk.bst:sdk/json-glib.bst
 - gnome-sdk.bst:sdk/libsoup.bst
 - sdk-depends/eos-shard.bst
+- sdk-depends/libzim-glib.bst
 - sdk-depends/xapian-glib.bst
 - sdk/eos-sdk.bst
 
