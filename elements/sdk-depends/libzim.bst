@@ -3,6 +3,11 @@ kind: meson
 build-depends:
 - freedesktop-sdk.bst:public-stacks/buildsystem-meson.bst
 
+depends:
+- freedesktop-sdk.bst:bootstrap/zlib.bst
+- freedesktop-sdk.bst:components/icu.bst
+- sdk-depends/xapian-core.bst
+
 sources:
 - kind: git_tag
   url: github_com:openzim/libzim
