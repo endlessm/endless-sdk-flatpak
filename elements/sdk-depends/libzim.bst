@@ -2,6 +2,7 @@ kind: meson
 
 build-depends:
 - freedesktop-sdk.bst:public-stacks/buildsystem-meson.bst
+- sdk-build-depends/googletest.bst
 
 depends:
 - freedesktop-sdk.bst:bootstrap/zlib.bst
