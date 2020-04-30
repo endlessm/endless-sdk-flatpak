@@ -2,6 +2,7 @@ kind: meson
 
 build-depends:
 - freedesktop-sdk.bst:public-stacks/buildsystem-meson.bst
+- gnome-sdk.bst:sdk/vala.bst
 
 depends:
 - gnome-sdk.bst:sdk/glib.bst
