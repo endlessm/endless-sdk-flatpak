@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2017 Endless -->
+<!-- Copyright 2017, 2020 Endless -->
 <component type="runtime">
   <id>com.endlessm.apps.Platform</id>
   <metadata_license>CC0</metadata_license>
-  <!-- FIXME -->
   <project_license>LGPL-2.1+</project_license>
   <name>Endless Application Platform version @@SDK_BRANCH@@</name>
   <summary>Shared libraries used by Endless applications</summary>
+  <description><p>The Endless Application Platform runtime is shared by Endless content applications. The runtime is layered on top of the Freedesktop runtime and adds shared libraries used by Endless apps.</p></description>
   <url type="homepage">https://endlessos.com/</url>
+  <project_group>Endless</project_group>
+  <bundle type="flatpak" runtime="com.endlessm.apps.Platform/@@SDK_ARCH@@/@@SDK_BRANCH@@" sdk="com.endlessm.apps.Sdk/@@SDK_ARCH@@/@@SDK_BRANCH@@">runtime/com.endlessm.apps.Platform/@@SDK_ARCH@@/@@SDK_BRANCH@@</bundle>
 </component>
 
