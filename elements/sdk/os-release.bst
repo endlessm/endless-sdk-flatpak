@@ -12,9 +12,10 @@ config:
   - |
     for i in *.in; do
       m4 \
-        -D__SDK_BRANCH__=%{sdk-branch} \
-        -D__RUNTIME_VERSION__=%{runtime-version} \
+        -D__ARCH__=%{arch} \
         -D__RUNTIME_VERSION_DATE__=%{runtime-version-date} \
+        -D__RUNTIME_VERSION__=%{runtime-version} \
+        -D__SDK_BRANCH__=%{sdk-branch} \
         "${i}" >"$(basename "${i}" .in)"
     done
 
