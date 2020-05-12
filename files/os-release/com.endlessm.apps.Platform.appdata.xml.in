@@ -12,5 +12,4 @@
   <description><p>The Endless Application Platform runtime is shared by Endless content applications. The runtime is layered on top of the Freedesktop runtime and adds shared libraries used by Endless apps.</p></description>
   <url type="homepage">https://endlessos.com/</url>
   <project_group>Endless</project_group>
-  <bundle type="flatpak" runtime="com.endlessm.apps.Platform/__ARCH__/__SDK_BRANCH__" sdk="com.endlessm.apps.Sdk/__ARCH__/__SDK_BRANCH__">runtime/com.endlessm.apps.Platform/__ARCH__/__SDK_BRANCH__</bundle>
 </component>
