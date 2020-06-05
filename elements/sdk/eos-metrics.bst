@@ -8,6 +8,7 @@ build-depends:
 depends:
 - gnome-sdk.bst:sdk/glib.bst
 - gnome-sdk.bst:sdk/gobject-introspection.bst
+- gnome-sdk.bst:sdk/pygobject.bst
 - freedesktop-sdk.bst:components/python3-dbus.bst
 
 variables:

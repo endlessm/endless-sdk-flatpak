@@ -21,6 +21,7 @@ depends:
 - freedesktop-sdk.bst:components/nettle.bst
 - freedesktop-sdk.bst:components/pixman.bst
 - freedesktop-sdk.bst:components/xorg-app-xkbcomp.bst
+- freedesktop-sdk.bst:components/xorg-data-xkeyboard-config.bst
 - freedesktop-sdk.bst:components/xorg-font-util.bst
 - freedesktop-sdk.bst:components/xorg-lib-xdmcp.bst
 - freedesktop-sdk.bst:components/xorg-lib-xfont2.bst
