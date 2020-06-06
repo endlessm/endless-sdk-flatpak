@@ -24,4 +24,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/libdmodel.git
   track: master
-  ref: 3ec3815ac020f80750a2f48297c10361b0b8c345
+  ref: 359064e22030b764760312b5a2c180ae0491f9a8

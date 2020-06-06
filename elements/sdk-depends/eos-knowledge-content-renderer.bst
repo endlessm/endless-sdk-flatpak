@@ -21,4 +21,4 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/eos-knowledge-content-renderer.git
   track: master
-  ref: 576f07d8eb844c4806b925b3cbe469176c712ac0
+  ref: 8714f14663c3e634d3c186c02ecfddc9c3a4d0f3
