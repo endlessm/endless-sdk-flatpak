@@ -6,4 +6,4 @@ config:
   install-commands:
     (>):
     - |
-      %{make} distcheck
+      %{make} check
