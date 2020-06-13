@@ -2,7 +2,7 @@ kind: flatpak_repo
 
 build-depends:
 - freedesktop-sdk.bst:deploy-tools/flatpak.bst
-- flatpak/extension-icon-theme-endless-os.bst
+- flatpak/org-freedesktop-platform-icontheme-endlessos.bst
 
 config:
   environment:

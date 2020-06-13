@@ -90,7 +90,7 @@ Next, run the [release-sdk](https://ci.endlessm-sf.com/view/Release/job/release-
 
 This project includes customized versions of elements included in the upstream [gnome-build-meta](https://gitlab.gnome.org/GNOME/gnome-build-meta) and [freedesktop-sdk](https://gitlab.com/freedesktop-sdk/freedesktop-sdk) BuildStream projects.
 
-Our project is mostly a superset of those projects, using junctions defined in [elements/gnome-sdk.bst](elements/gnome-sdk.bst) and [elements/freedesktop-sdk.bst](elements/freedesktop-sdk.bst). However, certain elements are replaced with our own modified versions. These modified BuildStream files are organized into directories such as [elements/gnome-sdk-sdk](elements/gnome-sdk-sdk) and [elements/freedesktop-sdk-components](elements/freedesktop-sdk-components), as well as [elements/sdk.bst](elements/sdk.bst) and [elements/sdk-platform.bst](elements/sdk-platform.bst). When updating junction files, make sure these elements correspond with their upstream counterparts to avoid conflicts.
+Our project is mostly a superset of those projects, using junctions defined in [elements/gnome-sdk.bst](elements/gnome-sdk.bst) and [elements/freedesktop-sdk.bst](elements/freedesktop-sdk.bst). However, certain elements are replaced with our own modified versions. These modified BuildStream files are organized into directories such as [elements/gnome-sdk-sdk](elements/gnome-sdk-sdk) and [elements/freedesktop-sdk-components](elements/freedesktop-sdk-components), as well as [elements/sdk.bst](elements/sdk.bst) and [elements/platform.bst](elements/platform.bst). When updating junction files, make sure these elements correspond with their upstream counterparts to avoid conflicts.
 
 ### Versioning
 

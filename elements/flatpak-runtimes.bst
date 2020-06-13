@@ -8,26 +8,26 @@ build-depends:
 - arch != 'i686':
     build-depends:
       (>):
-      - flatpak/platform.bst
-      - flatpak/platform-locale.bst
-      - flatpak/sdk.bst
-      - flatpak/sdk-debug.bst
-      - flatpak/sdk-docs.bst
-      - flatpak/sdk-locale.bst
+      - flatpak/com-endlessm-apps-platform.bst
+      - flatpak/com-endlessm-apps-platform-locale.bst
+      - flatpak/com-endlessm-apps-sdk.bst
+      - flatpak/com-endlessm-apps-sdk-debug.bst
+      - flatpak/com-endlessm-apps-sdk-docs.bst
+      - flatpak/com-endlessm-apps-sdk-locale.bst
 
 # platform compat is only built on 32 bit
 - arch in ('i686', 'arm'):
     build-depends:
       (>):
-      - flatpak/platform-arch-libs.bst
-      - flatpak/platform-arch-libs-debug.bst
+      - flatpak/com-endlessm-apps-platform-compat.bst
+      - flatpak/com-endlessm-apps-platform-compat-debug.bst
 
 # sdk compat is not built on x86_64
 - arch != 'x86_64':
     build-depends:
       (>):
-      - flatpak/sdk-arch-libs.bst
-      - flatpak/sdk-arch-libs-debug.bst
+      - flatpak/com-endlessm-apps-sdk-compat.bst
+      - flatpak/com-endlessm-apps-sdk-compat-debug.bst
 
 config:
   environment:

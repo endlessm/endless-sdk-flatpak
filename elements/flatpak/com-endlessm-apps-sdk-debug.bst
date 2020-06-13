@@ -1,13 +1,14 @@
 kind: flatpak_image
 
 build-depends:
-- flatpak/sdk-image.bst
+- flatpak/image/sdk-image.bst
 
 config:
-  directory: '%{datadir}/runtime/locale'
+  directory: '%{debugdir}'
   metadata:
     Runtime:
-      name: com.endlessm.apps.Sdk.Locale
+      name: com.endlessm.apps.Sdk.Debug
 
     ExtensionOf:
       ref: runtime/com.endlessm.apps.Sdk/%{gcc_arch}/%{sdk-branch}
+

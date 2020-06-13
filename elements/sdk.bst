@@ -1,7 +1,7 @@
 kind: stack
 
 depends:
-- sdk-platform.bst
+- platform.bst
 
 - sdk/apitrace.bst
 - sdk/basin.bst
@@ -9,8 +9,8 @@ depends:
 - sdk-build-depends/jasmine-gjs.bst
 
 # We can't depend on sdk.bst from gnome-sdk directly, as that would bring
-# unwanted dependencies. See sdk-platform.bst for details. This list should
-# be kept in sync with the dependencies in sdk.bst from gnome-sdk:
+# unwanted dependencies. See platform.bst for details. This list should be
+# kept in sync with the dependencies in sdk.bst from gnome-sdk:
 # <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/sdk.bst>
 
 - gnome-sdk.bst:sdk/gtk-doc.bst
