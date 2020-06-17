@@ -1,15 +1,15 @@
-ARCH ?= $(shell flatpak --default-arch)
-BOOTSTRAP_ARCH ?= $(shell flatpak --default-arch)
-
-EXPORT_ARGS ?=
-
 GIT ?= git
-
 BST ?= bst
+OSTREE ?= ostree
+FLATPAK ?= flatpak
+
+ARCH ?= $(shell $(FLATPAK) --default-arch)
+BOOTSTRAP_ARCH ?= $(shell $(FLATPAK) --default-arch)
+
 BST_ARGS ?=
 _BST_ARGS ?= --no-interactive -o arch $(ARCH) -o bootstrap_build_arch $(BOOTSTRAP_ARCH)
 
-OSTREE ?= ostree
+EXPORT_ARGS ?=
 
 OUTDIR ?= out
 CACHEDIR ?= cache
@@ -47,9 +47,9 @@ clean:
 
 export: | $(EXPORT_REPO)
 ifneq ($(EXPORT_ARGS),)
-	flatpak build-sign $(EXPORT_ARGS) $|
+	$(FLATPAK) build-sign $(EXPORT_ARGS) $|
 endif
-	flatpak build-update-repo $(EXPORT_ARGS) $|
+	$(FLATPAK) build-update-repo $(EXPORT_ARGS) $|
 .PHONY: export
 
 bundle: ;
@@ -99,7 +99,8 @@ CHECK-flatpak-runtimes: flatpak-version.yml | fetch-junctions
 check: CHECK-flatpak-runtimes
 
 $(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
-	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks --force flatpak-runtimes.bst $@
+	rm -rf "$@"
+	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks flatpak-runtimes.bst $@
 
 EXPORT-$(FLATPAK_RUNTIMES_REPO): $(FLATPAK_RUNTIMES_REPO) | $(EXPORT_REPO)
 	$(OSTREE) pull-local --repo=$| $<
@@ -122,7 +123,8 @@ CHECK-flatpak-platform-extensions: | fetch-junctions
 check: CHECK-flatpak-platform-extensions
 
 $(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHEDIR)
-	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks --force flatpak-platform-extensions.bst $@
+	rm -rf "$@"
+	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks flatpak-platform-extensions.bst $@
 
 EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(EXPORT_REPO)
 	$(OSTREE) pull-local --repo=$| $<
@@ -146,7 +148,8 @@ CHECK-flatpak-apps: | fetch-junctions
 check: CHECK-flatpak-apps
 
 $(FLATPAK_APPS_REPO): BUILD-flatpak-apps | $(CACHEDIR)
-	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks --force flatpak-apps.bst $@
+	rm -rf "$@"
+	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks flatpak-apps.bst $@
 
 EXPORT-$(FLATPAK_APPS_REPO): $(FLATPAK_APPS_REPO) | $(EXPORT_REPO)
 	$(OSTREE) pull-local --repo=$| $<
