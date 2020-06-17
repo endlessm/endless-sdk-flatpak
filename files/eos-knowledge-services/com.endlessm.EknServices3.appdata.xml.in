@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017, 2020 Endless -->
+<component type="runtime">
+  <id>com.endlessm.EknServices3</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>LGPL-2.1+</project_license>
+  <name>EOS Knowledge Services (v3)</name>
+  <summary>Services to accompany the Endless runtime (v3)</summary>
+  <releases>
+    <release version="__RUNTIME_VERSION__" date="__RUNTIME_VERSION_DATE__"/>
+  </releases>
+  <url type="homepage">https://endlessos.com/</url>
+  <project_group>Endless</project_group>
+</component>

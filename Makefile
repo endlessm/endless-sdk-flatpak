@@ -17,6 +17,7 @@ REPO ?= repo
 
 FLATPAK_RUNTIMES_REPO = $(CACHEDIR)/flatpak-runtimes-repo
 FLATPAK_PLATFORM_EXTENSIONS_REPO = $(CACHEDIR)/flatpak-platform-extensions-repo
+FLATPAK_APPS_REPO = $(CACHEDIR)/flatpak-apps-repo
 EXPORT_REPO = $(REPO)
 
 EXPORT_REFS = $(shell [ -d "$(EXPORT_REPO)" ] && $(OSTREE) refs --repo $(EXPORT_REPO))
@@ -132,6 +133,30 @@ CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO):
 	rm -rf $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 .PHONY: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 clean: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
+
+
+
+BUILD-flatpak-apps: elements/**/*.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-apps.bst
+.PHONY: BUILD-flatpak-apps
+
+CHECK-flatpak-apps: | fetch-junctions
+	$(BST) $(BST_ARGS) $(_BST_ARGS) show flatpak-apps.bst
+.PHONY: CHECK-flatpak-apps
+check: CHECK-flatpak-apps
+
+$(FLATPAK_APPS_REPO): BUILD-flatpak-apps | $(CACHEDIR)
+	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks --force flatpak-apps.bst $@
+
+EXPORT-$(FLATPAK_APPS_REPO): $(FLATPAK_APPS_REPO) | $(EXPORT_REPO)
+	$(OSTREE) pull-local --repo=$| $<
+.PHONY: EXPORT-$(FLATPAK_APPS_REPO)
+export: EXPORT-$(FLATPAK_APPS_REPO)
+
+CLEAN-$(FLATPAK_APPS_REPO):
+	rm -rf $(FLATPAK_APPS_REPO)
+.PHONY: CLEAN-$(FLATPAK_APPS_REPO)
+clean: CLEAN-$(FLATPAK_APPS_REPO)
 
 
 BUNDLE-$(EXPORT_REPO): $(EXPORT_REPO) export | $(OUTDIR)
