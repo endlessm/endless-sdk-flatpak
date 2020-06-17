@@ -4,6 +4,7 @@ kind: autotools
 
 build-depends:
   (>):
+  - sdk-build-depends/jasmine-gjs.bst
   - tests-build-depends/xvfb-run.bst
 
 environment:

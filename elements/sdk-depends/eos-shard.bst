@@ -2,7 +2,6 @@ kind: autotools
 
 build-depends:
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
-- sdk-build-depends/jasmine-gjs.bst
 
 depends:
 - gnome-sdk.bst:sdk/glib.bst

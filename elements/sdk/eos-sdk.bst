@@ -4,7 +4,6 @@ build-depends:
 - freedesktop-sdk.bst:components/git.bst
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
 - gnome-sdk.bst:sdk/gtk-doc.bst
-- sdk-build-depends/jasmine-gjs.bst
 
 depends:
 - gnome-sdk-sdk/gtk+-3.bst

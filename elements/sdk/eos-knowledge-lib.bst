@@ -5,7 +5,6 @@ build-depends:
 - sdk-build-depends/eos-hotdoc-theme.bst
 - sdk-build-depends/hotdoc-modular-framework.bst
 - sdk-build-depends/hotdoc.bst
-- sdk-build-depends/jasmine-gjs.bst
 - sdk-build-depends/lcov.bst
 
 depends:
