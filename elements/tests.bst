@@ -8,7 +8,7 @@ depends:
 - tests/sdk-depends/eos-shard.bst
 - tests/sdk-depends/maxwell.bst
 - tests/sdk-depends/xapian-glib.bst
-# - tests/sdk/eos-knowledge-lib.bst
-# - tests/sdk/eos-metrics.bst
+- tests/sdk/eos-knowledge-lib.bst
+- tests/sdk/eos-metrics.bst
 - tests/sdk/eos-sdk.bst
 - tests/sdk/libdmodel.bst
