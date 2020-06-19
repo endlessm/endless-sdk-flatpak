@@ -5,7 +5,6 @@ build-depends:
 - sdk-build-depends/eos-hotdoc-theme.bst
 - sdk-build-depends/hotdoc-modular-framework.bst
 - sdk-build-depends/hotdoc.bst
-- sdk-build-depends/jasmine-gjs.bst
 - sdk-build-depends/lcov.bst
 
 depends:
@@ -32,10 +31,6 @@ variables:
 
 environment:
   HOTDOC: "%{bindir}/python3 %{bindir}/hotdoc"
-  (?):
-  - eos_tests:
-      JASMINE_JUNIT_REPORTS_DIR: "%{build-root}/_reports"
-      EOS_COVERAGE_DIR: "%{build-root}/_coverage"
 
 sources:
 - kind: git_tag

@@ -4,7 +4,6 @@ build-depends:
 - freedesktop-sdk.bst:components/git.bst
 - freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
 - gnome-sdk.bst:sdk/gtk-doc.bst
-- sdk-build-depends/jasmine-gjs.bst
 
 depends:
 - gnome-sdk-sdk/gtk+-3.bst
@@ -19,12 +18,6 @@ variables:
     --disable-gir-doc \
     --disable-js-doc \
     --disable-webhelper
-
-environment:
-  (?):
-  - eos_tests:
-      JASMINE_JUNIT_REPORTS_DIR: "%{build-root}/_reports"
-      EOS_COVERAGE_DIR: "%{build-root}/_coverage"
 
 sources:
 - kind: git_tag

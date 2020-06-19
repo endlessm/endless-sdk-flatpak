@@ -5,6 +5,7 @@ build-depends:
 
 depends:
 - sdk-build-depends/hotdoc.bst
+- sdk-depends/python3-pyyaml.bst
 
 sources:
 - kind: git_tag
