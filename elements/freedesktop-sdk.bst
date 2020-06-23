@@ -11,10 +11,12 @@ sources:
   # is accepted and in a branch we can use.
   url: github_com:endlessm/freedesktop-sdk.git
   # url: gitlab_com/freedesktop-sdk/freedesktop-sdk.git
+  # track: '19.08'
+  # track-tags: true
   # Changed to track git commit from upstream bst
   track: '19.08'
-  track-tags: true
-  ref: freedesktop-sdk-19.08.6-0-g9c5136535694ef075913ecf2d09c99a6e638aa65
+  track-tags: false
+  ref: freedesktop-sdk-19.08.6-194-gc9e620c99ec94bf0d1eca2df7f1982165f2f0db4
 
 config:
   options:
