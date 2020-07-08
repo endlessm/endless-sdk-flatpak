@@ -37,7 +37,7 @@ define clean-ref
 endef
 
 
-all: export push-endless-sdk
+all: export
 
 check: ;
 .PHONY: check
@@ -71,7 +71,7 @@ push:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) push $(TOPLEVEL_BST_FILES) --deps=all
 .PHONY: push
 
-push-endless-sdk: | export
+push-endless-sdk:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) push $(ALL_BST_FILES)
 .PHONY: push-endless-sdk
 
