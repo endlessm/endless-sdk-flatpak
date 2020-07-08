@@ -23,6 +23,7 @@ EXPORT_REFS = $(shell [ -d "$(EXPORT_REPO)" ] && $(OSTREE) refs --repo $(EXPORT_
 
 GIT_HOOKS = $(shell [ -d ".git/hooks" ] && echo ".git/hooks/pre-commit")
 
+ALL_BST_FILES = $(patsubst elements/%.bst,%.bst,$(shell find elements/ -type f -name '*.bst'))
 JUNCTION_BST_FILES = freedesktop-sdk.bst gnome-sdk.bst
 TOPLEVEL_BST_FILES =
 
@@ -69,6 +70,10 @@ track:
 push:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) push $(TOPLEVEL_BST_FILES) --deps=all
 .PHONY: push
+
+push-endless-sdk:
+	$(BST) $(BST_ARGS) $(_BST_ARGS) push $(ALL_BST_FILES)
+.PHONY: push-endless-sdk
 
 
 $(OUTDIR):
