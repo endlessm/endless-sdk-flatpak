@@ -23,6 +23,9 @@ EXPORT_REFS = $(shell [ -d "$(EXPORT_REPO)" ] && $(OSTREE) refs --repo $(EXPORT_
 
 GIT_HOOKS = $(shell [ -d ".git/hooks" ] && echo ".git/hooks/pre-commit")
 
+JUNCTION_BST_FILES = freedesktop-sdk.bst gnome-sdk.bst
+TOPLEVEL_BST_FILES =
+
 
 define bundle-ref
 	$(shell flatpak build-bundle $(1) "$(OUTDIR)/$(subst /,-,$(2)).flatpak" $(2))
@@ -55,13 +58,17 @@ bundle: ;
 .PHONY: bundle
 
 fetch-junctions:
-	$(BST) $(BST_ARGS) $(_BST_ARGS) fetch freedesktop-sdk.bst gnome-sdk.bst
+	$(BST) $(BST_ARGS) $(_BST_ARGS) fetch $(JUNCTION_BST_FILES)
 .PHONY: fetch-junctions
 
 track:
-	$(BST) $(BST_ARGS) $(_BST_ARGS) track freedesktop-sdk.bst gnome-sdk.bst
-	$(BST) $(BST_ARGS) $(_BST_ARGS) track flatpak-runtimes.bst flatpak-platform-extensions.bst --deps=all
+	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(JUNCTION_BST_FILES)
+	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(TOPLEVEL_BST_FILES) --deps=all
 .PHONY: track
+
+push:
+	$(BST) $(BST_ARGS) $(_BST_ARGS) push $(TOPLEVEL_BST_FILES) --deps=all
+.PHONY: push
 
 
 $(OUTDIR):
@@ -88,6 +95,8 @@ CLEAN-flatpak-version.yml:
 clean: CLEAN-flatpak-version.yml
 
 
+TOPLEVEL_BST_FILES += flatpak-runtimes.bst
+
 BUILD-flatpak-runtimes: flatpak-version.yml elements/**/*.bst
 	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-runtimes.bst
 .PHONY: BUILD-flatpak-runtimes
@@ -111,6 +120,8 @@ CLEAN-$(FLATPAK_RUNTIMES_REPO):
 .PHONY: CLEAN-$(FLATPAK_RUNTIMES_REPO)
 clean: CLEAN-$(FLATPAK_RUNTIMES_REPO)
 
+
+TOPLEVEL_BST_FILES += flatpak-platform-extensions.bst
 
 BUILD-flatpak-platform-extensions: elements/**/*.bst
 	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-platform-extensions.bst
