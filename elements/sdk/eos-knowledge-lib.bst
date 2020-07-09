@@ -26,7 +26,6 @@ variables:
   conf-local: |
     --disable-js-doc \
     --enable-documentation \
-    --enable-coverage \
     --with-mathjax-dir="%{datadir}/javascript/mathjax"
 
 environment:
