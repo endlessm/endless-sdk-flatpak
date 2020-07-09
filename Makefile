@@ -37,7 +37,7 @@ define clean-ref
 endef
 
 
-all: export
+all: export push
 
 check: ;
 .PHONY: check
@@ -67,7 +67,7 @@ track:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(TOPLEVEL_BST_FILES) --deps=all
 .PHONY: track
 
-push:
+push: | export
 	$(BST) $(BST_ARGS) $(_BST_ARGS) push $(TOPLEVEL_BST_FILES) --deps=all
 .PHONY: push
 
