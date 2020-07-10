@@ -12,8 +12,8 @@ kind: autotools
 
 sources:
 - kind: tar
-  url: download_gnome_org_sources:cogl/1.22/cogl-1.22.6.tar.xz
-  ref: 6d134bd3e48c067507167c001200b275997fb9c68b08b48ff038211c8c251b75
+  url: download_gnome_org_sources:cogl/1.22/cogl-1.22.8.tar.xz
+  ref: a805b2b019184710ff53d0496f9f0ce6dcca420c141a0f4f6fcc02131581d759
 
 build-depends:
 - gnome-sdk.bst:sdk/gtk-doc.bst
