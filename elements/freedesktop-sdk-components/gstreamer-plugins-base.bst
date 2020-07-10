@@ -91,11 +91,9 @@ sources:
     common:
       checkout: false
       url: gitlab_freedesktop_org:gstreamer/common.git
-  ref: 1.16.2-0-g9d3581b2e6f12f0b7e790d1ebb63b90cf5b1ef4e
 - kind: git_tag
   url: gitlab_freedesktop_org:gstreamer/meson-ports/gl-headers.git
   directory: subprojects/gl-headers
   track: master
-  ref: 5c8c7c0d3ca1f0b783272dac0b95e09414e49bc8
 - kind: patch
   path: files/gstreamer-plugins-base/0001-gstgldisplay-Add-public-foreign_display-property.patch

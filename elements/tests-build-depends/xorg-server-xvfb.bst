@@ -46,4 +46,3 @@ sources:
   - xorg-server-*
   exclude:
   - xorg-server-*.99.*
-  ref: xorg-server-1.20.7-0-g489f4191f3c881c6c8acce97ec612167a4ae0f33

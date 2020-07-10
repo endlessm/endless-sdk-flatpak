@@ -16,4 +16,3 @@ sources:
   - libXmu-*
   exclude:
   - libXmu-*.99.*
-  ref: libXmu-1.1.3-0-ge9efe2d027b4c46cf6834cc532222f8ad1d1d3c3

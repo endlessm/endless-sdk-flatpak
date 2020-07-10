@@ -18,16 +18,11 @@ config:
 sources:
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notoserif/NotoSerif-Bold.ttf
-  ref: 58de10340959ee1abd715fb6f8a670f44ca3adfc5d9c7e09e48d7af4a1ff4192
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notoserif/NotoSerif-BoldItalic.ttf
-  ref: c8d7e9e9a586cd5f671fc267906c8739be70fb5e92069fd891e1177e1d255fe1
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notoserif/NotoSerif-Italic.ttf
-  ref: 4a5ae30931a7590be230ae1867650679f803188c5211493bd1a5e3fc0ac78181
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notoserif/NotoSerif-Regular.ttf
-  ref: 375e83eade60ffc1c2f516a89175358ba5fcb785a9bdb68c6a3be1b6470704dd
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notoserif/OFL.txt
-  ref: 5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6

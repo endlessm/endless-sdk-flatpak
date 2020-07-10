@@ -17,5 +17,4 @@ sources:
   - xauth-*
   exclude:
   - xauth-*.99.*
-  ref: xauth-1.1-5-gaaf037ec5c576e46318935feaf6e2b7407ff11a0
 

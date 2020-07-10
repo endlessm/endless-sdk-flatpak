@@ -23,4 +23,3 @@ sources:
 - kind: git_tag
   url: github_com:mathjax/MathJax
   track: 2.4.0
-  ref: 2.4.0-0-g1c54436ae6166a91495aba8a98cc18816b4789df

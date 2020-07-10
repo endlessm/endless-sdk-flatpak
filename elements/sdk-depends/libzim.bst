@@ -13,6 +13,5 @@ sources:
 - kind: git_tag
   url: github_com:openzim/libzim
   track: 6.1.1
-  ref: 6.1.1-0-gec13dd11ac4246fba2188896434d0bc25ae38a00
 - kind: patch
   path: files/libzim/0001-Fallback-to-xapian-core-1.5-dependency-if-xapian-cor.patch

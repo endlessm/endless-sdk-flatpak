@@ -1,0 +1,224 @@
+projects:
+  endless-sdk:
+    sdk-build-depends/python3-schema.bst:
+    - ref: 410f44cb025384959d20deef00b4e1595397fa30959947a4f0d92e9c84616f35
+    sdk-build-depends/python3-toposort.bst:
+    - ref: c190b9d9a9e53ae2835f4d524130147af601fbd63677d19381c65067a80fa903
+    sdk-build-depends/python3-wheezy.bst:
+    - ref: a2ee933452f0352fb8587d79bf6fc66dbf3a14779ef7d17b9fa75e80c0003f19
+    sdk-build-depends/python3-appdirs.bst:
+    - ref: 9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92
+    sdk-depends/python3-pyyaml.bst:
+    - ref: 5.1.2-0-g0f64cbfa54b0b22dc7b776b7b98a7cd657e84d78
+    tests/sdk-build-depends/hotdoc-modular-framework.bst:
+    - ref: Release_3.3.20-3-g03121236fa89574a9ee840e5b154363187af58e7
+    sdk-depends/mustache-c.bst:
+    - ref: v1.0-42-gc1948c599edfe48c6099ed70ab1d5911d8c3ddc8
+    sdk-build-depends/hotdoc.bst:
+    - ref: b9c7141ae71696e5da11974e2b012814d9cf76569a9934b184195237ada767bd
+    tests/sdk-depends/emeus.bst:
+    - ref: Release_3.3.20-0-g6ae2373bd9e652337b6dca3901f3b7c570257c31
+    sdk-build-depends/jasmine-gjs.bst:
+    - ref: 2.2.1-18-g88c2e56c7e50ab6f51008091e995771bf957fd89
+    sdk-build-depends/python3-sqlalchemy.bst:
+    - ref: 9ede7070d6fd18f28058be88296ed67893e2637465516d6a596cd9afea97b154
+    gnome-sdk-sdk/gtk+-3.bst:
+    - ref: Release_3.8.4-0-g8d2dc28367d1cb86c1854885432edf0b9f758bbf
+    - {}
+    sdk-build-depends/python3-lxml.bst:
+    - ref: lxml-4.4.1-0-g1781e48f8e51bb3eba8e31c3d7fbc47b4acfae26
+    sdk-depends/sassc.bst:
+    - ref: 3.4.8-0-gaa6d5c635ea8faf44d542a23aaf85d27e5777d48
+    sdk-depends/libsass.bst:
+    - ref: 3.4.9-0-g6de5050d11a1789d9922eb24e2925047ecbb499b
+    sdk/eos-metrics.bst:
+    - ref: Release_3.8.4-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
+    tests/sdk-depends/eos-knowledge-content-renderer.bst:
+    - ref: a9b0ea201991a73dc136b35ec90990f102601c0a
+    tests/sdk-depends/maxwell.bst:
+    - ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7
+    tests/sdk-depends/eos-shard.bst:
+    - ref: Release_3.8.4-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
+    sdk/eos-sdk.bst:
+    - ref: Release_3.3.20-67-g426b3f7b1001ee9d8e1d200eb18a308fe825ab0c
+    tests/sdk-depends/xapian-glib.bst:
+    - ref: 1.6.0-27-g7b50cb8f0fdad8ad3297e4c37e321ed254212a43
+    sdk-depends/eos-shard.bst:
+    - ref: Release_3.8.4-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
+    tests/sdk/basin.bst:
+    - ref: baaa1e7ebb3b777d12347eec1f6b062409d6ac33
+    sdk-build-depends/xapian-core-swig.bst:
+    - ref: rel-3.0.12-61-g2c910e47ae788412b95e356c99cef5862808bf9a
+    sdk-depends/xapian-glib.bst:
+    - ref: 1.6.0-27-g7b50cb8f0fdad8ad3297e4c37e321ed254212a43
+    sdk-build-depends/eos-hotdoc-theme.bst:
+    - ref: 38c0e9b4e30636fcc595e5f45504c08a912505a7c31b0d2ab1a27f0947c9b41e
+    sdk-build-depends/hotdoc-modular-framework.bst:
+    - ref: Release_3.3.20-3-g03121236fa89574a9ee840e5b154363187af58e7
+    sdk-build-depends/lcov.bst:
+    - ref: v1.14-0-g6c7ad581ab9ed66f80050970c0d559c6684613b7
+    sdk-depends/emeus.bst:
+    - ref: Release_3.3.20-0-g6ae2373bd9e652337b6dca3901f3b7c570257c31
+    sdk-build-depends/tcl.bst:
+    - ref: core-8-6-10-0-g35674d41c77c78cba3841eb6275e9cbe07f28140
+    sdk-depends/maxwell.bst:
+    - ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7
+    sdk-depends/eos-knowledge-content-renderer.bst:
+    - ref: a9b0ea201991a73dc136b35ec90990f102601c0a
+    sdk-depends/python3-polib.bst:
+    - ref: 1.0.7-26-g1cc0dd2d0018330b54f1ac862a3e1c20298b95a8
+    sdk-depends/mathjax.bst:
+    - ref: 2.4.0-0-g1c54436ae6166a91495aba8a98cc18816b4789df
+    sdk-depends/libzim-glib.bst:
+    - ref: v3.2.0-7-g2190b62217ff44a2c047067e2fd52af5dd0f9d16
+    tests-build-depends/dbus-test-environment.bst:
+    - {}
+    - {}
+    sdk-depends/libzim.bst:
+    - ref: 6.1.1-0-gec13dd11ac4246fba2188896434d0bc25ae38a00
+    - {}
+    sdk/libdmodel.bst:
+    - ref: 75622da10c33b04ffa3c3ace8a118f592cc985c5
+    sdk-build-depends/googletest.bst:
+    - ref: release-1.10.0-0-g703bd9caab50b139428cea1aaff9974ebee5742e
+    tests-build-depends/libxmu.bst:
+    - ref: libXmu-1.1.3-0-ge9efe2d027b4c46cf6834cc532222f8ad1d1d3c3
+    tests-build-depends/xauth.bst:
+    - ref: xauth-1.1-5-gaaf037ec5c576e46318935feaf6e2b7407ff11a0
+    tests-build-depends/xvfb-run.bst:
+    - ref: xorg-server-2_1.20.8-2-0-g6ff26b8d4a9492ad4b1edf2577b16911a860440c
+    tests/sdk/eos-metrics.bst:
+    - ref: Release_3.8.4-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
+    tests/sdk/eos-knowledge-lib.bst:
+    - ref: Release_3.2.6-739-gbcbd6db7e50023f635dba5148511d0b93095e37f
+    tests/sdk/eos-sdk.bst:
+    - ref: Release_3.3.20-67-g426b3f7b1001ee9d8e1d200eb18a308fe825ab0c
+    tests/sdk/libdmodel.bst:
+    - ref: 75622da10c33b04ffa3c3ace8a118f592cc985c5
+    sdk/eos-knowledge-lib.bst:
+    - ref: Release_3.2.6-739-gbcbd6db7e50023f635dba5148511d0b93095e37f
+    tests-build-depends/xorg-server-xvfb.bst:
+    - ref: xorg-server-1.20.0-683-ged624544d4aef72db8dd575ad55ef5e206c54757
+    sdk/fonts-librebaskerville.bst:
+    - ref: 899d2122e69d869b5ec7474b316ddb5be804f205d6b3e668a9d8b9ea09ed6f6f
+    - ref: f4d27b2b04767a73c8644b5bd4498f2c3352f27fc32949003e439721fe1f1d60
+    - ref: fd64409c4238f4c90eafc8900e41924bbc3e86a86f48aaca66f6b4d01b0aceb7
+    - ref: c867d1a613bebc4932cf28c060fefb3bcfba3be56ed498b873c79f4eb786af1d
+    freedesktop-sdk-components/gstreamer-plugins-good.bst:
+    - ref: 1.16.2-0-gce0723527aa37d5f4d19ef8021c0b2eb8f83b08d
+    - {}
+    freedesktop-sdk-components/gstreamer-plugins-base.bst:
+    - ref: 1.16.2-0-g9d3581b2e6f12f0b7e790d1ebb63b90cf5b1ef4e
+    - ref: 5c8c7c0d3ca1f0b783272dac0b95e09414e49bc8
+    - {}
+    sdk/os-release.bst:
+    - {}
+    sdk/basin.bst:
+    - ref: baaa1e7ebb3b777d12347eec1f6b062409d6ac33
+    sdk/apitrace.bst:
+    - ref: 9.0-0-gcae55f54c53449fd07f8a917dcd0874db2c15032
+    sdk/fonts-notoserif.bst:
+    - ref: 58de10340959ee1abd715fb6f8a670f44ca3adfc5d9c7e09e48d7af4a1ff4192
+    - ref: c8d7e9e9a586cd5f671fc267906c8739be70fb5e92069fd891e1177e1d255fe1
+    - ref: 4a5ae30931a7590be230ae1867650679f803188c5211493bd1a5e3fc0ac78181
+    - ref: 375e83eade60ffc1c2f516a89175358ba5fcb785a9bdb68c6a3be1b6470704dd
+    - ref: 5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6
+    sdk/fonts-notosans.bst:
+    - ref: 68bdd57a1e1e62663a0b372c7224204b82a89820b9cf30391337f61f0c5e7123
+    - ref: 8bedb0127e914ac3ade237b402d33e573acc4bdba0b9e3981272cae34ff9857a
+    - ref: 7d614e7ee6d32cfba2631bf986bc7ec65a1d9973bb414cb9e5aeb7dad85c8787
+    - ref: 9e9b4c53bd25cad9c04d370f133a5e32d166d0d54e2a9ad6cba4a31fcd382d5b
+    - ref: 5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6
+    extensions/icon-theme-endless-os.bst:
+    - ref: Release_3.8.4-0-gcebd71befe3c62203e32dc7a4679bddeb84710f1
+    - {}
+    sdk/fonts-merriweather.bst:
+    - ref: dff1048499a2c245713dfa41e3683cfecfd15df757cc4cb20f85bceba7bfd58b
+    - ref: 42b5cdd80b293acb1d7a15958a2c2f8b6b95213709110777486763c75bc83ebf
+    - ref: 55139769a87085bff777f68e3ecf92450c21a04c5ddd1e9e9528960ba4088c9f
+    - ref: 403b1bece3d70420e65c670315693e9bca255e9c95884d9cb2b334838e67b509
+    - ref: fc80dbac0ca9da894ae1801df9abe58f6dcca179ec4f8f6f7ea80fd13a1d387d
+    - ref: d3ecc46bab128ed073ad9189bd7efdd2df455d8942ec056f14129bf35bcea7e5
+    - ref: 8521c8eb542adf178b19c7ab7a0210fb4715fe68bb6ea578be129277b642c1f0
+    - ref: bc38fe756b3e259248183fc0b75ad81b02774f3ca68e5e544e925827b0186d40
+    - ref: a7ba785ad99b6eae0444ab89910e512d4af9865937fddbcb5c72c4f59f55d6ad
+    sdk/fonts-roboto.bst:
+    - ref: cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30
+    - ref: 3872e9b39760a1b59ac1e192633dbb3b58e595b4d423930ac7ded525e9ae25e0
+    - ref: 013d22a4fb2638adba28555ee19366f4585f6dc533b7c332f4931a231497cb22
+    - ref: 7d0b991ee3e0be7af01ad7ea8cd2beea6c00a25e679a0226b6737f079aafff86
+    - ref: a4bcac14f419a97de0917198a4bc51c3ed4fc4a3db9f68a5102f23664ee01354
+    - ref: 5fce8b6f8ba9f4d19f0d535e241d56a2b8e72bb07e7df711d968d092ef7f9fca
+    - ref: a6d343d425bc38db90152fa06058b1c7391eca9264f334ef65c1ce175085c6f6
+    - ref: 364a23e13c64937c3fcea3db778628b89379c893849bbade6e5bf83c5f605c6a
+    - ref: f205cc511821ea56078a105557fcea6253129404d411c997e1866fbd006abb68
+    - ref: f177eed10d2470d13ec68d04907a582829d0ee8281f8a02a906f6954c7816e58
+    - ref: 79e851404657dac2106b3d22ad256d47824a9a5765458edb72c9102a45816d95
+    - ref: 3d91f7aa69cb7f7064035895c566ac5cb9b2084582d351af7267bb4e0fba60f5
+    - ref: f5e89a344894a60f0f98f1c0182ba51f5046e29dde3118820d39025445aeaae8
+    sdk/fonts-raleway.bst:
+    - ref: e588abf45ca2b19c340c4b27349c9b6b6e5e198316fd965128ed9f4422942cbe
+    - ref: 5d2aec83bf60483dc15a92e393a12be3f19245e82fa913c3a55df4dd810c405c
+    - ref: e0f379b4e2f8d735fa6b189a1d095c17a11e5ab9fd755c87fc6bb64f3779b801
+    - ref: ca9de8b3be7ccd4b80774a9c7dd56a98c49c276771c5957729b5958d1d579112
+    - ref: 647fb029a65c0cd0b5a64a1d178ee4e118731e963cb1ef62cf24427b8b251c2a
+    - ref: a89c06c1793eb0b173c2101744cf53ea66f8b24b360f5aef7649f6f2b7120e9e
+    - ref: 43ee1a9aabfef25012cdfd38d683760f7e9c9e5d90adfb02125b4e1b602c7e6c
+    - ref: 2620b63bff6f16fb1fa5e28209777cfdfc51a0c8aa1d54ea24a590541e2fd54f
+    - ref: 02e952d32fc8fe96cddd4c3350d4a809f151e105de14d935974c9a19f3b6bac5
+    - ref: f9c5e089b4bb57662171cc7120e1dcae8d66432b4447dd7a7babb0c5e06aa93e
+    - ref: b3d8986142d28fd27c5158b5d24b072bbed301b1763fe0bfe3076a631e8ea0ca
+    - ref: c767a43c0012cdcb76e32f2f3b5005e054ba60fcf52653f7c456f0044e14f1d3
+    - ref: 3d8a045b2c853ee51e5d734d3b53eacf3f5f5290d6b5b862134af53b29dd6818
+    - ref: f7ac99eee53833254c89097c36ec68c0de390377cd31b4c1c082ec3b0132862e
+    - ref: 20e4ae409ffbe8bfd2af14d7f717398408ae8b481005beccb83d62ef4052b681
+    - ref: b7680f30199f65ce3b2620713f7cb27a175560ea7402e0b4cba01c5d54508a17
+    - ref: b8d486395fa65b66cb63321cb4a277d51035fe4d0bd9b49edf8322ea9d55c42c
+    - ref: 59ee38a0d6f119171f896098603246f2bfc5780d75d23c3298b66a03b45d32db
+    - ref: 961a831acb582dbc3ed7d79dc991118d60238c8683c50584e126a293a881264f
+    sdk-depends/xapian-core.bst:
+    - ref: v1.4.0-1506-g6851942c7820b410679e68a92fad55325c7164ef
+    - {}
+    - ref: 64ebcec9f8ac5b2487125a86a7760d2591ac9e1d3dbd59489633f9de62a57684
+    - ref: 5d05bb38a23fd3312b10aea93840feec685bdf4a41146e78882848165d3ae921
+    - ref: 7c87a8c2c8c0fc9cd5019e402bed4292462d00a718a7cd5f11218153bf28b26f
+    sdk/fonts-firasans.bst:
+    - ref: 0ab27e9178d7f74898dd26e3a5f10eb7922bb2a88a2903e00796c4f7c7e08cc0
+    - ref: 81bc0f5fac5b1ba562c1625319676e8202fec01b47e1e09b35db88210c30cf68
+    - ref: a4d8e149ecdd4874a0726eb0af894488b3b31c423d6b0017c8f415ed1b795b45
+    - ref: 1b96c16db9819bcaa9d588068bb397bb6e977c4874965d3d50d789a1943757eb
+    - ref: 0a26cff904d790f7ade2bffaf227b5fecdbeffdac1695fdbd640e086fe4e7152
+    - ref: eb26df1afeec1f817977c8729b4a1ba5ef07d7c821d39cbff6348e491c748f5f
+    - ref: f575442d8b863086599208c9b69d0e345a0936f3ec27b12b3fbc41526b56e838
+    - ref: f4d66af27c828a269d5df483a488404605957d0f4aeead8ebbc9a20dad24b115
+    - ref: a4204f9a8029c1c55daa5385ac95936f74abea3e232770f1fb2862a19d1dfa13
+    - ref: e2172f4a23e9be22f977c34de3897d890401bbc5e9c47df968dfa2c01fb32235
+    - ref: ca4228bdd77761e229e74e3e30f3a3786a75275b77e675decb75f7d356d7f7b4
+    - ref: cbc1842cbed8c1d1146ba7c9db97d8f28c9bedfd25f41c5b0e1259ca48622328
+    - ref: d892b7a6e874d839bc7e712b1d57cf64bcf8013ae143c3eab09e0fd9a0604411
+    - ref: c29556a2719bf613ef3d5e070e40d903a8965d9c081beca1375dc1e6e0f93c23
+    - ref: db0321f83eb3e9f527b8af384a1b3fefdc1039cf2b06fd39b3f61492bda9561c
+    - ref: 97dc5696fe0aabcabf7e041527e0ca39215661cb8174cd1a92c01d9fe224c73d
+    - ref: cd9d582ffae151bc616b26cf84b3c4912d04363b9c5e1b3e599b66e0e7d532a4
+    - ref: 7275879630990f5bc13a3c3fcd68eea1c902aa8827769de4985390104a71a149
+    - ref: 8f24842e9174beda18a556c2ae7d54f5dc444340c19a3a9ef77e23bca366adbd
+    sdk/fonts-lato.bst:
+    - ref: 808c62839c62dbce7de689af7603666fc7f8b81e0df537d8a5212c87580d4337
+    - ref: 3214f75bf96783a571bd25338c867c669e7c5e7c08a227f18a7b63766d6e6cbe
+    - ref: 8a0aace75d33794eece4b28187bfc1df0bbd2888b5d8a56e01788c8d65d16be1
+    - ref: 62c1b7f0d2e74b45960154c3520efc337b553db0961bfdc950d5618334596cc8
+    - ref: 61018de62bdaf90d4ac80b1d53c5c130756c8e9219aea3d2773fc9bd5869af97
+    - ref: a42b384b9c37913a61023e3a47c07fead26e776127bbc9e6a0c96fe413089374
+    - ref: 989989b481db5df0827d90c51fd08d024fe7bc4e367046e2584a0d3b0487936d
+    - ref: fc56526250b9b64ce0908c52350b03e91b84afecb08fd2834a12e57b91abdb31
+    - ref: e399c44efe1387100531d26c7e4800c5d12251b890d6654a3098c7c679cb1786
+    - ref: cf2a774503baf418d584f49967bd160e1e03f087c13b25602f28024ec7788f08
+    - ref: 700e6722fd14a10e7646347a6b14c486d4c364a373ba61c70e0b5ccee7811635
+    - ref: d3ac182a6833e005745dd75679fbad081c0b12535df4e93ad8ed57817a31a338
+    - ref: ecbce6cffa42d8a67afeb27a9d6e85d515e81481d4b2cece989e833a48048405
+    - ref: d636e4683231f931eda222d588e944d082bfd3bdba02f928bee461c0f185b251
+    - ref: 71b8b7decbe75a881ed267be539d402bd1e9420b799658aada4e0d1bd5af803c
+    - ref: 5adeb6b334d8fb99ef053bc052b952773d544315e0e1d668a12c0ce8bd51375c
+    - ref: 663c55bfe9a38270fff44da273bf4d792eafc3e7e1201f62c3064cad80c5d5e7
+    - ref: e5e86e219ce6987b175470d94d57753a387d1860b635da6327a60e8d19a33beb
+    - ref: 74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e

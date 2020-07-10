@@ -16,7 +16,6 @@ sources:
   # Changed to track git commit from upstream bst
   track: '19.08'
   track-tags: false
-  ref: freedesktop-sdk-19.08.6-194-gc9e620c99ec94bf0d1eca2df7f1982165f2f0db4
 
 config:
   options:
