@@ -39,8 +39,13 @@ endef
 
 all: export
 
-check: ;
+check:
+	$(BST) $(BST_ARGS) $(_BST_ARGS) build tests.bst
 .PHONY: check
+
+check-format: ;
+.PHONY: check-format
+check: check-format
 
 clean:
 	if [ -d "$(OUTDIR)" ]; then rmdir $(OUTDIR); fi
@@ -106,10 +111,10 @@ BUILD-flatpak-runtimes: flatpak-version.yml elements/**/*.bst
 	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-runtimes.bst
 .PHONY: BUILD-flatpak-runtimes
 
-CHECK-flatpak-runtimes: flatpak-version.yml | fetch-junctions
+CHECK-FORMAT-flatpak-runtimes: flatpak-version.yml | fetch-junctions
 	$(BST) $(BST_ARGS) $(_BST_ARGS) show flatpak-runtimes.bst
-.PHONY: CHECK-flatpak-runtimes
-check: CHECK-flatpak-runtimes
+.PHONY: CHECK-FORMAT-flatpak-runtimes
+check-format: CHECK-FORMAT-flatpak-runtimes
 
 $(FLATPAK_RUNTIMES_REPO): BUILD-flatpak-runtimes | $(CACHEDIR)
 	rm -rf "$@"
@@ -132,10 +137,10 @@ BUILD-flatpak-platform-extensions: elements/**/*.bst
 	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-platform-extensions.bst
 .PHONY: BUILD-flatpak-platform-extensions
 
-CHECK-flatpak-platform-extensions: | fetch-junctions
+CHECK-FORMAT-flatpak-platform-extensions: | fetch-junctions
 	$(BST) $(BST_ARGS) $(_BST_ARGS) show flatpak-platform-extensions.bst
-.PHONY: CHECK-flatpak-platform-extensions
-check: CHECK-flatpak-platform-extensions
+.PHONY: CHECK-FORMAT-flatpak-platform-extensions
+check-format: CHECK-FORMAT-flatpak-platform-extensions
 
 $(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHEDIR)
 	rm -rf "$@"

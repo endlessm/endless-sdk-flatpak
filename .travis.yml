@@ -31,4 +31,4 @@ before_script:
   - docker build -t local-endless-sdk-ci .
 
 script:
-  - docker run --privileged -t local-endless-sdk-ci make -C /endless-sdk-flatpak check ARCH="${ARCH}" BOOTSTRAP_ARCH="${ARCH}"
+  - docker run --privileged -t local-endless-sdk-ci make -C /endless-sdk-flatpak ARCH="${ARCH}" BOOTSTRAP_ARCH="${ARCH}" check-format
