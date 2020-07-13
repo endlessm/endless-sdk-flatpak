@@ -21,7 +21,6 @@ depends:
 - gnome-sdk-sdk/gst-plugins-base.bst
 - gnome-sdk-sdk/gst-plugins-good.bst
 - gnome-sdk-sdk/gtk+-3.bst
-- gnome-sdk-sdk/WebKitGTK.bst
 - sdk/os-release.bst
 
 - platform-upstream.bst

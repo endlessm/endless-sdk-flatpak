@@ -7,7 +7,7 @@ kind: stack
 # <https://gitlab.gnome.org/GNOME/gnome-build-meta/blob/gnome-3-36/elements/sdk-platform.bst>
 
 depends:
-# - gnome-sdk.bst:sdk/WebKitGTK.bst
+- gnome-sdk.bst:sdk/WebKitGTK.bst
 - gnome-sdk.bst:sdk/adwaita-icon-theme.bst
 - gnome-sdk.bst:sdk/appstream-glib.bst
 - gnome-sdk.bst:sdk/at-spi2-atk.bst

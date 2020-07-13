@@ -9,9 +9,9 @@ build-depends:
 
 depends:
 - freedesktop-sdk.bst:components/gstreamer.bst
-- gnome-sdk-sdk/WebKitGTK.bst
 - gnome-sdk.bst:core/evince.bst
 - gnome-sdk.bst:sdk/gjs.bst
+- gnome-sdk.bst:sdk/WebKitGTK.bst
 - sdk-depends/emeus.bst
 - sdk-depends/eos-knowledge-content-renderer.bst
 - sdk-depends/mathjax.bst

@@ -5,10 +5,10 @@ build-depends:
 
 depends:
 - gnome-sdk-sdk/gtk+-3.bst
-- gnome-sdk-sdk/WebKitGTK.bst
 - gnome-sdk.bst:sdk/glib.bst
 - gnome-sdk.bst:sdk/gobject-introspection.bst
 - gnome-sdk.bst:sdk/json-glib.bst
+- gnome-sdk.bst:sdk/WebKitGTK.bst
 
 sources:
 - kind: git_tag
