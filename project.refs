@@ -222,3 +222,9 @@ projects:
     - ref: 663c55bfe9a38270fff44da273bf4d792eafc3e7e1201f62c3064cad80c5d5e7
     - ref: e5e86e219ce6987b175470d94d57753a387d1860b635da6327a60e8d19a33beb
     - ref: 74ba064d03f1f1c4a952da936c3eb71866c34404916734de3cae73b34357e59e
+    sdk-build-depends/patchelf.bst:
+    - ref: 0.10-0-ge1e39f3639e39360ceebb2f7ed533cede4623070
+    gnome-sdk-sdk/cogl-endless-arm.bst:
+    - ref: a805b2b019184710ff53d0496f9f0ce6dcca420c141a0f4f6fcc02131581d759
+    gnome-sdk-sdk/WebKitGTK-endless-arm.bst:
+    - ref: f0898ac072c220e13a4aee819408421a6cb56a6eb89170ceafe52468b0903522

@@ -70,8 +70,7 @@ fetch-junctions: junction.refs
 .PHONY: fetch-junctions
 
 track:
-	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(JUNCTION_BST_FILES)
-	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(TOPLEVEL_BST_FILES) --deps=all
+	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(ALL_BST_FILES)
 .PHONY: track
 
 push:
