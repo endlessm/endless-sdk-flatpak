@@ -18,16 +18,11 @@ config:
 sources:
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notosans/NotoSans-Bold.ttf
-  ref: 68bdd57a1e1e62663a0b372c7224204b82a89820b9cf30391337f61f0c5e7123
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notosans/NotoSans-BoldItalic.ttf
-  ref: 8bedb0127e914ac3ade237b402d33e573acc4bdba0b9e3981272cae34ff9857a
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notosans/NotoSans-Italic.ttf
-  ref: 7d614e7ee6d32cfba2631bf986bc7ec65a1d9973bb414cb9e5aeb7dad85c8787
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notosans/NotoSans-Regular.ttf
-  ref: 9e9b4c53bd25cad9c04d370f133a5e32d166d0d54e2a9ad6cba4a31fcd382d5b
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/notosans/OFL.txt
-  ref: 5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6

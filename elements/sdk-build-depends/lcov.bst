@@ -17,4 +17,3 @@ sources:
 - kind: git_tag
   url: github_com:linux-test-project/lcov.git
   track: v1.14
-  ref: v1.14-0-g6c7ad581ab9ed66f80050970c0d559c6684613b7

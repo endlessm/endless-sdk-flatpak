@@ -18,13 +18,9 @@ config:
 sources:
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/librebaskerville/LibreBaskerville-Bold.ttf
-  ref: 899d2122e69d869b5ec7474b316ddb5be804f205d6b3e668a9d8b9ea09ed6f6f
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/librebaskerville/LibreBaskerville-Italic.ttf
-  ref: f4d27b2b04767a73c8644b5bd4498f2c3352f27fc32949003e439721fe1f1d60
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/librebaskerville/LibreBaskerville-Regular.ttf
-  ref: fd64409c4238f4c90eafc8900e41924bbc3e86a86f48aaca66f6b4d01b0aceb7
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/librebaskerville/OFL.txt
-  ref: c867d1a613bebc4932cf28c060fefb3bcfba3be56ed498b873c79f4eb786af1d

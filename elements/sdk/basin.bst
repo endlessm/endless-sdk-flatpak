@@ -16,4 +16,3 @@ sources:
 - kind: git_tag
   url: github_com:endlessm/basin.git
   track: master
-  ref: baaa1e7ebb3b777d12347eec1f6b062409d6ac33

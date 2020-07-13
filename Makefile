@@ -39,6 +39,8 @@ endef
 
 all: export
 
+TOPLEVEL_BST_FILES += tests.bst
+
 check:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) build tests.bst
 .PHONY: check
@@ -63,13 +65,12 @@ endif
 bundle: ;
 .PHONY: bundle
 
-fetch-junctions:
+fetch-junctions: junction.refs
 	$(BST) $(BST_ARGS) $(_BST_ARGS) fetch $(JUNCTION_BST_FILES)
 .PHONY: fetch-junctions
 
 track:
-	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(JUNCTION_BST_FILES)
-	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(TOPLEVEL_BST_FILES) --deps=all
+	$(BST) $(BST_ARGS) $(_BST_ARGS) track $(ALL_BST_FILES)
 .PHONY: track
 
 push:
@@ -107,7 +108,7 @@ clean: CLEAN-flatpak-version.yml
 
 TOPLEVEL_BST_FILES += flatpak-runtimes.bst
 
-BUILD-flatpak-runtimes: flatpak-version.yml elements/**/*.bst
+BUILD-flatpak-runtimes: flatpak-version.yml
 	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-runtimes.bst
 .PHONY: BUILD-flatpak-runtimes
 
@@ -133,7 +134,7 @@ clean: CLEAN-$(FLATPAK_RUNTIMES_REPO)
 
 TOPLEVEL_BST_FILES += flatpak-platform-extensions.bst
 
-BUILD-flatpak-platform-extensions: elements/**/*.bst
+BUILD-flatpak-platform-extensions:
 	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-platform-extensions.bst
 .PHONY: BUILD-flatpak-platform-extensions
 

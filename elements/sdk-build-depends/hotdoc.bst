@@ -20,4 +20,3 @@ depends:
 sources:
 - kind: tar
   url: https://pypi.python.org/packages/0b/8e/07d19b56d5e4fc79d86f2dff69674841c8dec30a008dbda36d0d2dbc6e50/hotdoc-0.8.92.tar.gz
-  ref: b9c7141ae71696e5da11974e2b012814d9cf76569a9934b184195237ada767bd

@@ -18,28 +18,19 @@ config:
 sources:
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-Black.ttf
-  ref: dff1048499a2c245713dfa41e3683cfecfd15df757cc4cb20f85bceba7bfd58b
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-BlackItalic.ttf
-  ref: 42b5cdd80b293acb1d7a15958a2c2f8b6b95213709110777486763c75bc83ebf
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-Bold.ttf
-  ref: 55139769a87085bff777f68e3ecf92450c21a04c5ddd1e9e9528960ba4088c9f
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-BoldItalic.ttf
-  ref: 403b1bece3d70420e65c670315693e9bca255e9c95884d9cb2b334838e67b509
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-Italic.ttf
-  ref: fc80dbac0ca9da894ae1801df9abe58f6dcca179ec4f8f6f7ea80fd13a1d387d
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-Light.ttf
-  ref: d3ecc46bab128ed073ad9189bd7efdd2df455d8942ec056f14129bf35bcea7e5
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-LightItalic.ttf
-  ref: 8521c8eb542adf178b19c7ab7a0210fb4715fe68bb6ea578be129277b642c1f0
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/Merriweather-Regular.ttf
-  ref: bc38fe756b3e259248183fc0b75ad81b02774f3ca68e5e544e925827b0186d40
 - kind: remote
   url: raw_githubusercontent_com:google/fonts/3fcf54a1009c15ca73c01a72a56c821cad413289/ofl/merriweather/OFL.txt
-  ref: a7ba785ad99b6eae0444ab89910e512d4af9865937fddbcb5c72c4f59f55d6ad
