@@ -20,6 +20,8 @@ config:
   install-commands:
     (>):
     - |
+      gtk-update-icon-cache --quiet "%{install-root}%{extension-dir}"
+    - |
       cd bst-local
       mkdir -p "%{install-root}%{extension-dir}/share/appdata"
       install org.freedesktop.Platform.Icontheme.EndlessOS.appdata.xml "%{install-root}%{extension-dir}/share/appdata"
