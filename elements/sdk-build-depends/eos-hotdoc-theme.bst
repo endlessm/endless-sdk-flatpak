@@ -13,4 +13,5 @@ config:
 sources:
 - kind: tar
   url: https://endlessm.github.io/eos-hotdoc-theme/releases/eos-hotdoc-theme-0.0.0.tar.xz
+  base-dir: ''
   directory: eos-hotdoc-theme
