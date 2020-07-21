@@ -10,4 +10,4 @@ config:
       name: org.freedesktop.Platform.Icontheme.EndlessOS
 
     ExtensionOf:
-      ref: runtime/org.freedesktop.Platform.Icontheme/%{gcc_arch}/1.0
+      ref: runtime/org.freedesktop.Platform/%{gcc_arch}/%{freedesktop-sdk-branch}
