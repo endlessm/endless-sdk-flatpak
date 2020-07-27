@@ -98,7 +98,7 @@ projects:
     sdk/eos-knowledge-lib.bst:
     - ref: Release_3.2.6-748-g2521cae99786083319a7d36b47e5ca7865fb20b1
     tests-build-depends/xorg-server-xvfb.bst:
-    - ref: xorg-server-1.20.8-8-g22c0808ac88f917541fe40ab30e85364adac82bc
+    - ref: xorg-server-1.20.0-697-g591916ea9e7a77f68f436b4a541402d9deadfe64
     sdk/fonts-librebaskerville.bst:
     - ref: 899d2122e69d869b5ec7474b316ddb5be804f205d6b3e668a9d8b9ea09ed6f6f
     - ref: f4d27b2b04767a73c8644b5bd4498f2c3352f27fc32949003e439721fe1f1d60
