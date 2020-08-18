@@ -19,11 +19,11 @@ projects:
     tests/sdk-depends/emeus.bst:
     - ref: Release_3.3.20-0-g6ae2373bd9e652337b6dca3901f3b7c570257c31
     sdk-build-depends/jasmine-gjs.bst:
-    - ref: 2.2.1-18-g88c2e56c7e50ab6f51008091e995771bf957fd89
+    - ref: 2.2.1-45-g2002b5c02ddfc68b48ef5d0dda5a71b3cf2ebb0d
     sdk-build-depends/python3-sqlalchemy.bst:
     - ref: 9ede7070d6fd18f28058be88296ed67893e2637465516d6a596cd9afea97b154
     gnome-sdk-sdk/gtk+-3.bst:
-    - ref: Release_3.8.4-0-g8d2dc28367d1cb86c1854885432edf0b9f758bbf
+    - ref: Release_3.8.5-0-g8d2dc28367d1cb86c1854885432edf0b9f758bbf
     - {}
     sdk-build-depends/python3-lxml.bst:
     - ref: lxml-4.4.1-0-g1781e48f8e51bb3eba8e31c3d7fbc47b4acfae26
@@ -32,19 +32,19 @@ projects:
     sdk-depends/libsass.bst:
     - ref: 3.4.9-0-g6de5050d11a1789d9922eb24e2925047ecbb499b
     sdk/eos-metrics.bst:
-    - ref: Release_3.8.4-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
+    - ref: Release_3.8.5-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk-depends/eos-knowledge-content-renderer.bst:
-    - ref: a9b0ea201991a73dc136b35ec90990f102601c0a
+    - ref: b6653f7829ff2cb2a8597c4134f6e564c970a803
     tests/sdk-depends/maxwell.bst:
     - ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7
     tests/sdk-depends/eos-shard.bst:
-    - ref: Release_3.8.4-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
+    - ref: Release_3.8.5-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
     sdk/eos-sdk.bst:
-    - ref: Release_3.3.20-67-g426b3f7b1001ee9d8e1d200eb18a308fe825ab0c
+    - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
     tests/sdk-depends/xapian-glib.bst:
     - ref: 1.6.0-27-g7b50cb8f0fdad8ad3297e4c37e321ed254212a43
     sdk-depends/eos-shard.bst:
-    - ref: Release_3.8.4-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
+    - ref: Release_3.8.5-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
     tests/sdk/basin.bst:
     - ref: baaa1e7ebb3b777d12347eec1f6b062409d6ac33
     sdk-build-depends/xapian-core-swig.bst:
@@ -64,7 +64,7 @@ projects:
     sdk-depends/maxwell.bst:
     - ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7
     sdk-depends/eos-knowledge-content-renderer.bst:
-    - ref: a9b0ea201991a73dc136b35ec90990f102601c0a
+    - ref: b6653f7829ff2cb2a8597c4134f6e564c970a803
     sdk-depends/python3-polib.bst:
     - ref: 1.0.7-26-g1cc0dd2d0018330b54f1ac862a3e1c20298b95a8
     sdk-depends/mathjax.bst:
@@ -88,17 +88,17 @@ projects:
     tests-build-depends/xvfb-run.bst:
     - ref: xorg-server-2_1.20.8-2-0-g6ff26b8d4a9492ad4b1edf2577b16911a860440c
     tests/sdk/eos-metrics.bst:
-    - ref: Release_3.8.4-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
+    - ref: Release_3.8.5-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk/eos-knowledge-lib.bst:
-    - ref: Release_3.2.6-748-g2521cae99786083319a7d36b47e5ca7865fb20b1
+    - ref: Release_3.2.6-752-gf7ff61df675060b9e2cfdba6183a09194a51259d
     tests/sdk/eos-sdk.bst:
-    - ref: Release_3.3.20-67-g426b3f7b1001ee9d8e1d200eb18a308fe825ab0c
+    - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
     tests/sdk/libdmodel.bst:
     - ref: 75622da10c33b04ffa3c3ace8a118f592cc985c5
     sdk/eos-knowledge-lib.bst:
-    - ref: Release_3.2.6-748-g2521cae99786083319a7d36b47e5ca7865fb20b1
+    - ref: Release_3.2.6-752-gf7ff61df675060b9e2cfdba6183a09194a51259d
     tests-build-depends/xorg-server-xvfb.bst:
-    - ref: xorg-server-1.20.0-697-g591916ea9e7a77f68f436b4a541402d9deadfe64
+    - ref: xorg-server-1.20.8-29-g249a12c54a9316b089bd22683c011519348496df
     sdk/fonts-librebaskerville.bst:
     - ref: 899d2122e69d869b5ec7474b316ddb5be804f205d6b3e668a9d8b9ea09ed6f6f
     - ref: f4d27b2b04767a73c8644b5bd4498f2c3352f27fc32949003e439721fe1f1d60
@@ -130,7 +130,7 @@ projects:
     - ref: 9e9b4c53bd25cad9c04d370f133a5e32d166d0d54e2a9ad6cba4a31fcd382d5b
     - ref: 5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6
     extensions/icon-theme-endless-os.bst:
-    - ref: Release_3.8.4-0-gcebd71befe3c62203e32dc7a4679bddeb84710f1
+    - ref: Release_3.8.5-0-gcebd71befe3c62203e32dc7a4679bddeb84710f1
     - {}
     sdk/fonts-merriweather.bst:
     - ref: dff1048499a2c245713dfa41e3683cfecfd15df757cc4cb20f85bceba7bfd58b
