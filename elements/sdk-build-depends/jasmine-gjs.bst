@@ -1,7 +1,7 @@
-kind: autotools
+kind: meson
 
 build-depends:
-- freedesktop-sdk.bst:public-stacks/buildsystem-autotools.bst
+- freedesktop-sdk.bst:public-stacks/buildsystem-meson.bst
 
 depends:
 - gnome-sdk.bst:sdk/gjs.bst
