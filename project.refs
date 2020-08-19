@@ -90,13 +90,13 @@ projects:
     tests/sdk/eos-metrics.bst:
     - ref: Release_3.8.5-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk/eos-knowledge-lib.bst:
-    - ref: Release_3.2.6-752-gf7ff61df675060b9e2cfdba6183a09194a51259d
+    - ref: Release_3.2.6-756-g54bde7c077fc9aec1b9dc1ea41d6856ed9a3f479
     tests/sdk/eos-sdk.bst:
     - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
     tests/sdk/libdmodel.bst:
     - ref: 75622da10c33b04ffa3c3ace8a118f592cc985c5
     sdk/eos-knowledge-lib.bst:
-    - ref: Release_3.2.6-752-gf7ff61df675060b9e2cfdba6183a09194a51259d
+    - ref: Release_3.2.6-756-g54bde7c077fc9aec1b9dc1ea41d6856ed9a3f479
     tests-build-depends/xorg-server-xvfb.bst:
     - ref: xorg-server-1.20.8-29-g249a12c54a9316b089bd22683c011519348496df
     sdk/fonts-librebaskerville.bst:
