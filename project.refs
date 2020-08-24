@@ -34,13 +34,13 @@ projects:
     sdk/eos-metrics.bst:
     - ref: Release_3.8.5-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk-depends/eos-knowledge-content-renderer.bst:
-    - ref: b6653f7829ff2cb2a8597c4134f6e564c970a803
+    - ref: a9b0ea201991a73dc136b35ec90990f102601c0a
     tests/sdk-depends/maxwell.bst:
     - ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7
     tests/sdk-depends/eos-shard.bst:
     - ref: Release_3.8.5-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
     sdk/eos-sdk.bst:
-    - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
+    - ref: Release_3.3.20-67-g426b3f7b1001ee9d8e1d200eb18a308fe825ab0c
     tests/sdk-depends/xapian-glib.bst:
     - ref: 1.6.0-27-g7b50cb8f0fdad8ad3297e4c37e321ed254212a43
     sdk-depends/eos-shard.bst:
@@ -64,7 +64,7 @@ projects:
     sdk-depends/maxwell.bst:
     - ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7
     sdk-depends/eos-knowledge-content-renderer.bst:
-    - ref: b6653f7829ff2cb2a8597c4134f6e564c970a803
+    - ref: a9b0ea201991a73dc136b35ec90990f102601c0a
     sdk-depends/python3-polib.bst:
     - ref: 1.0.7-26-g1cc0dd2d0018330b54f1ac862a3e1c20298b95a8
     sdk-depends/mathjax.bst:
@@ -78,7 +78,7 @@ projects:
     - ref: 6.1.8-0-g5996f7962758da8afc4c28d31abb7624b79e822e
     - {}
     sdk/libdmodel.bst:
-    - ref: adf719000ba643f13aad90736dac5215b87c258f
+    - ref: f1b3e7ff658c5aec6c3dd497429cb024d6abdf21
     sdk-build-depends/googletest.bst:
     - ref: release-1.10.0-0-g703bd9caab50b139428cea1aaff9974ebee5742e
     tests-build-depends/libxmu.bst:
@@ -90,13 +90,13 @@ projects:
     tests/sdk/eos-metrics.bst:
     - ref: Release_3.8.5-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk/eos-knowledge-lib.bst:
-    - ref: Release_3.2.6-756-g54bde7c077fc9aec1b9dc1ea41d6856ed9a3f479
+    - ref: Release_3.2.6-757-g77b16b28b2f71d9cfe95f40c7311c794db8cdfde
     tests/sdk/eos-sdk.bst:
-    - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
+    - ref: Release_3.3.20-67-g426b3f7b1001ee9d8e1d200eb18a308fe825ab0c
     tests/sdk/libdmodel.bst:
-    - ref: adf719000ba643f13aad90736dac5215b87c258f
+    - ref: f1b3e7ff658c5aec6c3dd497429cb024d6abdf21
     sdk/eos-knowledge-lib.bst:
-    - ref: Release_3.2.6-756-g54bde7c077fc9aec1b9dc1ea41d6856ed9a3f479
+    - ref: Release_3.2.6-757-g77b16b28b2f71d9cfe95f40c7311c794db8cdfde
     tests-build-depends/xorg-server-xvfb.bst:
     - ref: xorg-server-1.20.8-29-g249a12c54a9316b089bd22683c011519348496df
     sdk/fonts-librebaskerville.bst:
