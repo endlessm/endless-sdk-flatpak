@@ -10,6 +10,7 @@ build-depends:
 environment:
   JASMINE_JUNIT_REPORTS_DIR: "%{build-root}/_reports"
   EOS_COVERAGE_DIR: "%{build-root}/_coverage"
+  GJS_PATH: "%{build-root}"
 
 config:
   install-commands:
