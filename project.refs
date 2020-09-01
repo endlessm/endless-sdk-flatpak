@@ -78,7 +78,7 @@ projects:
     - ref: 6.1.8-0-g5996f7962758da8afc4c28d31abb7624b79e822e
     - {}
     sdk/libdmodel.bst:
-    - ref: 60df72dd7000fab5510e9795193a07ebad0d1ad3
+    - ref: 0ae8ee942aa775a9f31d48f3679caa0e34082975
     sdk-build-depends/googletest.bst:
     - ref: release-1.10.0-0-g703bd9caab50b139428cea1aaff9974ebee5742e
     tests-build-depends/libxmu.bst:
@@ -86,7 +86,7 @@ projects:
     tests-build-depends/xauth.bst:
     - ref: xauth-1.1-5-gaaf037ec5c576e46318935feaf6e2b7407ff11a0
     tests-build-depends/xvfb-run.bst:
-    - ref: xorg-server-2_1.20.8-2-0-g6ff26b8d4a9492ad4b1edf2577b16911a860440c
+    - ref: xorg-server-2_1.20.9-1-0-g78eca05f0471c901b2986db4f2e949e6cfe52c4b
     tests/sdk/eos-metrics.bst:
     - ref: Release_3.8.6-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk/eos-knowledge-lib.bst:
@@ -94,11 +94,11 @@ projects:
     tests/sdk/eos-sdk.bst:
     - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
     tests/sdk/libdmodel.bst:
-    - ref: 60df72dd7000fab5510e9795193a07ebad0d1ad3
+    - ref: 0ae8ee942aa775a9f31d48f3679caa0e34082975
     sdk/eos-knowledge-lib.bst:
     - ref: Release_3.2.6-757-g14d8c95f95795d4e6afac62d911fa3254fee2ee6
     tests-build-depends/xorg-server-xvfb.bst:
-    - ref: xorg-server-1.20.8-29-g249a12c54a9316b089bd22683c011519348496df
+    - ref: xorg-server-1.20.0-719-g727df0a74e75982f4352f0a3e574fcf6db3372f7
     sdk/fonts-librebaskerville.bst:
     - ref: 899d2122e69d869b5ec7474b316ddb5be804f205d6b3e668a9d8b9ea09ed6f6f
     - ref: f4d27b2b04767a73c8644b5bd4498f2c3352f27fc32949003e439721fe1f1d60
