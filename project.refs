@@ -23,7 +23,7 @@ projects:
     sdk-build-depends/python3-sqlalchemy.bst:
     - ref: 9ede7070d6fd18f28058be88296ed67893e2637465516d6a596cd9afea97b154
     gnome-sdk-sdk/gtk+-3.bst:
-    - ref: Release_3.8.5-0-g8d2dc28367d1cb86c1854885432edf0b9f758bbf
+    - ref: Release_3.8.6-0-g8d2dc28367d1cb86c1854885432edf0b9f758bbf
     - {}
     sdk-build-depends/python3-lxml.bst:
     - ref: lxml-4.4.1-0-g1781e48f8e51bb3eba8e31c3d7fbc47b4acfae26
@@ -32,19 +32,19 @@ projects:
     sdk-depends/libsass.bst:
     - ref: 3.4.9-0-g6de5050d11a1789d9922eb24e2925047ecbb499b
     sdk/eos-metrics.bst:
-    - ref: Release_3.8.5-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
+    - ref: Release_3.8.6-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk-depends/eos-knowledge-content-renderer.bst:
     - ref: b6653f7829ff2cb2a8597c4134f6e564c970a803
     tests/sdk-depends/maxwell.bst:
     - ref: 384f3b0c6ce37002fa9155cbc9bb9c5ddb870fc7
     tests/sdk-depends/eos-shard.bst:
-    - ref: Release_3.8.5-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
+    - ref: Release_3.8.6-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
     sdk/eos-sdk.bst:
     - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
     tests/sdk-depends/xapian-glib.bst:
     - ref: 1.6.0-27-g7b50cb8f0fdad8ad3297e4c37e321ed254212a43
     sdk-depends/eos-shard.bst:
-    - ref: Release_3.8.5-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
+    - ref: Release_3.8.6-0-g2e102d668c9280f760cc3d9fcf1572515ae76c64
     tests/sdk/basin.bst:
     - ref: baaa1e7ebb3b777d12347eec1f6b062409d6ac33
     sdk-build-depends/xapian-core-swig.bst:
@@ -78,7 +78,7 @@ projects:
     - ref: 6.1.8-0-g5996f7962758da8afc4c28d31abb7624b79e822e
     - {}
     sdk/libdmodel.bst:
-    - ref: adf719000ba643f13aad90736dac5215b87c258f
+    - ref: 60df72dd7000fab5510e9795193a07ebad0d1ad3
     sdk-build-depends/googletest.bst:
     - ref: release-1.10.0-0-g703bd9caab50b139428cea1aaff9974ebee5742e
     tests-build-depends/libxmu.bst:
@@ -88,13 +88,13 @@ projects:
     tests-build-depends/xvfb-run.bst:
     - ref: xorg-server-2_1.20.8-2-0-g6ff26b8d4a9492ad4b1edf2577b16911a860440c
     tests/sdk/eos-metrics.bst:
-    - ref: Release_3.8.5-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
+    - ref: Release_3.8.6-2-gb9b99b04ac76643943fd603416de9e0bf08db5bb
     tests/sdk/eos-knowledge-lib.bst:
     - ref: Release_3.2.6-757-g14d8c95f95795d4e6afac62d911fa3254fee2ee6
     tests/sdk/eos-sdk.bst:
     - ref: Release_3.3.20-69-gfa30ef84df310b7c37aa2697fa330b58dc701ca7
     tests/sdk/libdmodel.bst:
-    - ref: adf719000ba643f13aad90736dac5215b87c258f
+    - ref: 60df72dd7000fab5510e9795193a07ebad0d1ad3
     sdk/eos-knowledge-lib.bst:
     - ref: Release_3.2.6-757-g14d8c95f95795d4e6afac62d911fa3254fee2ee6
     tests-build-depends/xorg-server-xvfb.bst:
@@ -130,7 +130,7 @@ projects:
     - ref: 9e9b4c53bd25cad9c04d370f133a5e32d166d0d54e2a9ad6cba4a31fcd382d5b
     - ref: 5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6
     extensions/icon-theme-endless-os.bst:
-    - ref: Release_3.8.5-0-gcebd71befe3c62203e32dc7a4679bddeb84710f1
+    - ref: Release_3.8.6-0-gcebd71befe3c62203e32dc7a4679bddeb84710f1
     - {}
     sdk/fonts-merriweather.bst:
     - ref: dff1048499a2c245713dfa41e3683cfecfd15df757cc4cb20f85bceba7bfd58b
