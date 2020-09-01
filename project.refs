@@ -78,7 +78,7 @@ projects:
     - ref: 6.1.8-0-g5996f7962758da8afc4c28d31abb7624b79e822e
     - {}
     sdk/libdmodel.bst:
-    - ref: f1b3e7ff658c5aec6c3dd497429cb024d6abdf21
+    - ref: 1dea9effb8d212c0ecfebbbb21eafa4e07fd2ad5
     sdk-build-depends/googletest.bst:
     - ref: release-1.10.0-0-g703bd9caab50b139428cea1aaff9974ebee5742e
     tests-build-depends/libxmu.bst:
@@ -94,7 +94,7 @@ projects:
     tests/sdk/eos-sdk.bst:
     - ref: Release_3.3.20-67-g426b3f7b1001ee9d8e1d200eb18a308fe825ab0c
     tests/sdk/libdmodel.bst:
-    - ref: f1b3e7ff658c5aec6c3dd497429cb024d6abdf21
+    - ref: 1dea9effb8d212c0ecfebbbb21eafa4e07fd2ad5
     sdk/eos-knowledge-lib.bst:
     - ref: Release_3.2.6-759-g60783e54da1107a7eb660506c0b1687d20e73e8f
     tests-build-depends/xorg-server-xvfb.bst:
