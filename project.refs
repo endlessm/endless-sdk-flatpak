@@ -19,7 +19,7 @@ projects:
     tests/sdk-depends/emeus.bst:
     - ref: Release_3.3.20-0-g6ae2373bd9e652337b6dca3901f3b7c570257c31
     sdk-build-depends/jasmine-gjs.bst:
-    - ref: 2.3.4-4-g12330e2319031056638d551d4b7be7033d9bf308
+    - ref: 2.4.1-0-g449600fe313992999c9e9481ea7c2d3ba871820a
     sdk-build-depends/python3-sqlalchemy.bst:
     - ref: 9ede7070d6fd18f28058be88296ed67893e2637465516d6a596cd9afea97b154
     gnome-sdk-sdk/gtk+-3.bst:
@@ -84,7 +84,7 @@ projects:
     tests-build-depends/libxmu.bst:
     - ref: libXmu-1.1.3-0-ge9efe2d027b4c46cf6834cc532222f8ad1d1d3c3
     tests-build-depends/xauth.bst:
-    - ref: xauth-1.1-5-gaaf037ec5c576e46318935feaf6e2b7407ff11a0
+    - ref: xauth-1.1-6-g18a3c3a7672ff5d65bf0b79b89464eac7540b95b
     tests-build-depends/xvfb-run.bst:
     - ref: xorg-server-2_1.20.9-1-0-g78eca05f0471c901b2986db4f2e949e6cfe52c4b
     tests/sdk/eos-metrics.bst:
@@ -98,7 +98,7 @@ projects:
     sdk/eos-knowledge-lib.bst:
     - ref: Release_3.2.6-759-g60783e54da1107a7eb660506c0b1687d20e73e8f
     tests-build-depends/xorg-server-xvfb.bst:
-    - ref: xorg-server-1.20.0-719-g727df0a74e75982f4352f0a3e574fcf6db3372f7
+    - ref: xorg-server-1.20.0-727-g97f858d336a85cb49de6275918793c773d5d9db1
     sdk/fonts-librebaskerville.bst:
     - ref: 899d2122e69d869b5ec7474b316ddb5be804f205d6b3e668a9d8b9ea09ed6f6f
     - ref: f4d27b2b04767a73c8644b5bd4498f2c3352f27fc32949003e439721fe1f1d60
