@@ -77,7 +77,8 @@ def edit_manifest(data, arch, branch, runtime_version):
     gtk_patches = {
         'all': [
             'gtk3-fix-atk-gjs-crash.patch',
-            'gtk3-CSS-eos-cairo-filter-property.patch'
+            'gtk3-CSS-eos-cairo-filter-property.patch',
+            'gtk3-x11-Don-t-set-NET_WM_PID-when-sandboxed.patch'
         ],
         'arm': [
             'gtk3-egl-x11.patch',
