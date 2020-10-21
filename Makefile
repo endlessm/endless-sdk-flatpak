@@ -16,7 +16,6 @@ CACHEDIR ?= cache
 REPO ?= repo
 
 FLATPAK_RUNTIMES_REPO = $(CACHEDIR)/flatpak-runtimes-repo
-FLATPAK_PLATFORM_EXTENSIONS_REPO = $(CACHEDIR)/flatpak-platform-extensions-repo
 EXPORT_REPO = $(REPO)
 
 EXPORT_REFS = $(shell [ -d "$(EXPORT_REPO)" ] && $(OSTREE) refs --repo $(EXPORT_REPO))
@@ -130,32 +129,6 @@ CLEAN-$(FLATPAK_RUNTIMES_REPO):
 	rm -rf $(FLATPAK_RUNTIMES_REPO)
 .PHONY: CLEAN-$(FLATPAK_RUNTIMES_REPO)
 clean: CLEAN-$(FLATPAK_RUNTIMES_REPO)
-
-
-TOPLEVEL_BST_FILES += flatpak-platform-extensions.bst
-
-BUILD-flatpak-platform-extensions:
-	$(BST) $(BST_ARGS) $(_BST_ARGS) build flatpak-platform-extensions.bst
-.PHONY: BUILD-flatpak-platform-extensions
-
-CHECK-FORMAT-flatpak-platform-extensions: | fetch-junctions
-	$(BST) $(BST_ARGS) $(_BST_ARGS) show flatpak-platform-extensions.bst
-.PHONY: CHECK-FORMAT-flatpak-platform-extensions
-check-format: CHECK-FORMAT-flatpak-platform-extensions
-
-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): BUILD-flatpak-platform-extensions | $(CACHEDIR)
-	rm -rf "$@"
-	$(BST) $(BST_ARGS) $(_BST_ARGS) checkout --hardlinks flatpak-platform-extensions.bst $@
-
-EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO): $(FLATPAK_PLATFORM_EXTENSIONS_REPO) | $(EXPORT_REPO)
-	$(OSTREE) pull-local --repo=$| $<
-.PHONY: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
-export: EXPORT-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
-
-CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO):
-	rm -rf $(FLATPAK_PLATFORM_EXTENSIONS_REPO)
-.PHONY: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
-clean: CLEAN-$(FLATPAK_PLATFORM_EXTENSIONS_REPO)
 
 
 BUNDLE-$(EXPORT_REPO): $(EXPORT_REPO) export | $(OUTDIR)
