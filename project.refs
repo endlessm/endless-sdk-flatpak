@@ -129,9 +129,6 @@ projects:
     - ref: 7d614e7ee6d32cfba2631bf986bc7ec65a1d9973bb414cb9e5aeb7dad85c8787
     - ref: 9e9b4c53bd25cad9c04d370f133a5e32d166d0d54e2a9ad6cba4a31fcd382d5b
     - ref: 5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6
-    extensions/icon-theme-endless-os.bst:
-    - ref: Release_3.8.6-0-gcebd71befe3c62203e32dc7a4679bddeb84710f1
-    - {}
     sdk/fonts-merriweather.bst:
     - ref: dff1048499a2c245713dfa41e3683cfecfd15df757cc4cb20f85bceba7bfd58b
     - ref: 42b5cdd80b293acb1d7a15958a2c2f8b6b95213709110777486763c75bc83ebf
