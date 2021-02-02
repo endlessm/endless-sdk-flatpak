@@ -8,6 +8,7 @@ depends:
 - freedesktop-sdk.bst:bootstrap/zlib.bst
 - freedesktop-sdk.bst:components/icu.bst
 - sdk-depends/xapian-core.bst
+- sdk-depends/zstd.bst
 
 sources:
 - kind: git_tag
