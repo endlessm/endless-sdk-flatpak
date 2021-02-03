@@ -223,3 +223,5 @@ projects:
     - ref: 0.10-0-ge1e39f3639e39360ceebb2f7ed533cede4623070
     gnome-sdk-sdk/cogl-endless-arm.bst:
     - ref: a805b2b019184710ff53d0496f9f0ce6dcca420c141a0f4f6fcc02131581d759
+    sdk-depends/zstd.bst:
+    - ref: v1.4.7-2-gce34dc39a07661df751a0a5792aed28bf47dbcac
