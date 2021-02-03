@@ -13,6 +13,6 @@ depends:
 sources:
 - kind: git_tag
   url: github_com:openzim/libzim
-  track: 6.1.8
+  track: 6.3.0
 - kind: patch
   path: files/libzim/0001-Fallback-to-xapian-core-1.5-dependency-if-xapian-cor.patch
