@@ -75,7 +75,7 @@ projects:
     - {}
     - {}
     sdk-depends/libzim.bst:
-    - ref: 6.1.8-0-g5996f7962758da8afc4c28d31abb7624b79e822e
+    - ref: 6.3.0-0-ga5c4bc380cb791bd51e0785527607d106615313b
     - {}
     sdk/libdmodel.bst:
     - ref: 1dea9effb8d212c0ecfebbbb21eafa4e07fd2ad5
