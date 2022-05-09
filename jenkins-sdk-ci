@@ -1,0 +1,97 @@
+#!/bin/bash -ex
+
+#SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+SCRIPT_DIR="$HOME/eos-build/ci-integration"
+
+# If we're on jenkins and not within our own cgroup yet, start one.
+if [ -n "$JENKINS_HOME" -a -z "$JENKINS_CGROUP" ]; then
+  exec "${SCRIPT_DIR}/jenkins-cgroup" "$0" "$@"
+fi
+
+# If a GPG key file has been specified, start the gpg-agent wrapper.
+if [ -n "$GPG_KEY_FILE" ] && [ -z "$GPG_HOMEDIR" ]; then
+  exec "${SCRIPT_DIR}"/jenkins-gpg-agent -- "$0" "$@"
+fi
+
+export WORKSPACE=${WORKSPACE:-$(pwd)}
+
+REPO=eos-sdk
+REMOTE_REPO=eos-sdk
+ARCH=$(flatpak --default-arch)
+SDK_BRANCH=master
+EXPORT_ARGS=()
+[ -n "${GPG_KEY_ID}" ] && EXPORT_ARGS+=(--gpg-sign="${GPG_KEY_ID}")
+[ -n "${GPG_HOMEDIR}" ] && EXPORT_ARGS+=(--gpg-homedir="${GPG_HOMEDIR}")
+
+ARGS=$(getopt -o a:b:r:R: \
+  -l "arch:,branch:,repo:,remote-repo:" \
+  -n "jenkins-sdk-ci" -q -- "$@")
+eval set -- "$ARGS"
+
+while true; do
+  case "$1" in
+  -a|--arch)
+    ARCH=$2
+    shift 2
+    ;;
+  -b|--branch)
+    SDK_BRANCH=$2
+    shift 2
+    ;;
+  -r|--repo)
+    REPO=$2
+    shift 2
+    ;;
+  -R|--remote-repo)
+    REMOTE_REPO=$2
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *)
+    echo "Unrecognized option \"$1\"" >&2
+    exit 1
+    ;;
+  esac
+done
+
+make clean
+
+case "${SDK_BRANCH}" in
+4|5)
+  make install-dependencies
+  make install-locale-dependencies
+  make REPO=${REPO} ARCH=${ARCH} SDK_BRANCH=${SDK_BRANCH} \
+       EXPORT_ARGS="${EXPORT_ARGS[*]}"
+  ;;
+*)
+  BUILD_CONF="${WORKSPACE}/build.conf"
+  cat > "${BUILD_CONF}" <<EOF
+logdir: ${WORKSPACE}/logs
+
+cache:
+  quota: 20G
+EOF
+
+  # Enable push artifact server when a TLS client certificate available.
+  # TLS_CERT_PATH is a directory with cert.pem and key.pem X.509 PEM
+  # encoded certificate and private key, respectively.
+  if [ -n "${TLS_CERT_PATH}" ]; then
+    cat >> "${BUILD_CONF}" <<EOF
+
+artifacts:
+  - url: https://bstcachepriv.endlessos.org
+    push: true
+    client-cert: ${TLS_CERT_PATH}/cert.pem
+    client-key: ${TLS_CERT_PATH}/key.pem
+EOF
+  fi
+
+  make BST_ARGS="--config ${BUILD_CONF}" REPO=${REPO} ARCH=${ARCH} \
+       EXPORT_ARGS="${EXPORT_ARGS[*]}"
+  ;;
+esac
+
+jenkins-ostree-push --remote-repo=${REMOTE_REPO} ${REPO}
