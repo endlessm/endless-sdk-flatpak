@@ -90,7 +90,7 @@ EOF
   fi
 
   make BST_ARGS="--config ${BUILD_CONF}" REPO=${REPO} ARCH=${ARCH} \
-       EXPORT_ARGS="${EXPORT_ARGS[*]}"
+       EXPORT_ARGS="${EXPORT_ARGS[*]}" ostree-version
   ;;
 esac
 

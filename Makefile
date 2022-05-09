@@ -87,6 +87,9 @@ $(OUTDIR):
 $(CACHEDIR):
 	mkdir -p $@
 
+ostree-version:
+	$(OSTREE) --version
+
 $(EXPORT_REPO):
 	env
 	which ostree
