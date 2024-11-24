@@ -87,7 +87,17 @@ $(OUTDIR):
 $(CACHEDIR):
 	mkdir -p $@
 
+ostree-version:
+	$(OSTREE) --version
+
 $(EXPORT_REPO):
+	env
+	which ostree
+	pwd
+#	strace $(OSTREE) --version
+	/usr/bin/ostree --version
+	set -x; type ostree; type $(OSTREE); ostree --version; $(OSTREE) --version
+	$(OSTREE) --version
 	$(OSTREE) init --repo=$@ --mode=archive
 
 
